@@ -13,9 +13,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SoundManager.Init();
+        StateUnitManager.Init();
         a = DataManager.Instance.LoadGameData().saveStruct.a;
         //GameObject.Find("Text").GetComponent<TextMeshProUGUI>().text = a + "";
-        StateUnitManager.Init();
     }
 
     // Update is called once per frame

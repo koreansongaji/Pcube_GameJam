@@ -8,7 +8,11 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] Slider HPBar;
     [SerializeField] Slider ExpBar;
+    Player player;
     int statePoint;
+
+    
+
 
     public void OpenStatToggle()
     {

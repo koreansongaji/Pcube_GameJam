@@ -14,6 +14,8 @@ public class StateUnitManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI RemainSPText;
     [SerializeField] GameObject Description;
 
+
+
     public int remainSP = 11;
 
     private static StateUnitManager instance;
@@ -31,7 +33,7 @@ public class StateUnitManager : MonoBehaviour
 
     public void StateUnitMouseDown(StateUnit.ESkillType skillType, int number)
     {
-        if (remainSP>0)
+        if (remainSP > 0)
         {
             if (skillType == StateUnit.ESkillType.skill1)
             {
@@ -63,7 +65,7 @@ public class StateUnitManager : MonoBehaviour
                 }
 
             }
-            else if(skillType == StateUnit.ESkillType.skill3)
+            else if (skillType == StateUnit.ESkillType.skill3)
             {
                 if (CheckIsRightAccess(skill3, number))
                 {
@@ -79,21 +81,22 @@ public class StateUnitManager : MonoBehaviour
 
             }
         }
-        
+
     }
 
     bool CheckIsRightAccess(GameObject gameObject, int number)
     {
         int sum = 0;
-        for (int i = 0; i < number / 2 * 2+2; i++) //자기 둘까지 포함해서
+        for (int i = 0; i < number / 2 * 2 + 2; i++) //자기 둘까지 포함해서
         {
             sum += gameObject.transform.GetChild(i).GetComponent<StateUnit>().NowCount;
         }
         Debug.Log(sum);
-        if(number < 2)
+        if (number < 2)
         {
             return sum < 5;
-        } else if(number < 4)
+        }
+        else if (number < 4)
         {
             return sum < 6 && sum >= 5;
         }
@@ -107,17 +110,18 @@ public class StateUnitManager : MonoBehaviour
         }
     }
 
-    public static void Init()
+    public static void Init() //완전처음
     {
         instance = GameObject.Find("StateUI").GetComponent<StateUnitManager>();
 
-        for(int i=0; i<8; i++)
+        for (int i = 0; i < 8; i++)
         {
-            if(i%4 > 1)
+            if (i % 4 > 1)
             {
                 instance.skill1.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill1, i, 0, 1);
                 //2, 3
-            } else
+            }
+            else
             {
                 instance.skill1.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill1, i, 0, 5);
                 //0, 1
@@ -168,5 +172,26 @@ public class StateUnitManager : MonoBehaviour
     public void ExitDescription()
     {
         Description.SetActive(false);
+    }
+
+    public void RenewalStateUI(int[] skill1Arr, int[] skill2Arr, int[] skill3Arr)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            skill1.transform.GetChild(i).GetComponent<StateUnit>().NowCount = skill1Arr[i];
+            skill1.transform.GetChild(i).GetComponent<StateUnit>().StateUnitUpdate();
+        }
+
+        for (int i = 0; i < 8; i++)
+        {
+            skill2.transform.GetChild(i).GetComponent<StateUnit>().NowCount = skill2Arr[i];
+            skill2.transform.GetChild(i).GetComponent<StateUnit>().StateUnitUpdate();
+        }
+
+        for (int i = 0; i < 8; i++)
+        {
+            skill3.transform.GetChild(i).GetComponent<StateUnit>().NowCount = skill3Arr[i];
+            skill3.transform.GetChild(i).GetComponent<StateUnit>().StateUnitUpdate();
+        }
     }
 }
