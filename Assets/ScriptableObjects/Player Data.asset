@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbe52e27fc949499faeeb3ba3e7dbe2, type: 3}
+  m_Name: Player Data
+  m_EditorClassIdentifier: 
+  maxHp:
+    baseValue: 0
+  regenHp:
+    baseValue: 0
+  armor:
+    baseValue: 0
+  damage:
+    baseValue: 0
+  projectileSpeed:
+    baseValue: 0
+  duration:
+    baseValue: 0
+  attackRange:
+    baseValue: 0
+  coolTime:
+    baseValue: 0
+  projectileCount:
+    baseValue: 0
+  resurrection:
+    baseValue: 0
+  growth:
+    baseValue: 0
