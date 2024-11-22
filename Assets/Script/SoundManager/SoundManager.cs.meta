@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 9d402c15aadb39c4b83166e54d50b828
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - SFXAudioMixer: {fileID: 5434214961191605414, guid: 0df0906a99087dd44b8a89ea09ef7ada, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
