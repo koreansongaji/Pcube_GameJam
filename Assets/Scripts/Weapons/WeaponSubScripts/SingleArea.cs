@@ -49,6 +49,9 @@ namespace Weapons.WeaponSubScripts
         {
             foreach (MonsterBehavior monster in _monsters)
             {
+                if (monster == null)
+                    continue;
+                
                 monster.TakeDamage(_damage);
                 OnHit?.Invoke(monster);
             }

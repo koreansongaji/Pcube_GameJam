@@ -13,7 +13,7 @@ public static class NearestMonsterFinder
         {
             MonsterBehavior monster = obj.GetComponent<MonsterBehavior>();
             
-            float dist = Vector3.Distance(position, monster.transform.position);
+            float dist = Vector3.Distance(position, obj.transform.position);
             if (dist < range && dist < minDist)
             {
                 nearestMonster = monster;

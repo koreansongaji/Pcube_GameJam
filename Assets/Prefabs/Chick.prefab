@@ -653,7 +653,7 @@ GameObject:
   - component: {fileID: 6934452627955419809}
   m_Layer: 0
   m_Name: Chick
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -702,13 +702,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4742bf951c617f343ab2c923a76c2ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
-  _speed: 0
-  _maxHp: 0
-  _curHp: 0
-  _damage: 0
-  _attackSpeed: 0
   monsterData: {fileID: 11400000, guid: f6c055b0e4709c54fb8a7aa3f4cb94ee, type: 2}
+  runtimeData: {fileID: 0}
 --- !u!205 &7465606655834807862
 LODGroup:
   m_ObjectHideFlags: 0

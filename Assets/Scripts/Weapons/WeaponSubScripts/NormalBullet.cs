@@ -41,7 +41,8 @@ namespace Weapons.WeaponSubScripts
         {
             if (other.CompareTag($"Monster") && !_collided)
             {
-                other.TryGetComponent(out MonsterBehavior monster);
+                if(other.TryGetComponent(out MonsterBehavior monster) == false)
+                    return;
                 monster.TakeDamage(_damage);
                 _collided = true;
                 

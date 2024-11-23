@@ -80,6 +80,8 @@ public class PoolingHandler : MonoBehaviour //이 스크립트는 싱글톤으�
     private void Pooling()
     {
         PooledObject = new List<GameObject>[Prefabs.Length];
+        ActiveMonster = new List<GameObject>[Prefabs.Length];
+        DeActiveMonster = new List<GameObject>[Prefabs.Length];
 
         for (int index = 0; index < Prefabs.Length; index++)
         {

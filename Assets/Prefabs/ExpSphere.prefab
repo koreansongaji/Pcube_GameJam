@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -4025303860176776149}
   m_Layer: 7
   m_Name: ExpSphere
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,7 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505240c079996ed45bd30b5a997dc52f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!135 &-4025303860176776149
 SphereCollider:
   m_ObjectHideFlags: 0

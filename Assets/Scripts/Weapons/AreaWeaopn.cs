@@ -30,7 +30,7 @@ namespace Weapons
             GameObject area = areaPool.Get();
             area.TryGetComponent(out SingleArea areaScript);
             
-            area.transform.position = weaponHandler.transform.position;
+            area.transform.position = target;
             areaScript.SetArgs(
                 CalculateFinalDamage(),
                 CalculateAreaSize(),
@@ -74,6 +74,7 @@ namespace Weapons
             // 본인 Transform 이내에서 10f 반경 이내 랜덤 점
             Vector3 randomPoint = Random.insideUnitSphere * 10f;
             randomPoint.y = 0;
+            Debug.Log($"randomPoint: {randomPoint}");
             
             target = weaponHandler.transform.position + randomPoint;
             return true;
