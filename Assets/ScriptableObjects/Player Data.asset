@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp:
     baseValue: 0
+  currentHp:
+    baseValue: 0
   regenHp:
     baseValue: 0
   armor:
@@ -26,10 +28,10 @@ MonoBehaviour:
     baseValue: 0
   attackRange:
     baseValue: 0
-  coolTime:
+  coolTimeReduce:
     baseValue: 0
   projectileCount:
-    baseValue: 0
+    baseValue: 1
   resurrection:
     baseValue: 0
   growth:

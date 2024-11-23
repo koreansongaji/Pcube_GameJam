@@ -5,14 +5,14 @@ using UnityEngine;
 
 [Serializable] // Á÷·ÄÈ­
 
-public class Data
+public class SaveData
 {
     public struct SaveStruct
     {
         public int a;
     }
     public SaveStruct saveStruct;
-    public Data(int a)
+    public SaveData(int a)
     {
         saveStruct.a = a;
     }

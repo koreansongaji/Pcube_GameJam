@@ -37,4 +37,9 @@ public class Player : MonoBehaviour
     {
         // todo : 플레이어 사망 처리
     }
+
+    public PlayerData GetStat()
+    {
+        return runtimeData;
+    }
 }
