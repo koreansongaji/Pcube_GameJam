@@ -7,7 +7,7 @@ using UnityEngine.Pool;
 namespace Weapons.WeaponSubScripts
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class LeavesBullet : MonoBehaviour
+    public class NormalBullet : MonoBehaviour
     {
         public UnityAction<MonsterBehavior> OnHit { get; set; }
         
