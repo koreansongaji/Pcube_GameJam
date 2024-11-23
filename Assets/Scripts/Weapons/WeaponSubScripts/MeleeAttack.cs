@@ -1,5 +1,6 @@
 using Data;
 using Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Pool;
@@ -7,12 +8,11 @@ using UnityEngine.Pool;
 namespace Weapons.WeaponSubScripts
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class NormalBullet : MonoBehaviour
+    public class MeleeAttack : MonoBehaviour
     {
         public UnityAction<MonsterBehavior> OnHit { get; set; }
 
         public GameObject myVFX;
-        private GameObjectPool _pool;
         private float _damage;
         private Rigidbody _rigidBody;
         
@@ -22,35 +22,23 @@ namespace Weapons.WeaponSubScripts
         {
             _rigidBody = GetComponent<Rigidbody>();
         }
+
         float a = 0;
         private float _time = 0;
-        private void Update()
-        {
-            _time += Time.deltaTime;
-            if (_time >= 1)
-            {
-                CheckRelease();
-            }
 
+        IEnumerator LiveCoroutine()
+        {
+            yield return new WaitForSeconds(_time);
+            transform.GetChild(0).gameObject.SetActive(true);
+            yield return null;
+            Destroy(gameObject);
         }
 
-        private void CheckRelease()
+        public void Damage(MonsterBehavior monster)
         {
-            _pool.Release(gameObject);
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag($"Monster") && !_collided)
-            {
-                if(other.TryGetComponent(out MonsterBehavior monster) == false)
-                    return;
-                monster.TakeDamage(_damage);
-                _collided = true;
-                
-                OnHit?.Invoke(monster);
-                _pool.Release(gameObject);
-            }
+            monster.TakeDamage(_damage);
+            _collided = true;
+            OnHit?.Invoke(monster);
         }
         
         public void SetTarget(Vector3 target)
@@ -62,16 +50,16 @@ namespace Weapons.WeaponSubScripts
             transform.LookAt(target);
         }
 
-        public void SetArgs(float damage, float speed, GameObjectPool pool)
+        public void SetArgs(float damage)
         {
             _damage = damage;
-            _rigidBody.velocity = transform.forward * speed;
-            _pool = pool;
         }
         
         private void OnEnable()
         {
-
+            GameObject spawnedVFX = Instantiate(myVFX, transform.position, transform.rotation) as GameObject;
+            spawnedVFX.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            Destroy(spawnedVFX, 1f);
             _time = 0;
             _collided = false;
         }

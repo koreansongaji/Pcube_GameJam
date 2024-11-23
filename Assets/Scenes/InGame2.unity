@@ -548,7 +548,6 @@ MonoBehaviour:
   expPrefab: {fileID: 9165418659709256353, guid: 4ace7995390bcae40a581881bf1d603f, type: 3}
   ExpPoolTransform: {fileID: 1388017232}
   ExpPoolTransformSub: {fileID: 922562232}
-  player: {fileID: 2413036113369209422}
 --- !u!4 &470313621
 Transform:
   m_ObjectHideFlags: 0
@@ -1370,6 +1369,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1714968855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1355225206
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1355225207}
+  - component: {fileID: 1355225210}
+  m_Layer: 0
+  m_Name: MeleeWeapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1355225207
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355225206}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1087.2351, y: 137.29117, z: -5.261809}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2387264208512388385}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1355225210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355225206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f38563b3d04d3a94902c8680216a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atkTrigger: 0
+  weaponHandler: {fileID: 0}
+  weaponData: {fileID: 11400000, guid: 1cb66ea869337c241b287a6cf9310578, type: 2}
+  bulletPrefab: {fileID: 4156557611044721591, guid: 859aeb978295b8b44886388210c9fd9a, type: 3}
+  currentType: 0
 --- !u!1 &1388017231
 GameObject:
   m_ObjectHideFlags: 0
@@ -1815,6 +1863,7 @@ Transform:
   m_Children:
   - {fileID: 251997023}
   - {fileID: 1094484458}
+  - {fileID: 1355225207}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2389851311215646119
@@ -1903,9 +1952,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseData: {fileID: 11400000, guid: ff58c0af199587a45be219642a08ac2b, type: 2}
   runtimeData: {fileID: 0}
-  skill1: 0000000000000000000000000000000000000000000000000000000000000000
-  skill2: 0000000000000000000000000000000000000000000000000000000000000000
-  skill3: 0000000000000000000000000000000000000000000000000000000000000000
   statePoint: 0
 --- !u!114 &2413036113369209423
 MonoBehaviour:
@@ -1922,6 +1968,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 251997024}
   - {fileID: 1094484459}
+  - {fileID: 1355225210}
   playerData: {fileID: 11400000, guid: ff58c0af199587a45be219642a08ac2b, type: 2}
   player: {fileID: 2413036113369209422}
 --- !u!114 &2413036113369209424
