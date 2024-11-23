@@ -548,7 +548,6 @@ MonoBehaviour:
   expPrefab: {fileID: 9165418659709256353, guid: 4ace7995390bcae40a581881bf1d603f, type: 3}
   ExpPoolTransform: {fileID: 1388017232}
   ExpPoolTransformSub: {fileID: 922562232}
-  player: {fileID: 2413036113369209422}
 --- !u!4 &470313621
 Transform:
   m_ObjectHideFlags: 0
@@ -1903,10 +1902,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseData: {fileID: 11400000, guid: ff58c0af199587a45be219642a08ac2b, type: 2}
   runtimeData: {fileID: 0}
-  skill1: 0000000000000000000000000000000000000000000000000000000000000000
-  skill2: 0000000000000000000000000000000000000000000000000000000000000000
-  skill3: 0000000000000000000000000000000000000000000000000000000000000000
-  statePoint: 0
 --- !u!114 &2413036113369209423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1936,6 +1931,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe0de061e2e49c7843881ca3f699951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curLevel: 0
+  curExp: 0
+  expToNextLevel: 0
+  expIncreaseFactor: 0
 --- !u!1001 &3757989898795580017
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1944,10 +1943,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 605276443862865822, guid: 409983b9981fd32429c9b14842b23629, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 797555572503571312, guid: 409983b9981fd32429c9b14842b23629, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.612424
@@ -1986,18 +1981,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 797555572503571312, guid: 409983b9981fd32429c9b14842b23629, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2724418038392359943, guid: 409983b9981fd32429c9b14842b23629, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4002528943550964979, guid: 409983b9981fd32429c9b14842b23629, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4727804988604315959, guid: 409983b9981fd32429c9b14842b23629, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6619611879017089968, guid: 409983b9981fd32429c9b14842b23629, type: 3}
