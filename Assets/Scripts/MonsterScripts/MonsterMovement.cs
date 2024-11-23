@@ -10,18 +10,40 @@ using static UnityEngine.GraphicsBuffer;
 /// </summary>
 public abstract class MonsterMovement : MonsterAttack
 {
-
+    /// <summary>
+    /// 몬스터Behavior Start에서 한번 실행
+    /// </summary>
+    /// <param name="player"></param>
+    /// <param name="monsterStatus"></param>
+    /// <param name="agent"></param>
+    /// <param name="animator"></param>
+    public void MoveStart(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
+    {
+        SetAgent(player, monsterStatus, agent, animator);
+    }
+    /// <summary>
+    /// 몬스터 Behavior Update에서 한 번 실행
+    /// </summary>
+    /// <param name="player"></param>
+    /// <param name="monsterStatus"></param>
+    /// <param name="agent"></param>
+    /// <param name="animator"></param>
+    public void MoveUpdate(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
+    {
+        RotateTowardsTarget(player);
+    }
     /// <summary>
     /// 플레이를 목적지로 NavMeshAgent실행
     /// </summary>
     /// <param name="player">플레이어</param>
     /// <param name="monsterStatus">몬스터의 상태</param>
     /// <param name="agent">몬스터 Agent</param>
-    public void SetAgent(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent)
+    public void SetAgent(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
     {
         Debug.Log("쫒기 시작");
         agent.speed = monsterStatus.Speed;
         agent.SetDestination(player.transform.position);
+        animator.SetBool("isWalking", true);
     }
     /// <summary>
     /// 플레이어를 계속 바라봐야하는 몬스터만 실행시킬 함수, 플레이어 방향을 바라봄
