@@ -17,7 +17,6 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        SoundManager.Init();
     }
     public float GameTime { get; private set; }
 
@@ -26,7 +25,7 @@ public class GameManager : Singleton<GameManager>
     public void StartGame()
     {
         // 1. Scene Change
-        //SceneManager.LoadScene($"GameScene");
+        SceneManager.LoadScene("InGame2");
         // 2. Game Start
         GameTime = 0;
     }
@@ -34,6 +33,17 @@ public class GameManager : Singleton<GameManager>
     private void Update()
     {
         GameTime += Time.deltaTime;
+        CheckSufficientTime();
+    }
+
+    //시간이 다찼는지 확인하는 함수
+    public void CheckSufficientTime()
+    {
+        if (GameTime > 10f)
+        {
+            GameTime = 0;
+            SceneManager.LoadScene("GameClear");
+        }
     }
     
     public bool TryGetPlayerObject(out Player player)
