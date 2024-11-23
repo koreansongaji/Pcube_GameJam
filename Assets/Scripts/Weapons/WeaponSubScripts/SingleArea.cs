@@ -12,7 +12,8 @@ namespace Weapons.WeaponSubScripts
     public class SingleArea : MonoBehaviour
     {
         public UnityAction<MonsterBehavior> OnHit { get; set; }
-        
+
+        public GameObject myVFX;
         private GameObjectPool _pool;
         private Rigidbody _rigidBody;
         private const float ATK_RATE = 1;
@@ -28,17 +29,25 @@ namespace Weapons.WeaponSubScripts
             _rigidBody = GetComponent<Rigidbody>();
             _rigidBody.isKinematic = true;
         }
-
-        private float _time = 0;
+        float a = 0;        private float _time = 0;
         private float _nextAtk = 0;
         private void Update()
         {
+            a += Time.deltaTime;
             _time += Time.deltaTime;
             if (_time >= _duration)
             {
                 CheckRelease();
             }
-            
+
+            if ( a>0.5f)
+            {
+                GameObject spawnedVFX = Instantiate(myVFX, transform.position, transform.rotation) as GameObject;
+                spawnedVFX.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                Destroy(spawnedVFX, 5f);
+                a -= 0.5f;
+            }
+
             if (_time >= _nextAtk)
             {
                 _nextAtk = _time + ATK_RATE;
@@ -46,10 +55,14 @@ namespace Weapons.WeaponSubScripts
             }
         }
 
+        
+
         private void DealMonsters()
         {
             foreach (MonsterBehavior monster in _monsters.Where(monster => monster != null))
             {
+                if (monster == null)
+                    continue;
                 monster.TakeDamage(_damage);
                 OnHit?.Invoke(monster);
                 _pool.Release(gameObject);
@@ -94,6 +107,9 @@ namespace Weapons.WeaponSubScripts
             _time = 0;
             _nextAtk = 0;
             _monsters.Clear();
+            GameObject spawnedVFX = Instantiate(myVFX, transform.position, transform.rotation) as GameObject;
+            spawnedVFX.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            Destroy(spawnedVFX, 5f);
         }
     }
 }
