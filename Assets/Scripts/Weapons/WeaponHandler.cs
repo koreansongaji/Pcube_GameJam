@@ -13,8 +13,15 @@ public class WeaponHandler : MonoBehaviour
     
     private void Awake()
     {
-        weapons = new List<Weapon>();
         player = GetComponent<Player>();
+    }
+
+    private void Start()
+    {
+        foreach (Weapon weapon in weapons)
+        {
+            weapon.Setup(this);
+        }
     }
 
     private void Update()

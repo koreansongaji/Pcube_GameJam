@@ -30,7 +30,7 @@ public class DataManager : MonoBehaviour
     // --- 저장용 클래스 변수 --- //
 
     // 불러오기
-    public Data LoadGameData()
+    public SaveData LoadGameData()
     {
         string filePath = Application.persistentDataPath + "/" + GameDataFileName;
 
@@ -38,15 +38,15 @@ public class DataManager : MonoBehaviour
         if (File.Exists(filePath))
         {
             // 저장된 파일 읽어오고 Json을 클래스 형식으로 전환해서 할당
-            string FromJsonData = File.ReadAllText(filePath);
-            Data data = JsonConvert.DeserializeObject<Data>(FromJsonData);
+            string fromJsonData = File.ReadAllText(filePath);
+            SaveData data = JsonConvert.DeserializeObject<SaveData>(fromJsonData);
             Debug.Log("불러오기 완료");
             return data;
         }
         else
         {
             Debug.LogError("파일이 존재하지 않음");
-            Data data = new Data(0);//디폴트 Data
+            SaveData data = new SaveData(0);//디폴트 Data
             SaveGameData(data);
             return data;
         }
@@ -54,7 +54,7 @@ public class DataManager : MonoBehaviour
 
 
     // 저장하기
-    public void SaveGameData(Data data)
+    public void SaveGameData(SaveData data)
     {
         // 클래스를 Json 형식으로 전환 (true : 가독성 좋게 작성)
         JsonSerializerSettings setting = new JsonSerializerSettings();

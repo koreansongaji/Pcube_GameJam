@@ -15,8 +15,8 @@ public class Player : MonoBehaviour
     {
         _playerLevel = GetComponent<PlayerLevel>();
         _weaponHandler = GetComponent<WeaponHandler>();
-        
-        runtimeData = new PlayerData(baseData);
+
+        runtimeData = Instantiate(baseData);
         runtimeData.currentHp.baseValue = baseData.maxHp.baseValue;
     }
 
@@ -36,5 +36,10 @@ public class Player : MonoBehaviour
     private void Die()
     {
         // todo : 플레이어 사망 처리
+    }
+
+    public PlayerData GetStat()
+    {
+        return runtimeData;
     }
 }

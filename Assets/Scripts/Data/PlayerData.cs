@@ -1,9 +1,20 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "Player Data", menuName = "Scriptable Object/Player Data", order = int.MaxValue)]
 public class PlayerData : ScriptableObject
 {
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (Application.isPlaying)
+        {
+            UnityEditor.EditorUtility.SetDirty(this); // 변경사항 무효화
+        }
+    }
+#endif
+    
     [SerializeField] public CharacterStat maxHp;
     [SerializeField] public CharacterStat currentHp;
     [SerializeField] public CharacterStat regenHp;
@@ -12,7 +23,7 @@ public class PlayerData : ScriptableObject
     [SerializeField] public CharacterStat projectileSpeed;
     [SerializeField] public CharacterStat duration;
     [SerializeField] public CharacterStat attackRange;
-    [SerializeField] public CharacterStat coolTime;
+    [SerializeField] public CharacterStat coolTimeReduce;
     [SerializeField] public CharacterStat projectileCount;
     [SerializeField] public CharacterStat resurrection;
     [SerializeField] public CharacterStat growth;
@@ -28,7 +39,7 @@ public class PlayerData : ScriptableObject
         projectileSpeed = new CharacterStat(playerData.maxHp.baseValue);
         duration = new CharacterStat(playerData.maxHp.baseValue);
         attackRange = new CharacterStat(playerData.maxHp.baseValue);
-        coolTime = new CharacterStat(playerData.maxHp.baseValue);
+        coolTimeReduce = new CharacterStat(playerData.maxHp.baseValue);
         projectileCount = new CharacterStat(playerData.maxHp.baseValue);
         resurrection = new CharacterStat(playerData.maxHp.baseValue);
         growth = new CharacterStat(playerData.maxHp.baseValue);
