@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Generic.Singleton<UIManager>
 {
     // Start is called before the first frame update
     [SerializeField] Slider HPBar;
@@ -31,21 +31,6 @@ public class UIManager : MonoBehaviour
     public GameObject StateUI;
     bool isGameStopOpened = false;
     bool isStateUIWindowOpened = false;
-    public static UIManager Init()
-    {
-        if (instance == null)
-        {
-            instance = GameObject.Find("UIManager").GetComponent<UIManager>();
-        }
-        else
-        {
-            Debug.LogError("동일한 씬에 Init 2번실행 오류");
-        }
-        StateUnitManager.Init(instance);
-
-        return instance;
-
-    }
 
     public void Update()
     {
@@ -86,7 +71,8 @@ public class UIManager : MonoBehaviour
         {
             for(int i=0; i<GameManager.Instance.ExpPoolTransformSub.transform.childCount; i++)
             {
-                if ((GameManager.Instance.ExpPoolTransformSub.GetChild(i).transform.position-MouseCursorPosFinder.GetMouseWorldPosition()).magnitude < 1f) {
+                if ((GameManager.Instance.ExpPoolTransformSub.GetChild(i).transform.position -
+                     MouseCursorPosFinder.GetMouseWorldPosition()).magnitude < 1f) {
                     GameManager.Instance.ExpPoolTransformSub.GetChild(i).GetComponent<ExpSphere>().ActiveThisExpSphere();
                 } 
             }

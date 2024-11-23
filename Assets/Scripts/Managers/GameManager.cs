@@ -28,7 +28,6 @@ public class GameManager : Singleton<GameManager>
     {
         // 1. Scene Change
         //SceneManager.LoadScene($"GameScene");
-        UIManager.Init();
         _expPool = new GameObjectPool(expPrefab, ExpPoolTransform, 50);
         // 2. Game Start
         GameTime = 0;

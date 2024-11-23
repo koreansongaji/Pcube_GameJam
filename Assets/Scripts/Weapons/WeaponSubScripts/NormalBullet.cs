@@ -52,6 +52,10 @@ namespace Weapons.WeaponSubScripts
         
         public void SetTarget(Vector3 target)
         {
+            // target과 gameobjec의 y 동기화
+            target.y = transform.position.y;
+            
+            // target 방향으로 회전
             transform.LookAt(target);
         }
 

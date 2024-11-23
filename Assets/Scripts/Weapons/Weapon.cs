@@ -25,9 +25,7 @@ namespace Weapons
         {
             return atkTrigger;
         }
-        
-        public abstract bool CanUpgrade();
-        public abstract void Upgrade();
+
 
         protected abstract float CalculateFinalDamage();
 
