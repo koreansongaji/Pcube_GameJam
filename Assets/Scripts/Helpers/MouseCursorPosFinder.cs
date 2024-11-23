@@ -2,7 +2,7 @@
 
 namespace Helpers
 {
-    public abstract class MouseCursorPosFinder
+    public static class MouseCursorPosFinder
     {
         public static Vector3 GetMouseWorldPosition()
         {
