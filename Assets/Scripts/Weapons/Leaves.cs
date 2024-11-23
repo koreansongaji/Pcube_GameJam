@@ -2,6 +2,7 @@ using Data;
 using Generic;
 using Helpers;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Weapons.WeaponSubScripts;
 
 namespace Weapons
@@ -10,11 +11,9 @@ namespace Weapons
     {
         private Player _player;
         [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private AimType currentType;
         
         private GameObjectPool _bulletPool;
-        private AimType _currentType;
-        
-        
         
         public override void Setup(WeaponHandler handler)
         {
@@ -25,21 +24,15 @@ namespace Weapons
         }
         public override void Attack()
         {
-            MonsterBehavior monster = 
-                NearestMonsterFinder.
-                    FindNearestMonster(weaponHandler.transform.position, 100f);
-            if (monster == null)
-            {
-                Debug.Log("No monster found");
+            if(TryGetTarget(out Vector3 target) == false)
                 return;
-            }
             
             // shoot LeavesBullet
             GameObject bullet = _bulletPool.Get();
             bullet.TryGetComponent(out NormalBullet bulletScript);
             
             bullet.transform.position = weaponHandler.transform.position;
-            bulletScript.SetTarget(monster.transform.position);
+            bulletScript.SetTarget(target);
             bulletScript.SetArgs(CalculateFinalDamage(), CalculateProjectileSpeed(), _bulletPool);
             
             
@@ -79,24 +72,27 @@ namespace Weapons
             _bulletPool.Release(bullet);
         }
 
-        private Vector3 GetTarget()
+        private bool TryGetTarget(out Vector3 target)
         {
-            if (_currentType == AimType.TARGET)
+            if (currentType == AimType.TARGET)
             {
-                var monster = NearestMonsterFinder.FindNearestMonster(weaponHandler.transform.position, 100f);
+                MonsterBehavior monster = 
+                    NearestMonsterFinder.FindNearestMonster(weaponHandler.transform.position, 100f);
                 if (monster == null)
                 {
-                    Debug.Log("No monster found");
-                    return Vector3.zero;
+                    target = Vector3.zero;
+                    return false;
                 }
+
+                target = monster.transform.position;
+                return true;
             }
 
             else
             {
-                return MouseCursorPosFinder.GetMouseWorldPosition();
+                target = MouseCursorPosFinder.GetMouseWorldPosition();
+                return true;
             }
-            
-            return Vector3.zero;
         }
     }
     
