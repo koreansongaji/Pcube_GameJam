@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterData: {fileID: 11400000, guid: 72203b9b6e7b415449b40ec7199a74b3, type: 2}
-  Data: {fileID: 0}
+  runtimeData: {fileID: 0}
 --- !u!114 &7506123872961575249
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ namespace Generic
         private readonly Transform _parent;
         
 #if UNITY_EDITOR
-        static int debugNumber = 0;
+        private static int _debugNumber = 0;
 #endif
         public GameObjectPool(GameObject prefab, Transform parent = null, int initialCapacity = 10)
         {
@@ -75,7 +75,7 @@ namespace Generic
         {
 #if UNITY_EDITOR
             GameObject ret = Object.Instantiate(_prefab, _parent);
-            ret.name = _prefab.name + debugNumber++;
+            ret.name = _prefab.name + _debugNumber++;
             return ret;
 #else
             return Object.Instantiate(_prefab, _parent);

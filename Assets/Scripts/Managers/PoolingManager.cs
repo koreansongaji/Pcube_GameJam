@@ -15,7 +15,7 @@ public class PoolingManager : MonoBehaviour //이 스크립트는 싱글톤으로 안만들고 
     public struct SpawnMonsterInfo
     {
         public float time; //분
-        public int num; //스폰할 몬스터 수
+        public readonly int num; //스폰할 몬스터 수
         public SpawnMonsterInfo(float t, int n)
         {
             this.time = t;
@@ -61,14 +61,10 @@ public class PoolingManager : MonoBehaviour //이 스크립트는 싱글톤으로 안만들고 
         SetUp();
         Pooling();
     }
-    void Start()
-    {
-
-    }
 
     void Update()
     {
-        SpawnMonster();
+        SpawnMonsterTest();
     }
 
     /// <summary>
@@ -109,7 +105,8 @@ public class PoolingManager : MonoBehaviour //이 스크립트는 싱글톤으로 안만들고 
     /// </summary>
     private void SpawnMonster()
     {
-        //if (GameManager.Instance != null && GameManager.Instance.time >= Level_1_Time[IndexLevel_1].time)
+        // todo : -1 => 지정된 인덱스로 변경하기
+        if (GameManager.Instance.GameTime >= Level_1_Time[-1].time)
         {
             for (int i = 0; i < Level_1_Time[TimeIndex[0]].num; i++)
             {
@@ -117,7 +114,8 @@ public class PoolingManager : MonoBehaviour //이 스크립트는 싱글톤으로 안만들고 
             }
             TimeIndex[0]++;
         }
-        //if (GameManager.Instance != null && GameManager.Instance.time >= Level_2_Time[IndexLevel_2].time)
+        
+        if (GameManager.Instance.GameTime >= Level_2_Time[-1].time)
         {
             for (int i = 0; i < Level_2_Time[TimeIndex[1]].num; i++)
             {
@@ -125,7 +123,8 @@ public class PoolingManager : MonoBehaviour //이 스크립트는 싱글톤으로 안만들고 
             }
             TimeIndex[1]++;
         }
-        //if (GameManager.Instance != null && GameManager.Instance.time >= Level_3_Time[IndexLevel_3].time)
+        
+        if (GameManager.Instance.GameTime >= Level_3_Time[-1].time)
         {
             for (int i = 0; i < Level_3_Time[TimeIndex[2]].num; i++)
             {
@@ -133,7 +132,8 @@ public class PoolingManager : MonoBehaviour //이 스크립트는 싱글톤으로 안만들고 
             }
             TimeIndex[2]++;
         }
-        //if (GameManager.Instance != null && GameManager.Instance.time >= Level_4_Time[IndexLevel_4].time)
+        
+        if (GameManager.Instance.GameTime  >= Level_4_Time[-1].time)
         {
             for (int i = 0; i < Level_4_Time[TimeIndex[3]].num; i++)
             {
@@ -142,6 +142,16 @@ public class PoolingManager : MonoBehaviour //이 스크립트는 싱글톤으로 안만들고 
             TimeIndex[3]++;
         }
     }
+    
+    private void SpawnMonsterTest()
+    {
+        for (int i = 0; i < Level_1_Time[TimeIndex[0]].num; i++)
+        {
+            SetActiveMonster(0);
+        }
+        TimeIndex[0]++;
+    }
+    
     /// <summary>
     /// 풀링한 몬스터 활성화 시키는 함수
     /// </summary>

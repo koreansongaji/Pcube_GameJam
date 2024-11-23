@@ -33,7 +33,7 @@ public abstract class MonsterMovement : MonsterAttack
     public void MoveUpdate(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
     {
         RotateTowardsTarget(player);
-        Debug.Log("AttackSpeed 값: " + monsterStatus.Data.AttackSpeed);
+        Debug.Log("AttackSpeed 값: " + monsterStatus.runtimeData.AttackSpeed);
     }
     /// <summary>
     /// 몬스터 Behavior OnEnable에서 한 번 실행
@@ -67,9 +67,9 @@ public abstract class MonsterMovement : MonsterAttack
     public void SetAgent(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
     {
         Debug.Log("쫒기 시작");
-        agent.speed = monsterStatus.Data.Speed;
+        agent.speed = monsterStatus.runtimeData.Speed;
         agent.SetDestination(player.transform.position);
-        animator.SetFloat("AttackSpeed", monsterStatus.Data.AttackSpeed);
+        animator.SetFloat("AttackSpeed", monsterStatus.runtimeData.AttackSpeed);
         animator.SetBool("isWalking", true);
     }
     /// <summary>
@@ -111,16 +111,16 @@ public abstract class MonsterMovement : MonsterAttack
     private IEnumerator Attack(MonsterStatus monsterStatus, Animator animator)
     {
         animator.SetTrigger("isAttack");
-        yield return new WaitForSecondsRealtime(1 / monsterStatus.Data.AttackSpeed); //애니메이션 동작에 따라 시간 조절
+        yield return new WaitForSecondsRealtime(1 / monsterStatus.runtimeData.AttackSpeed); //애니메이션 동작에 따라 시간 조절
 
-        CommonAttack(monsterStatus.Data.Damage, 0.5f, 2f);
+        CommonAttack(monsterStatus.runtimeData.Damage, 0.5f, 2f);
     }
     private IEnumerator isAttack(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
     {
         while (true)
         {
             yield return new WaitForSecondsRealtime(0.02f);
-            if ((Vector3.Distance(this.gameObject.transform.position, player.transform.position) <= monsterStatus.Data.Range))
+            if ((Vector3.Distance(this.gameObject.transform.position, player.transform.position) <= monsterStatus.runtimeData.Range))
             {
                 Debug.Log(this.gameObject.name + "거리 확인");
                 isAttacking = true;
@@ -128,7 +128,7 @@ public abstract class MonsterMovement : MonsterAttack
                 yield return StartCoroutine(Attack(monsterStatus, animator));
                 isAttacking = false;
             }
-            else if ((Vector3.Distance(this.gameObject.transform.position, player.transform.position) > monsterStatus.Data.Range) && !isAttacking)
+            else if ((Vector3.Distance(this.gameObject.transform.position, player.transform.position) > monsterStatus.runtimeData.Range) && !isAttacking)
             {
                 ResumeChase(agent, animator);
             }

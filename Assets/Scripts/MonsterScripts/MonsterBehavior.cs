@@ -51,6 +51,6 @@ public class MonsterBehavior : MonsterMovement
 
     public void TakeDamage(float damage)
     {
-        monsterStatus.Data.CurHp -= damage;
+        monsterStatus.runtimeData.CurHp -= damage;
     }
 }
