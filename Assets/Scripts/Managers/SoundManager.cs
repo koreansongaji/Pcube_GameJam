@@ -23,33 +23,25 @@ public class SoundManager : MonoBehaviour
         {
             if (!instance)
             {
-                Debug.LogError("init함수가 시작되지 않았음!!");
+                instance = new GameObject().AddComponent<SoundManager>();
+                instance.BGMPlayer = instance.AddComponent<AudioSource>();
+                instance.BGMPlayer.volume = 0.5f;
+                instance.BGMPlayer.loop = true;
+                DontDestroyOnLoad(instance);
+
+                //사운드 세팅
+                SetSound(ESoundEffect.SE_BEAT_01);
+                SetSound(ESoundEffect.SE_APPEAR_01);
+                SetSound(ESoundEffect.SE_ANSWER_01);
+                SetSound(ESoundEffect.SE_BEEP_01);
+
+                SetSound(Ebgm.SUMMER);
+                SetSound(Ebgm.WINTER);
+                SetSound(Ebgm.FALL);
+                SetSound(Ebgm.SPRING);
             }
             return instance;
         }
-    }
-
-    public static SoundManager Init()
-    {
-        //추가할 음악데이터 load
-        instance = new GameObject().AddComponent<SoundManager>();
-        instance.BGMPlayer = instance.AddComponent<AudioSource>();
-
-        instance.BGMPlayer.loop = true;
-        DontDestroyOnLoad(instance);
-
-        //사운드 세팅
-        SetSound(ESoundEffect.SE_BEAT_01);
-        SetSound(ESoundEffect.SE_APPEAR_01);
-        SetSound(ESoundEffect.SE_ANSWER_01);
-        SetSound(ESoundEffect.SE_BEEP_01);
-
-        SetSound(Ebgm.SUMMER);
-        SetSound(Ebgm.WINTER);
-        SetSound(Ebgm.FALL);
-        SetSound(Ebgm.SPRING);
-
-        return instance;
     }
 
     private static void SetSound(ESoundEffect soundEffect)
@@ -72,7 +64,7 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    void PlayBGM(Ebgm? bgm)
+    public void PlayBGM(Ebgm? bgm)
     {
         BGMPlayer.Stop();
         if (bgm == null)

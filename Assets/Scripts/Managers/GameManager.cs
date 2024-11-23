@@ -17,8 +17,6 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        SoundManager.Init();
-        StartGame();
     }
     public float GameTime { get; private set; }
 
@@ -27,7 +25,7 @@ public class GameManager : Singleton<GameManager>
     public void StartGame()
     {
         // 1. Scene Change
-        //SceneManager.LoadScene($"GameScene");
+        SceneManager.LoadScene("InGame2");
         _expPool = new GameObjectPool(expPrefab, ExpPoolTransform, 50, false);
         // 2. Game Start
         GameTime = 0;
