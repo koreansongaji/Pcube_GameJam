@@ -1,89 +1,89 @@
 fileFormatVersion: 2
-guid: 434ffe68bbe5d5b49b417181e5b0cc65
+guid: 2506762f5c7771b4a96dfc0e08e594e4
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 19301
   internalIDToNameTable:
   - first:
       1: 100000
     second: body
   - first:
       1: 100002
-    second: ear.L
+    second: feet.L
   - first:
       1: 100004
-    second: ear.R
+    second: feet.R
   - first:
       1: 100006
-    second: //RootNode
+    second: hair.01
   - first:
       1: 100008
-    second: leg.B.L
+    second: hair.02
   - first:
       1: 100010
-    second: leg.B.R
-  - first:
-      1: 100012
-    second: leg.F.L
-  - first:
-      1: 100014
-    second: leg.F.R
-  - first:
-      1: 100016
     second: Mesh
   - first:
-      1: 100018
+      1: 100012
+    second: //RootNode
+  - first:
+      1: 100014
     second: Rig
   - first:
-      1: 100020
+      1: 100016
     second: root
   - first:
-      1: 100022
+      1: 100018
     second: tail.01
   - first:
-      1: 100024
+      1: 100020
     second: tail.02
+  - first:
+      1: 100022
+    second: wing.L
+  - first:
+      1: 100024
+    second: wing.R
   - first:
       4: 400000
     second: body
   - first:
       4: 400002
-    second: ear.L
+    second: feet.L
   - first:
       4: 400004
-    second: ear.R
+    second: feet.R
   - first:
       4: 400006
-    second: //RootNode
+    second: hair.01
   - first:
       4: 400008
-    second: leg.B.L
+    second: hair.02
   - first:
       4: 400010
-    second: leg.B.R
-  - first:
-      4: 400012
-    second: leg.F.L
-  - first:
-      4: 400014
-    second: leg.F.R
-  - first:
-      4: 400016
     second: Mesh
   - first:
-      4: 400018
+      4: 400012
+    second: //RootNode
+  - first:
+      4: 400014
     second: Rig
   - first:
-      4: 400020
+      4: 400016
     second: root
   - first:
-      4: 400022
+      4: 400018
     second: tail.01
   - first:
-      4: 400024
+      4: 400020
     second: tail.02
   - first:
+      4: 400022
+    second: wing.L
+  - first:
+      4: 400024
+    second: wing.R
+  - first:
       21: 2100000
-    second: M_Hog
+    second: M_Pigeon
   - first:
       43: 4300000
     second: Mesh
@@ -151,8 +151,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_Hog
-    second: {fileID: 2100000, guid: 902060c66c0392942ad14484ef179522, type: 2}
+      name: M_Pigeon
+    second: {fileID: 2100000, guid: 51c7befe5cda6b14e925213b0bb7e6a9, type: 2}
   materials:
     materialImportMode: 1
     materialName: 1
@@ -163,7 +163,6 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -711,35 +710,27 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
-    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
-    nodeNameCollisionStrategy: 0
     fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
-    bakeAxisConversion: 0
     preserveHierarchy: 0
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
-    optimizeBones: 1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
-    secondaryUVMarginMethod: 0
-    secondaryUVMinLightmapResolution: 40
-    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -771,9 +762,6 @@ ModelImporter:
   animationType: 2
   humanoidOversampling: 1
   avatarSetup: 1
-  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
-  importBlendShapeDeformPercent: 0
-  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

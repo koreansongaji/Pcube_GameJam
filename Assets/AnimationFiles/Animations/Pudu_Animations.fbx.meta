@@ -1,158 +1,68 @@
 fileFormatVersion: 2
-guid: 434ffe68bbe5d5b49b417181e5b0cc65
+guid: 657cc73ecdb2a5447a788b8c32bd20ad
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      1: 100000
-    second: body
-  - first:
-      1: 100002
-    second: ear.L
-  - first:
-      1: 100004
-    second: ear.R
-  - first:
-      1: 100006
-    second: //RootNode
-  - first:
-      1: 100008
-    second: leg.B.L
-  - first:
-      1: 100010
-    second: leg.B.R
-  - first:
-      1: 100012
-    second: leg.F.L
-  - first:
-      1: 100014
-    second: leg.F.R
-  - first:
-      1: 100016
-    second: Mesh
-  - first:
-      1: 100018
-    second: Rig
-  - first:
-      1: 100020
-    second: root
-  - first:
-      1: 100022
-    second: tail.01
-  - first:
-      1: 100024
-    second: tail.02
-  - first:
-      4: 400000
-    second: body
-  - first:
-      4: 400002
-    second: ear.L
-  - first:
-      4: 400004
-    second: ear.R
-  - first:
-      4: 400006
-    second: //RootNode
-  - first:
-      4: 400008
-    second: leg.B.L
-  - first:
-      4: 400010
-    second: leg.B.R
-  - first:
-      4: 400012
-    second: leg.F.L
-  - first:
-      4: 400014
-    second: leg.F.R
-  - first:
-      4: 400016
-    second: Mesh
-  - first:
-      4: 400018
-    second: Rig
-  - first:
-      4: 400020
-    second: root
-  - first:
-      4: 400022
-    second: tail.01
-  - first:
-      4: 400024
-    second: tail.02
-  - first:
-      21: 2100000
-    second: M_Hog
-  - first:
-      43: 4300000
-    second: Mesh
-  - first:
-      74: 7400000
+      74: 6720303635017113406
     second: Attack
   - first:
-      74: 7400002
+      74: -2597794908530434257
     second: Bounce
   - first:
-      74: 7400004
+      74: -3978480390344217146
     second: Clicked
   - first:
-      74: 7400006
+      74: 4348485665485846014
     second: Death
   - first:
-      74: 7400008
+      74: 2530875414512321751
     second: Eat
   - first:
-      74: 7400010
+      74: -4917721445252819994
     second: Fear
   - first:
-      74: 7400012
+      74: -4506558747437489242
     second: Fly
   - first:
-      74: 7400014
+      74: -1304387373167265313
     second: Hit
   - first:
-      74: 7400016
+      74: -5624545281902316504
     second: Idle_A
   - first:
-      74: 7400018
+      74: 345275505875579249
     second: Idle_B
   - first:
-      74: 7400020
+      74: 7349504748338987087
     second: Idle_C
   - first:
-      74: 7400022
+      74: 5539831331247536789
     second: Jump
   - first:
-      74: 7400024
+      74: -2341027594253812581
     second: Roll
   - first:
-      74: 7400026
+      74: 5522812681064789136
     second: Run
   - first:
-      74: 7400028
+      74: 1970460594263377210
     second: Sit
   - first:
-      74: 7400030
+      74: -6333163131637793548
     second: Spin
   - first:
-      74: 7400032
+      74: 5414490534771693905
     second: Swim
   - first:
-      74: 7400034
+      74: 2667949614841947897
     second: Walk
-  - first:
-      95: 9500000
-    second: //RootNode
-  - first:
-      137: 13700000
-    second: Mesh
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_Hog
-    second: {fileID: 2100000, guid: 902060c66c0392942ad14484ef179522, type: 2}
+      name: M_Alpaca
+    second: {fileID: 2100000, guid: 3898d9a8370af9a4bba9dc6a2d84bced, type: 2}
   materials:
     materialImportMode: 1
     materialName: 1
@@ -163,7 +73,6 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -177,7 +86,7 @@ ModelImporter:
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
-    animationWrapMode: 0
+    animationWrapMode: 2
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations:
@@ -711,13 +620,11 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
-    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
-    nodeNameCollisionStrategy: 0
-    fileIdsGeneration: 1
+    fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -728,18 +635,16 @@ ModelImporter:
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
-    optimizeBones: 1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
-    secondaryUVMarginMethod: 0
+    secondaryUVMarginMethod: 1
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -772,8 +677,6 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 0
-  importBlendShapeDeformPercent: 0
-  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
