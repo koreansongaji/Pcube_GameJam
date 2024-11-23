@@ -13,13 +13,13 @@ namespace Weapons.WeaponSubScripts
         
         private GameObjectPool _pool;
         private float _damage;
-        private Rigidbody _rigidbody;
+        private Rigidbody _rigidBody;
         
         private bool _collided = false;
         
         private void Awake()
         {
-            _rigidbody = GetComponent<Rigidbody>();
+            _rigidBody = GetComponent<Rigidbody>();
         }
 
         private float _time = 0;
@@ -58,7 +58,7 @@ namespace Weapons.WeaponSubScripts
         public void SetArgs(float damage, float speed, GameObjectPool pool)
         {
             _damage = damage;
-            _rigidbody.velocity = transform.forward * speed;
+            _rigidBody.velocity = transform.forward * speed;
             _pool = pool;
         }
         
