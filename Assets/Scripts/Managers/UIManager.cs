@@ -1,3 +1,4 @@
+using Helpers;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -78,7 +79,17 @@ public class UIManager : MonoBehaviour
                 OpenStateToggle();
                 isStateUIWindowOpened = true;
             }
+        }
 
+
+        if(!isGameStopOpened && !isStateUIWindowOpened)
+        {
+            for(int i=0; i<GameManager.Instance.ExpPoolTransformSub.transform.childCount; i++)
+            {
+                if ((GameManager.Instance.ExpPoolTransformSub.GetChild(i).transform.position-MouseCursorPosFinder.GetMouseWorldPosition()).magnitude < 1f) {
+                    GameManager.Instance.ExpPoolTransformSub.GetChild(i).GetComponent<ExpSphere>().ActiveThisExpSphere();
+                } 
+            }
         }
     }
 
