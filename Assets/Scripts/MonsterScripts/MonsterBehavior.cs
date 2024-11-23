@@ -27,6 +27,10 @@ public class MonsterBehavior : MonsterMovement
     {
         GetInfo();
     }
+    private void OnEnable()
+    {
+        MoveOnEnable(player, monsterStatus, agent, animator);
+    }
     void Start()
     {
         MoveStart(player, monsterStatus, agent, animator);
@@ -40,9 +44,13 @@ public class MonsterBehavior : MonsterMovement
     {
         MoveUpdate(player, monsterStatus, agent, animator);
     }
+    private void OnDisable()
+    {
+        MoveOnDisable(player, monsterStatus, agent, animator);    
+    }
 
     public void TakeDamage(float damage)
     {
-        monsterStatus.CurHp -= damage;
+        monsterStatus.Data.CurHp -= damage;
     }
 }
