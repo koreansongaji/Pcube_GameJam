@@ -10,8 +10,6 @@ public class Player : MonoBehaviour
 
     private PlayerLevel _playerLevel;
     private WeaponHandler _weaponHandler;
-    
-    public int statePoint;
     private void Awake()
     {
         _playerLevel = GetComponent<PlayerLevel>();

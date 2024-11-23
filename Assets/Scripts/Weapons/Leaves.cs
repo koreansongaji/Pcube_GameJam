@@ -31,7 +31,7 @@ namespace Weapons
             GameObject bullet = _bulletPool.Get();
             bullet.TryGetComponent(out NormalBullet bulletScript);
             
-            bullet.transform.position = weaponHandler.transform.position;
+            bullet.transform.position = weaponHandler.transform.position + new Vector3(0, 1, 0);
             bulletScript.SetTarget(target);
             bulletScript.SetArgs(CalculateFinalDamage(), CalculateProjectileSpeed(), _bulletPool);
             
@@ -80,11 +80,8 @@ namespace Weapons
                 return true;
             }
 
-            else
-            {
-                target = MouseCursorPosFinder.GetMouseWorldPosition();
-                return true;
-            }
+            target = MouseCursorPosFinder.GetMouseWorldPosition();
+            return true;
         }
     }
     

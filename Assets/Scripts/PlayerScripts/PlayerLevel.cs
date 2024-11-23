@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Player))]
 public class PlayerLevel : MonoBehaviour
@@ -7,11 +8,11 @@ public class PlayerLevel : MonoBehaviour
     private Player _player;
     public UnityEvent<int> OnLevelUp { get; private set; }
 
-    private int _curLevel;
-    private float _curExp;
+    [SerializeField] private int curLevel;
+    [SerializeField] private float curExp;
     
-    private float _expToNextLevel;
-    private float _expIncreaseFactor;
+    [SerializeField] private float expToNextLevel;
+    [SerializeField] private float expIncreaseFactor;
 
     private void Awake()
     {
@@ -19,16 +20,16 @@ public class PlayerLevel : MonoBehaviour
         OnLevelUp = new UnityEvent<int>();
     }
     
-    private void EarnExp(int exp)
+    public void EarnExp(int exp)
     {
         // todo : 성장이라는 강화요소를 사용한다면, 이곳에서 성장이 적용된 경험치를 계산한다.
-        _curExp += exp;
+        curExp += exp;
         CheckLevelUp();
     }
     
     private void CheckLevelUp()
     {
-        if (_curExp >= _expToNextLevel)
+        if (curExp >= expToNextLevel)
         {
             LevelUp();
             CheckLevelUp();
@@ -37,9 +38,24 @@ public class PlayerLevel : MonoBehaviour
 
     private void LevelUp()
     {
-        _curLevel++;
-        _curExp -= _expToNextLevel;
-        _expToNextLevel *= _expIncreaseFactor;
-        OnLevelUp.Invoke(_curLevel);
+        curLevel++;
+        curExp -= expToNextLevel;
+        expToNextLevel *= expIncreaseFactor;
+        OnLevelUp.Invoke(curLevel);
+    }
+    
+    public int GetLevel()
+    {
+        return curLevel;
+    }
+    
+    public float GetExp()
+    {
+        return curExp;
+    }
+
+    public float GetExpToNextLevel()
+    {
+        return expToNextLevel;
     }
 }

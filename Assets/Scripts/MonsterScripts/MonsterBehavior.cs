@@ -17,6 +17,10 @@ public class MonsterBehavior : MonsterMovement
 
     private PoolingHandler poolingHandler;
     private int _monsterKind;
+    private static readonly int IS_DEATH = Animator.StringToHash("isDeath");
+
+    private bool _dead;
+
     /// <summary>
     /// 정보 받아오는 함수, Awake에 처음 한 번 쓰인다.
     /// </summary>
@@ -49,7 +53,7 @@ public class MonsterBehavior : MonsterMovement
     private void FixedUpdate()
     {
         MoveUpdate(player, monsterStatus, agent, animator);
-        isDeath();
+        CheckDeath();
     }
     private void OnDisable()
     {
@@ -61,20 +65,26 @@ public class MonsterBehavior : MonsterMovement
         monsterStatus.runtimeData.CurHp -= damage;
     }
 
-    private void isDeath()
+    private void CheckDeath()
     {
+        if(_dead) return;
+        
         if(monsterStatus.runtimeData.CurHp <= 0)
         {
+            _dead = true;
+            
             StartCoroutine(Death());
         }
     }
-    IEnumerator Death()
+
+    private IEnumerator Death()
     {
-        animator.SetBool("isDeath", true);
+        animator.SetBool(IS_DEATH, true);
         ExpPoolSystem.Instance.CreateExpSphere(this.transform.position);
         yield return new WaitForSecondsRealtime(1f);
-        poolingHandler.DeActiveMonster[monsterStatus.runtimeData.Kind].Add(this.gameObject);
-        poolingHandler.ActiveMonster[monsterStatus.runtimeData.Kind].Remove(this.gameObject);
-        this.gameObject.SetActive(false);
+        poolingHandler.DeActiveMonster[monsterStatus.runtimeData.Kind].Add(gameObject);
+        poolingHandler.ActiveMonster[monsterStatus.runtimeData.Kind].Remove(gameObject);
+        
+        gameObject.SetActive(false);
     }
 }

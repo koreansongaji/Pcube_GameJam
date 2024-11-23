@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,19 +7,19 @@ using UnityEngine;
 
 public class ExpSphere : MonoBehaviour
 {
-    bool isActive = false;
+    bool _isActive = false;
 
-    public void ActiveThisExpSphere()
+    private void ActiveThisExpSphere()
     {
-        if (isActive) return;
+        if (_isActive) return;
         
-        isActive = true;
+        _isActive = true;
         GameManager.Instance.TryGetPlayerObject(out Player player);
             
         transform.DOMove(player.transform.position + new Vector3(0, 2, 0), 0.5f)
             .SetEase(Ease.InExpo).OnComplete(() =>
             {
-                player.statePoint++;
+                player.GetComponent<PlayerLevel>().EarnExp(10);
                 SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_APPEAR_01);
                 ExpPoolSystem.Instance.ReturnExpSphere(gameObject);
             });
@@ -26,14 +27,27 @@ public class ExpSphere : MonoBehaviour
 
     private void Update()
     {
-        if (isActive is false) return;
         if (GameManager.Pause) return;
         
         Vector3 getMousePos = Helpers.MouseCursorPosFinder.GetMouseWorldPosition();
+        
+        // mousePos와의 거리가 5 이하일 때
+        if (Vector3.Distance(getMousePos, transform.position) < 5)
+        {
+            ActiveThisExpSphere();
+        }
     }
 
     public void OnEnable()
     {
-        isActive = false;
+        _isActive = false;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        // draw mouse pos
+        Vector3 getMousePos = Helpers.MouseCursorPosFinder.GetMouseWorldPosition();
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(getMousePos, 0.5f);
     }
 }
