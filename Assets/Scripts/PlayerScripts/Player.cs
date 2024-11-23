@@ -15,8 +15,8 @@ public class Player : MonoBehaviour
     {
         _playerLevel = GetComponent<PlayerLevel>();
         _weaponHandler = GetComponent<WeaponHandler>();
-        
-        runtimeData = new PlayerData(baseData);
+
+        runtimeData = Instantiate(baseData);
         runtimeData.currentHp.baseValue = baseData.maxHp.baseValue;
     }
 
