@@ -49,6 +49,7 @@ public class MonsterBehavior : MonsterMovement
     private void FixedUpdate()
     {
         MoveUpdate(player, monsterStatus, agent, animator);
+        isDeath();
     }
     private void OnDisable()
     {
