@@ -9,6 +9,13 @@ public class WeaponHandler : MonoBehaviour
 
     [SerializeField] private List<Weapon> weapons;
     [SerializeField] private PlayerData playerData;
+    [SerializeField] private Player player;
+    
+    private void Awake()
+    {
+        weapons = new List<Weapon>();
+        player = GetComponent<Player>();
+    }
 
     private void Update()
     {
@@ -23,7 +30,7 @@ public class WeaponHandler : MonoBehaviour
         if (weapons.Count < MAX_WEAPON_COUNT)
         {
             weapons.Add(weapon);
-            weapon.Setup();
+            weapon.Setup(this);
         }
     }
     

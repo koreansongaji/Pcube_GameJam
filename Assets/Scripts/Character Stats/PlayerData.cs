@@ -16,4 +16,21 @@ public class PlayerData : ScriptableObject
     [SerializeField] public CharacterStat projectileCount;
     [SerializeField] public CharacterStat resurrection;
     [SerializeField] public CharacterStat growth;
+    
+    //복사 생성자
+    public PlayerData(PlayerData playerData)
+    {
+        maxHp = new CharacterStat(playerData.maxHp.baseValue);
+        currentHp = new CharacterStat(playerData.maxHp.baseValue);
+        regenHp = new CharacterStat(playerData.maxHp.baseValue);
+        armor = new CharacterStat(playerData.maxHp.baseValue);
+        damage = new CharacterStat(playerData.maxHp.baseValue);
+        projectileSpeed = new CharacterStat(playerData.maxHp.baseValue);
+        duration = new CharacterStat(playerData.maxHp.baseValue);
+        attackRange = new CharacterStat(playerData.maxHp.baseValue);
+        coolTime = new CharacterStat(playerData.maxHp.baseValue);
+        projectileCount = new CharacterStat(playerData.maxHp.baseValue);
+        resurrection = new CharacterStat(playerData.maxHp.baseValue);
+        growth = new CharacterStat(playerData.maxHp.baseValue);
+    }
 }
