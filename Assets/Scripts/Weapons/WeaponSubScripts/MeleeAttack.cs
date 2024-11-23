@@ -48,6 +48,9 @@ namespace Weapons.WeaponSubScripts
             
             // target 방향으로 회전
             transform.LookAt(target);
+            GameObject spawnedVFX = Instantiate(myVFX, transform.position, transform.rotation) as GameObject;
+            spawnedVFX.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            Destroy(spawnedVFX, 1f);
         }
 
         public void SetArgs(float damage)
@@ -57,9 +60,8 @@ namespace Weapons.WeaponSubScripts
         
         private void OnEnable()
         {
-            GameObject spawnedVFX = Instantiate(myVFX, transform.position, transform.rotation) as GameObject;
-            spawnedVFX.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            Destroy(spawnedVFX, 1f);
+            
+            
             _time = 0;
             _collided = false;
         }
