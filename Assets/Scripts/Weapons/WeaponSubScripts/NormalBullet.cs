@@ -10,7 +10,8 @@ namespace Weapons.WeaponSubScripts
     public class NormalBullet : MonoBehaviour
     {
         public UnityAction<MonsterBehavior> OnHit { get; set; }
-        
+
+        public GameObject myVFX;
         private GameObjectPool _pool;
         private float _damage;
         private Rigidbody _rigidBody;
@@ -21,7 +22,7 @@ namespace Weapons.WeaponSubScripts
         {
             _rigidBody = GetComponent<Rigidbody>();
         }
-
+        float a = 0;
         private float _time = 0;
         private void Update()
         {
@@ -30,6 +31,7 @@ namespace Weapons.WeaponSubScripts
             {
                 CheckRelease();
             }
+
         }
 
         private void CheckRelease()
