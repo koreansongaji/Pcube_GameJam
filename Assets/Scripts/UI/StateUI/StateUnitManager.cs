@@ -11,13 +11,19 @@ public class StateUnitManager : MonoBehaviour
     [SerializeField] GameObject skill1;
     [SerializeField] GameObject skill2;
     [SerializeField] GameObject skill3;
-    [SerializeField] TextMeshProUGUI RemainSPText;
+
+    [SerializeField] GameObject skill1StopScene;
+    [SerializeField] GameObject skill2StopScene;
+    [SerializeField] GameObject skill3StopScene;
+
+    [SerializeField] Text RemainSPText;
     [SerializeField] GameObject Description;
-
-
+    [SerializeField] GameObject DescriptionStopScene;
+    [SerializeField] Button ResetButton;
+    [SerializeField] Button ConfirmButton;
 
     public int remainSP = 11;
-
+    UIManager UIObject;
     private static StateUnitManager instance;
     public static StateUnitManager Instance
     {
@@ -39,6 +45,7 @@ public class StateUnitManager : MonoBehaviour
             {
                 if (CheckIsRightAccess(skill1, number))
                 {
+                    SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_Appear_01);
                     if (skill1.transform.GetChild(number).GetComponent<StateUnit>().NowCount < skill1.transform.GetChild(number).GetComponent<StateUnit>().MaxCount)
                     {
                         //이 스텟 활성화
@@ -47,6 +54,10 @@ public class StateUnitManager : MonoBehaviour
                         remainSP--;
                         RemainSPText.text = "남은 스탯포인트 : " + remainSP;
                     }
+                    else
+                    {
+                        SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_Beep_01);
+                    }
                 }
 
             }
@@ -54,6 +65,7 @@ public class StateUnitManager : MonoBehaviour
             {
                 if (CheckIsRightAccess(skill2, number))
                 {
+                    SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_Appear_01);
                     if (skill2.transform.GetChild(number).GetComponent<StateUnit>().NowCount < skill2.transform.GetChild(number).GetComponent<StateUnit>().MaxCount)
                     {
                         //이 스텟 활성화
@@ -62,6 +74,9 @@ public class StateUnitManager : MonoBehaviour
                         remainSP--;
                         RemainSPText.text = "남은 스탯포인트 : " + remainSP;
                     }
+                } else
+                {
+                    SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_Beep_01);
                 }
 
             }
@@ -69,6 +84,7 @@ public class StateUnitManager : MonoBehaviour
             {
                 if (CheckIsRightAccess(skill3, number))
                 {
+                    SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_Appear_01);
                     if (skill3.transform.GetChild(number).GetComponent<StateUnit>().NowCount < skill3.transform.GetChild(number).GetComponent<StateUnit>().MaxCount)
                     {
                         //이 스텟 활성화
@@ -78,8 +94,20 @@ public class StateUnitManager : MonoBehaviour
                         RemainSPText.text = "남은 스탯포인트 : " + remainSP;
                     }
                 }
+                else
+                {
+                    SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_Beep_01);
+                }
 
             }
+
+            if (remainSP == 0)
+            {
+                ConfirmButton.gameObject.SetActive(true);
+            }
+        } else
+        {
+            SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_Beep_01);
         }
 
     }
@@ -108,73 +136,134 @@ public class StateUnitManager : MonoBehaviour
         {
             return sum < 12 && sum >= 11;
         }
+
+
     }
 
-    public static void Init() //완전처음
+    public static void Init(UIManager uIManager) //완전처음
     {
-        instance = GameObject.Find("StateUI").GetComponent<StateUnitManager>();
-
+        
+        instance = uIManager.StateUI.GetComponent<StateUnitManager>();
+        instance.UIObject = uIManager;
         for (int i = 0; i < 8; i++)
         {
             if (i % 4 > 1)
             {
-                instance.skill1.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill1, i, 0, 1);
+                instance.skill1.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill1, i, 0, 1, false);
+                instance.skill2.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill2, i, 0, 1, false);
+                instance.skill3.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill3, i, 0, 1, false);
                 //2, 3
             }
             else
             {
-                instance.skill1.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill1, i, 0, 5);
+                instance.skill1.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill1, i, 0, 5, false);
+                instance.skill2.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill2, i, 0, 5, false);
+                instance.skill3.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill3, i, 0, 5, false);
                 //0, 1
             }
 
             instance.skill1.transform.GetChild(i).GetComponent<StateUnit>().StateUnitUpdate();
-        }
-
-        for (int i = 0; i < 8; i++)
-        {
-            if (i % 4 > 1)
-            {
-                instance.skill2.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill2, i, 0, 1);
-                //2, 3
-            }
-            else
-            {
-                instance.skill2.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill2, i, 0, 5);
-                //0, 1
-            }
-
             instance.skill2.transform.GetChild(i).GetComponent<StateUnit>().StateUnitUpdate();
-        }
-
-        for (int i = 0; i < 8; i++)
-        {
-            if (i % 4 > 1)
-            {
-                instance.skill3.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill3, i, 0, 1);
-                //2, 3
-            }
-            else
-            {
-                instance.skill3.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill3, i, 0, 5);
-                //0, 1
-            }
-
             instance.skill3.transform.GetChild(i).GetComponent<StateUnit>().StateUnitUpdate();
         }
+
+
+
+        for (int i = 0; i < 8; i++)
+        {
+            if (i % 4 > 1)
+            {
+                instance.skill1StopScene.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill1, i, 0, 1, true);
+                instance.skill2StopScene.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill2, i, 0, 1, true);
+                instance.skill3StopScene.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill3, i, 0, 1, true);
+                //2, 3
+            }
+            else
+            {
+                instance.skill1StopScene.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill1, i, 0, 5, true);
+                instance.skill2StopScene.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill2, i, 0, 5, true);
+                instance.skill3StopScene.transform.GetChild(i).GetComponent<StateUnit>().SetStateUnit(StateUnit.ESkillType.skill3, i, 0, 5, true);
+                //0, 1
+            }
+
+            instance.skill1StopScene.transform.GetChild(i).GetComponent<StateUnit>().StateUnitUpdate();
+            instance.skill2StopScene.transform.GetChild(i).GetComponent<StateUnit>().StateUnitUpdate();
+            instance.skill3StopScene.transform.GetChild(i).GetComponent<StateUnit>().StateUnitUpdate();
+        }
+
+        instance.gameObject.SetActive(false);
     }
 
     public void MarkDescription(Sprite sprite, string context)
     {
         Description.SetActive(true);
         Description.transform.Find("Img").GetComponent<Image>().sprite = sprite;
-        Description.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = context;
+        Description.transform.Find("Text").GetComponent<Text>().text = context;
+    }
+
+    public void MarkDescriptionGameStop(Sprite sprite, string context)
+    {
+        DescriptionStopScene.SetActive(true);
+        DescriptionStopScene.transform.Find("Img").GetComponent<Image>().sprite = sprite;
+        DescriptionStopScene.transform.Find("Text").GetComponent<Text>().text = context;
     }
     public void ExitDescription()
     {
         Description.SetActive(false);
     }
+    public void ExitDescriptionGameStop()
+    {
+        DescriptionStopScene.SetActive(false);
+    }
 
-    public void RenewalStateUI(int[] skill1Arr, int[] skill2Arr, int[] skill3Arr)
+    public void RenewalStateUI(int[] skill1Arr, int[] skill2Arr, int[] skill3Arr, int SP)
+    {
+        remainSP = SP;
+        RemainSPText.text = "남은 스탯 포인트 : " + remainSP;
+        for (int i = 0; i < 8; i++)
+        {
+            skill1.transform.GetChild(i).GetComponent<StateUnit>().NowCount = skill1Arr[i];
+            skill1.transform.GetChild(i).GetComponent<StateUnit>().StateUnitUpdate();
+        }
+
+        for (int i = 0; i < 8; i++)
+        {
+            skill2.transform.GetChild(i).GetComponent<StateUnit>().NowCount = skill2Arr[i];
+            skill2.transform.GetChild(i).GetComponent<StateUnit>().StateUnitUpdate();
+        }
+
+        for (int i = 0; i < 8; i++)
+        {
+            skill3.transform.GetChild(i).GetComponent<StateUnit>().NowCount = skill3Arr[i];
+            skill3.transform.GetChild(i).GetComponent<StateUnit>().StateUnitUpdate();
+        }
+
+        if (remainSP > 0)
+        {
+            ConfirmButton.gameObject.SetActive(false);
+        } else
+        {
+            ConfirmButton.gameObject.SetActive(true);
+        }
+    }
+    public void RenewalGameStopStateUI(int[] skill1Arr, int[] skill2Arr, int[] skill3Arr)
+    {
+        DescriptionStopScene.SetActive(false);
+        for (int i = 0; i < 8; i++)
+        {
+            skill1StopScene.transform.GetChild(i).GetComponent<StateUnit>().NowCount = skill1Arr[i];
+            skill1StopScene.transform.GetChild(i).GetComponent<StateUnit>().StateUnitUpdate();
+
+            skill2StopScene.transform.GetChild(i).GetComponent<StateUnit>().NowCount = skill2Arr[i];
+            skill2StopScene.transform.GetChild(i).GetComponent<StateUnit>().StateUnitUpdate();
+
+            skill3StopScene.transform.GetChild(i).GetComponent<StateUnit>().NowCount = skill3Arr[i];
+            skill3StopScene.transform.GetChild(i).GetComponent<StateUnit>().StateUnitUpdate();
+        }
+
+    }
+
+    public void GameStop(int[] skill1Arr, int[] skill2Arr, int[] skill3Arr)
     {
         for (int i = 0; i < 8; i++)
         {
@@ -193,5 +282,25 @@ public class StateUnitManager : MonoBehaviour
             skill3.transform.GetChild(i).GetComponent<StateUnit>().NowCount = skill3Arr[i];
             skill3.transform.GetChild(i).GetComponent<StateUnit>().StateUnitUpdate();
         }
+    }
+
+    public void ConfirmButtonClick()
+    {
+        for(int i=0; i<8; i++)
+        {
+            UIObject.player.skill1[i] = skill1.transform.GetChild(i).GetComponent<StateUnit>().NowCount;
+            UIObject.player.skill2[i] = skill2.transform.GetChild(i).GetComponent<StateUnit>().NowCount;
+            UIObject.player.skill3[i] = skill3.transform.GetChild(i).GetComponent<StateUnit>().NowCount;
+        }
+        SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_Beat_01);
+        UIObject.player.statePoint = 0;
+        //먼가 넘기기
+        UIObject.CloseStateToggle();
+    }
+
+    public void ResetButtonClick()
+    {
+        RenewalStateUI(UIObject.player.skill1, UIObject.player.skill2, UIObject.player.skill3, UIObject.player.statePoint);
+        SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_Answer_01);
     }
 }

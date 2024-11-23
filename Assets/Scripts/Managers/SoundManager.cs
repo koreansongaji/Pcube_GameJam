@@ -40,7 +40,14 @@ public class SoundManager : MonoBehaviour
 
         //사운드 세팅
         SetSound(ESoundEffect.SE_Beat_01);
+        SetSound(ESoundEffect.SE_Appear_01);
+        SetSound(ESoundEffect.SE_Answer_01);
+        SetSound(ESoundEffect.SE_Beep_01);
 
+        SetSound(EBGM.summer);
+        SetSound(EBGM.winter);
+        SetSound(EBGM.fall);
+        SetSound(EBGM.spring);
 
         return instance;
     }
@@ -57,7 +64,7 @@ public class SoundManager : MonoBehaviour
 
     private static void SetSound(EBGM bgm)
     {
-        instance.BGMClips[(int)bgm] = Resources.Load<AudioClip>("Sound/" + bgm.ToString());
+        instance.BGMClips[(int)bgm] = Resources.Load<AudioClip>("Sound/BGM/" + bgm.ToString());
     }
     private static void SetSound(EBGM bgm, string path)
     {
@@ -111,14 +118,17 @@ public class SoundManager : MonoBehaviour
     public enum ESoundEffect
     {
         SE_Beat_01,
-        sound2,
+        SE_Answer_01,
+        SE_Appear_01,
+        SE_Beep_01
 
     }
     public enum EBGM
     {
-        sound1,
-        sound2,
-
+        summer,
+        winter,
+        spring,
+        fall
     }
 
 }

@@ -14,6 +14,8 @@ public class StateUnit : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     Material grayMaterial;
     [SerializeField] string context;
 
+    bool isGameStopObject;
+
     public enum ESkillType
     {
         skill1, skill2, skill3
@@ -22,26 +24,45 @@ public class StateUnit : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        StateUnitManager.Instance.StateUnitMouseDown(skillType, number);
+        if (!isGameStopObject)
+        {
+            StateUnitManager.Instance.StateUnitMouseDown(skillType, number);
+        }
+            
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        StateUnitManager.Instance.MarkDescription(GetComponent<Image>().sprite, context);
+        if (isGameStopObject)
+        {
+            StateUnitManager.Instance.MarkDescriptionGameStop(GetComponent<Image>().sprite, context);
+        } else
+        {
+            StateUnitManager.Instance.MarkDescription(GetComponent<Image>().sprite, context);
+        }
+        
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        StateUnitManager.Instance.ExitDescription();
+        if (isGameStopObject)
+        {
+            StateUnitManager.Instance.ExitDescriptionGameStop();
+        }
+        else
+        {
+            StateUnitManager.Instance.ExitDescription();
+        }
+        
     }
 
-    public void SetStateUnit(ESkillType skillType, int a, int NowCount, int MaxCount)
+    public void SetStateUnit(ESkillType skillType, int a, int NowCount, int MaxCount, bool isGameStopObject)
     {
         this.skillType = skillType;
         this.number = a;
         this.NowCount = NowCount;
         this.MaxCount = MaxCount;
-
+        this.isGameStopObject = isGameStopObject;
         grayMaterial = new Material(GetComponent<Image>().material);
         GetComponent<Image>().material = grayMaterial;
     }
