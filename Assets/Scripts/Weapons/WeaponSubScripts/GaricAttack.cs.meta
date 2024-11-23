@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 35392006ec913024c9e9082309b32498
+guid: a65a0cd897b478246919e6d1c690b98b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - myVFX: {fileID: 1805875275914810, guid: 2b567eadfb3fbcd40b2937e0cac6e890, type: 3}
+  - myVFX: {fileID: 1212038522573524, guid: d773d301d86b3254180a6887af308eef, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

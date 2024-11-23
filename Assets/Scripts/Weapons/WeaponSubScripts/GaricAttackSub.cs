@@ -6,15 +6,15 @@ using UnityEngine.Events;
 using UnityEngine.Pool;
 using Weapons.WeaponSubScripts;
 
-public class MeleeAttackSub : MonoBehaviour
+public class GaricAttackSub : MonoBehaviour
     {
         private void OnTriggerEnter(Collider other)
         {
-        if (other.CompareTag($"Monster"))
+            if (other.CompareTag($"Monster"))
             {
-                if(other.TryGetComponent(out MonsterBehavior monster) == false)
+                if (other.TryGetComponent(out MonsterBehavior monster) == false)
                     return;
-                transform.parent.GetComponent<MeleeAttack>().Damage(monster);
+                transform.parent.GetComponent<GaricAttack>().Damage(monster);
             }
         }
     }
