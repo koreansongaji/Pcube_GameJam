@@ -17,7 +17,7 @@ public class StateUnitManager : MonoBehaviour
     [SerializeField] GameObject skill3StopScene;
 
     [SerializeField] Text RemainSPText;
-    [SerializeField] GameObject Description;
+    public GameObject Description;
     [SerializeField] GameObject DescriptionStopScene;
     [SerializeField] Button ResetButton;
     [SerializeField] Button ConfirmButton;
@@ -36,7 +36,7 @@ public class StateUnitManager : MonoBehaviour
             return instance;
         }
     }
-
+    bool isChanged = false;
     public void StateUnitMouseDown(StateUnit.ESkillType skillType, int number)
     {
         if (remainSP > 0)
@@ -52,6 +52,7 @@ public class StateUnitManager : MonoBehaviour
                         skill1.transform.GetChild(number).GetComponent<StateUnit>().NowCount++;
                         skill1.transform.GetChild(number).GetComponent<StateUnit>().StateUnitUpdate();
                         remainSP--;
+                        isChanged = true;
                         RemainSPText.text = "남은 스탯포인트 : " + remainSP;
                     }
                     else
@@ -72,9 +73,11 @@ public class StateUnitManager : MonoBehaviour
                         skill2.transform.GetChild(number).GetComponent<StateUnit>().NowCount++;
                         skill2.transform.GetChild(number).GetComponent<StateUnit>().StateUnitUpdate();
                         remainSP--;
+                        isChanged = true;
                         RemainSPText.text = "남은 스탯포인트 : " + remainSP;
                     }
-                } else
+                }
+                else
                 {
                     SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_BEEP_01);
                 }
@@ -101,11 +104,17 @@ public class StateUnitManager : MonoBehaviour
 
             }
 
-            if (remainSP == 0)
+            if (isChanged)
             {
                 ConfirmButton.gameObject.SetActive(true);
             }
-        } else
+            else
+            {
+                ConfirmButton.gameObject.SetActive(false);
+            }
+
+        }
+        else
         {
             SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_BEEP_01);
         }
@@ -142,6 +151,7 @@ public class StateUnitManager : MonoBehaviour
 
     public static void Init(UIManager uIManager) //완전처음
     {
+
         instance = uIManager.StateUI.GetComponent<StateUnitManager>();
         instance.UIObject = uIManager;
         for (int i = 0; i < 8; i++)
@@ -219,6 +229,10 @@ public class StateUnitManager : MonoBehaviour
     {
         remainSP = SP;
         RemainSPText.text = "남은 스탯 포인트 : " + remainSP;
+
+        isChanged = false;
+        ResetButton.gameObject.SetActive(false);
+
         for (int i = 0; i < 8; i++)
         {
             skill1.transform.GetChild(i).GetComponent<StateUnit>().NowCount = skill1Arr[i];
@@ -240,7 +254,8 @@ public class StateUnitManager : MonoBehaviour
         if (remainSP > 0)
         {
             ConfirmButton.gameObject.SetActive(false);
-        } else
+        }
+        else
         {
             ConfirmButton.gameObject.SetActive(true);
         }
@@ -285,21 +300,25 @@ public class StateUnitManager : MonoBehaviour
 
     public void ConfirmButtonClick()
     {
-        for(int i=0; i<8; i++)
+        for (int i = 0; i < 8; i++)
         {
             UIObject.player.skill1[i] = skill1.transform.GetChild(i).GetComponent<StateUnit>().NowCount;
             UIObject.player.skill2[i] = skill2.transform.GetChild(i).GetComponent<StateUnit>().NowCount;
             UIObject.player.skill3[i] = skill3.transform.GetChild(i).GetComponent<StateUnit>().NowCount;
         }
         SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_BEAT_01);
-        UIObject.player.statePoint = 0;
+        UIObject.player.statePoint = remainSP;
         //먼가 넘기기
-        UIObject.CloseStateToggle();
     }
 
     public void ResetButtonClick()
     {
         RenewalStateUI(UIObject.player.skill1, UIObject.player.skill2, UIObject.player.skill3, UIObject.player.statePoint);
         SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_ANSWER_01);
+    }
+
+    public void CloseStateUIButtonClick()
+    {
+        UIObject.CloseStateToggle();
     }
 }

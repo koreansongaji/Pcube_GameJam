@@ -4,14 +4,22 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : Generic.Singleton<UIManager>
+public class UIManager : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] Slider HPBar;
     [SerializeField] Slider ExpBar;
     [SerializeField] Slider SeasonSlider;
+    public static UIManager instance;
     public Player player;
-    
+
+    public enum ESeason
+    {
+        summer,
+        winter,
+        spring,
+        fall
+    }
     public ESeason NowSeason;
     [SerializeField] Color summerColor;
     [SerializeField] Color winterColor;
@@ -21,11 +29,21 @@ public class UIManager : Generic.Singleton<UIManager>
     [SerializeField] GameObject GameStopObject;
     public GameObject StateUI;
     bool isGameStopOpened = false;
-
-    private void Awake()
+    bool isStateUIWindowOpened = false;
+    public static UIManager Init()
     {
-        OpenStateToggle();
-        StateUnitManager.Init(this);
+        if (instance == null)
+        {
+            instance = GameObject.Find("UIManager").GetComponent<UIManager>();
+        }
+        else
+        {
+            Debug.LogError("동일한 씬에 Init 2번실행 오류");
+        }
+        StateUnitManager.Init(instance);
+
+        return instance;
+
     }
 
     public void Update()
@@ -47,6 +65,27 @@ public class UIManager : Generic.Singleton<UIManager>
                 StateUnitManager.Instance.RenewalGameStopStateUI(player.skill1, player.skill2, player.skill3);
             }
         }
+        if (Input.GetKeyDown(KeyCode.E) && !isGameStopOpened)
+        {
+            SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_ANSWER_01);
+            if (isStateUIWindowOpened)
+            {
+                CloseStateToggle();
+                isStateUIWindowOpened = false;
+            }
+            else
+            {
+                OpenStateToggle();
+                isStateUIWindowOpened = true;
+            }
+
+        }
+    }
+
+
+    public void OnDestroy()
+    {
+        instance = null;
     }
 
     public void OpenStateToggle()
@@ -58,6 +97,7 @@ public class UIManager : Generic.Singleton<UIManager>
     public void CloseStateToggle()
     {
         StateUnitManager.Instance.gameObject.SetActive(false);
+        StateUnitManager.Instance.Description.SetActive(false);
     }
     public void SetHPBar(float a)
     {
@@ -79,16 +119,16 @@ public class UIManager : Generic.Singleton<UIManager>
 
         switch (season)
         {
-            case (ESeason.WINTER):
+            case (ESeason.winter):
                 SeasonSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = winterColor;
                 break;
-            case (ESeason.SUMMER):
+            case (ESeason.summer):
                 SeasonSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = summerColor;
                 break;
-            case (ESeason.SPRING):
+            case (ESeason.spring):
                 SeasonSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = fallColor;
                 break;
-            case (ESeason.FALL):
+            case (ESeason.fall):
                 SeasonSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = fallColor;
                 break;
         }
@@ -96,20 +136,12 @@ public class UIManager : Generic.Singleton<UIManager>
 
     public void QuitGame()
     {
-            Application.Quit();
+        Application.Quit();
     }
     public void GameContinue()
     {
         isGameStopOpened = false;
         Time.timeScale = 1;
         GameStopObject.SetActive(false);
-    }
-    
-    public enum ESeason
-    {
-        SUMMER,
-        WINTER,
-        SPRING,
-        FALL
     }
 }
