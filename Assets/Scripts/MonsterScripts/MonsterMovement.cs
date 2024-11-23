@@ -10,6 +10,7 @@ using static UnityEngine.GraphicsBuffer;
 /// </summary>
 public abstract class MonsterMovement : MonsterAttack
 {
+    private bool isAttacking;
     /// <summary>
     /// 몬스터Behavior Start에서 한번 실행
     /// </summary>
@@ -19,10 +20,11 @@ public abstract class MonsterMovement : MonsterAttack
     /// <param name="animator"></param>
     public void MoveStart(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
     {
+        isAttacking = false;
         SetAgent(player, monsterStatus, agent, animator);
     }
     /// <summary>
-    /// 몬스터 Behavior Update에서 한 번 실행
+    /// 몬스터 Behavior Update에서 실행
     /// </summary>
     /// <param name="player"></param>
     /// <param name="monsterStatus"></param>
@@ -31,6 +33,30 @@ public abstract class MonsterMovement : MonsterAttack
     public void MoveUpdate(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
     {
         RotateTowardsTarget(player);
+        Debug.Log("AttackSpeed 값: " + monsterStatus.Data.AttackSpeed);
+    }
+    /// <summary>
+    /// 몬스터 Behavior OnEnable에서 한 번 실행
+    /// </summary>
+    /// <param name="player"></param>
+    /// <param name="monsterStatus"></param>
+    /// <param name="agent"></param>
+    /// <param name="animator"></param>
+    public void MoveOnEnable(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
+    {
+        //SetAgent(player, monsterStatus, agent, animator);
+        StartCoroutine(isAttack(player, monsterStatus, agent, animator));
+    }
+    /// <summary>
+    /// 몬스터 Behavior OnDisable에서 한 번 실행
+    /// </summary>
+    /// <param name="player"></param>
+    /// <param name="monsterStatus"></param>
+    /// <param name="agent"></param>
+    /// <param name="animator"></param>
+    public void MoveOnDisable(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
+    {
+        StopCoroutine(isAttack(player, monsterStatus, agent, animator));
     }
     /// <summary>
     /// 플레이를 목적지로 NavMeshAgent실행
@@ -41,8 +67,9 @@ public abstract class MonsterMovement : MonsterAttack
     public void SetAgent(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
     {
         Debug.Log("쫒기 시작");
-        agent.speed = monsterStatus.Speed;
+        agent.speed = monsterStatus.Data.Speed;
         agent.SetDestination(player.transform.position);
+        animator.SetFloat("AttackSpeed", monsterStatus.Data.AttackSpeed);
         animator.SetBool("isWalking", true);
     }
     /// <summary>
@@ -61,9 +88,9 @@ public abstract class MonsterMovement : MonsterAttack
     /// 플레이어가 공격 사거리 내에 들어오면 쫒기 멈춤
     /// </summary>
     /// <param name="agent">몬스터 Agent</param>
-    private void StopChase(NavMeshAgent agent)
+    private void StopChase(NavMeshAgent agent, Animator animator)
     {
-        //애니메이션 중지
+        animator.SetBool("isWalking", false);
         agent.isStopped = true;
         agent.velocity = new Vector3(0, 0, 0);
     }
@@ -71,9 +98,9 @@ public abstract class MonsterMovement : MonsterAttack
     /// 다시 플레이어 쫒기, 혹시 밀격 공격이 있으면 사용함
     /// </summary>
     /// <param name="agent">몬스터 Agent</param>
-    private void ResumeChase(NavMeshAgent agent)
+    private void ResumeChase(NavMeshAgent agent, Animator animator)
     {
-        //애니매이션 다시 시작
+        animator.SetBool("isWalking", true);
         agent.isStopped = false;
     }
     /// <summary>
@@ -81,12 +108,31 @@ public abstract class MonsterMovement : MonsterAttack
     /// </summary>
     /// <param name="monsterStatus">몬스터 상태</param>
     /// <returns></returns>
-    private IEnumerator Attack(MonsterStatus monsterStatus)
+    private IEnumerator Attack(MonsterStatus monsterStatus, Animator animator)
     {
-        //애니매이션
-        yield return new WaitForSecondsRealtime(1f); //애니메이션 동작에 따라 시간 조절
+        animator.SetTrigger("isAttack");
+        yield return new WaitForSecondsRealtime(1 / monsterStatus.Data.AttackSpeed); //애니메이션 동작에 따라 시간 조절
 
-        CommonAttack(monsterStatus.Damage, 0.5f, 2f);
+        CommonAttack(monsterStatus.Data.Damage, 0.5f, 2f);
+    }
+    private IEnumerator isAttack(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
+    {
+        while (true)
+        {
+            yield return new WaitForSecondsRealtime(0.02f);
+            if ((Vector3.Distance(this.gameObject.transform.position, player.transform.position) <= monsterStatus.Data.Range))
+            {
+                Debug.Log(this.gameObject.name + "거리 확인");
+                isAttacking = true;
+                StopChase(agent, animator);
+                yield return StartCoroutine(Attack(monsterStatus, animator));
+                isAttacking = false;
+            }
+            else if ((Vector3.Distance(this.gameObject.transform.position, player.transform.position) > monsterStatus.Data.Range) && !isAttacking)
+            {
+                ResumeChase(agent, animator);
+            }
+        }
     }
     /// <summary>
     /// 상속받은 Attack함수 실행
@@ -94,7 +140,7 @@ public abstract class MonsterMovement : MonsterAttack
     /// <param name="dmg">데미지</param>
     /// <param name="hight">몬스터 높이</param>
     /// <param name="dis">몬스터 공격 사거리</param>
-    public void CommonAttack(float dmg, float hight, float dis)
+    new public void CommonAttack(float dmg, float hight, float dis)
     {
         base.CommonAttack(dmg, hight, dis);
     }
