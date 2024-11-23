@@ -122,7 +122,6 @@ public abstract class MonsterMovement : MonsterAttack
             yield return new WaitForSecondsRealtime(0.02f);
             if ((Vector3.Distance(this.gameObject.transform.position, player.transform.position) <= monsterStatus.runtimeData.Range))
             {
-                Debug.Log(this.gameObject.name + "거리 확인");
                 isAttacking = true;
                 StopChase(agent, animator);
                 yield return StartCoroutine(Attack(monsterStatus, animator));
