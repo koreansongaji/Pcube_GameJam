@@ -11,6 +11,10 @@ public class Player : MonoBehaviour
     private PlayerLevel _playerLevel;
     private WeaponHandler _weaponHandler;
 
+    public int[] skill1 = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
+    public int[] skill2 = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
+    public int[] skill3 = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
+    public int statePoint;
     private void Awake()
     {
         _playerLevel = GetComponent<PlayerLevel>();

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Generic;
@@ -9,6 +8,14 @@ using static SoundManager;
 
 public class GameManager : Singleton<GameManager>
 {
+    UIManager UIObject;
+    private void Awake()
+    {
+        SoundManager.Init();
+        UIObject = UIManager.Init();
+        UIObject.OpenStateToggle();
+
+    }
     public float GameTime { get; private set; }
 
     public void StartGame()
