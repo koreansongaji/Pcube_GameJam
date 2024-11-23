@@ -14,13 +14,7 @@ public class UIManager : Generic.Singleton<UIManager>
     public static UIManager instance;
     public Player player;
 
-    public enum ESeason
-    {
-        summer,
-        winter,
-        spring,
-        fall
-    }
+    
     public ESeason NowSeason;
     [SerializeField] Color summerColor;
     [SerializeField] Color winterColor;
@@ -34,7 +28,6 @@ public class UIManager : Generic.Singleton<UIManager>
 
     protected override void Awake()
     {
-        StateUnitManager.Init(this);
     }
 
     public void Update()
@@ -53,7 +46,6 @@ public class UIManager : Generic.Singleton<UIManager>
                 Time.timeScale = 0;
                 isGameStopOpened = true;
                 GameStopObject.SetActive(true);
-                StateUnitManager.Instance.RenewalGameStopStateUI(player.skill1, player.skill2, player.skill3);
             }
         }
         if (Input.GetKeyDown(KeyCode.E) && !isGameStopOpened)
@@ -61,25 +53,11 @@ public class UIManager : Generic.Singleton<UIManager>
             SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_ANSWER_01);
             if (isStateUIWindowOpened)
             {
-                CloseStateToggle();
                 isStateUIWindowOpened = false;
             }
             else
             {
-                OpenStateToggle();
                 isStateUIWindowOpened = true;
-            }
-        }
-
-
-        if(!isGameStopOpened && !isStateUIWindowOpened)
-        {
-            for(int i=0; i<GameManager.Instance.ExpPoolTransformSub.transform.childCount; i++)
-            {
-                if ((GameManager.Instance.ExpPoolTransformSub.GetChild(i).transform.position -
-                     MouseCursorPosFinder.GetMouseWorldPosition()).magnitude < 1f) {
-                    GameManager.Instance.ExpPoolTransformSub.GetChild(i).GetComponent<ExpSphere>().ActiveThisExpSphere();
-                } 
             }
         }
     }
@@ -90,17 +68,6 @@ public class UIManager : Generic.Singleton<UIManager>
         instance = null;
     }
 
-    public void OpenStateToggle()
-    {
-        StateUnitManager.Instance.gameObject.SetActive(true);
-        StateUnitManager.Instance.RenewalStateUI(player.skill1, player.skill2, player.skill3, player.statePoint);
-    }
-
-    public void CloseStateToggle()
-    {
-        StateUnitManager.Instance.gameObject.SetActive(false);
-        StateUnitManager.Instance.Description.SetActive(false);
-    }
     public void SetHPBar(float a)
     {
         HPBar.value = a;
@@ -121,16 +88,16 @@ public class UIManager : Generic.Singleton<UIManager>
 
         switch (season)
         {
-            case (ESeason.winter):
+            case (ESeason.WINTER):
                 SeasonSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = winterColor;
                 break;
-            case (ESeason.summer):
+            case (ESeason.SUMMER):
                 SeasonSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = summerColor;
                 break;
-            case (ESeason.spring):
+            case (ESeason.SPRING):
                 SeasonSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = fallColor;
                 break;
-            case (ESeason.fall):
+            case (ESeason.FALL):
                 SeasonSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = fallColor;
                 break;
         }

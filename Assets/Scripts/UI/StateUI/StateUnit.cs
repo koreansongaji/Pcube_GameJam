@@ -24,35 +24,16 @@ public class StateUnit : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (!isGameStopObject)
-        {
-            StateUnitManager.Instance.StateUnitMouseDown(skillType, number);
-        }
-            
+        
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (isGameStopObject)
-        {
-            StateUnitManager.Instance.MarkDescriptionGameStop(GetComponent<Image>().sprite, context);
-        } else
-        {
-            StateUnitManager.Instance.MarkDescription(GetComponent<Image>().sprite, context);
-        }
         
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (isGameStopObject)
-        {
-            StateUnitManager.Instance.ExitDescriptionGameStop();
-        }
-        else
-        {
-            StateUnitManager.Instance.ExitDescription();
-        }
         
     }
 
