@@ -33,7 +33,9 @@ namespace Generic
             else
             {
                 Destroy(gameObject);
+                return;
             }
+            
         }
     }
 }

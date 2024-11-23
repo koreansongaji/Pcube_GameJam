@@ -9,7 +9,7 @@ public class SoundManager : MonoBehaviour
 {
     //BGM은 audio 믹서를 사용하지 않고
     //source가 하나뿐이므로 그것의 volume을 자체 조절하는 방식으로 하자-
-    AudioClip[] BGMClips = new AudioClip[System.Enum.GetValues(typeof(EBGM)).Length];
+    AudioClip[] BGMClips = new AudioClip[System.Enum.GetValues(typeof(Ebgm)).Length];
     AudioSource BGMPlayer;
 
     
@@ -39,15 +39,15 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(instance);
 
         //사운드 세팅
-        SetSound(ESoundEffect.SE_Beat_01);
-        SetSound(ESoundEffect.SE_Appear_01);
-        SetSound(ESoundEffect.SE_Answer_01);
-        SetSound(ESoundEffect.SE_Beep_01);
+        SetSound(ESoundEffect.SE_BEAT_01);
+        SetSound(ESoundEffect.SE_APPEAR_01);
+        SetSound(ESoundEffect.SE_ANSWER_01);
+        SetSound(ESoundEffect.SE_BEEP_01);
 
-        SetSound(EBGM.summer);
-        SetSound(EBGM.winter);
-        SetSound(EBGM.fall);
-        SetSound(EBGM.spring);
+        SetSound(Ebgm.SUMMER);
+        SetSound(Ebgm.WINTER);
+        SetSound(Ebgm.FALL);
+        SetSound(Ebgm.SPRING);
 
         return instance;
     }
@@ -62,17 +62,17 @@ public class SoundManager : MonoBehaviour
         instance.SFXClips[(int)soundEffect] = Resources.Load<AudioClip>(path);
     }
 
-    private static void SetSound(EBGM bgm)
+    private static void SetSound(Ebgm bgm)
     {
         instance.BGMClips[(int)bgm] = Resources.Load<AudioClip>("Sound/BGM/" + bgm.ToString());
     }
-    private static void SetSound(EBGM bgm, string path)
+    private static void SetSound(Ebgm bgm, string path)
     {
         instance.BGMClips[(int)bgm] = Resources.Load<AudioClip>(path);
     }
 
 
-    void PlayBGM(EBGM? bgm)
+    void PlayBGM(Ebgm? bgm)
     {
         BGMPlayer.Stop();
         if (bgm == null)
@@ -117,18 +117,18 @@ public class SoundManager : MonoBehaviour
     //음악추가하는 방법
     public enum ESoundEffect
     {
-        SE_Beat_01,
-        SE_Answer_01,
-        SE_Appear_01,
-        SE_Beep_01
+        SE_BEAT_01,
+        SE_ANSWER_01,
+        SE_APPEAR_01,
+        SE_BEEP_01
 
     }
-    public enum EBGM
+    public enum Ebgm
     {
-        summer,
-        winter,
-        spring,
-        fall
+        SUMMER,
+        WINTER,
+        SPRING,
+        FALL
     }
 
 }

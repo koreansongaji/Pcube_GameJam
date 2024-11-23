@@ -8,13 +8,11 @@ using static SoundManager;
 
 public class GameManager : Singleton<GameManager>
 {
-    UIManager UIObject;
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         SoundManager.Init();
-        UIObject = UIManager.Init();
-        UIObject.OpenStateToggle();
-
     }
     public float GameTime { get; private set; }
 

@@ -1,29 +1,11 @@
 using System.IO;
+using Generic;
 using UnityEngine;
 using Newtonsoft;
 using Newtonsoft.Json;
 
-public class DataManager : MonoBehaviour
+public class DataManager : Singleton<DataManager>
 {
-    static GameObject container;
-
-    // ---싱글톤으로 선언--- //
-    static DataManager instance;
-    public static DataManager Instance
-    {
-        get
-        {
-            if (!instance)
-            {
-                container = new GameObject();
-                container.name = "DataManager";
-                instance = container.AddComponent(typeof(DataManager)) as DataManager;
-                DontDestroyOnLoad(container);
-            }
-            return instance;
-        }
-    }
-
     // --- 게임 데이터 파일이름 설정 ("원하는 이름(영문).json") --- //
     string GameDataFileName = "SaveData-GameJam.json";
 

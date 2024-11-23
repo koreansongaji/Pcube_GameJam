@@ -45,7 +45,7 @@ public class StateUnitManager : MonoBehaviour
             {
                 if (CheckIsRightAccess(skill1, number))
                 {
-                    SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_Appear_01);
+                    SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_APPEAR_01);
                     if (skill1.transform.GetChild(number).GetComponent<StateUnit>().NowCount < skill1.transform.GetChild(number).GetComponent<StateUnit>().MaxCount)
                     {
                         //이 스텟 활성화
@@ -56,7 +56,7 @@ public class StateUnitManager : MonoBehaviour
                     }
                     else
                     {
-                        SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_Beep_01);
+                        SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_BEEP_01);
                     }
                 }
 
@@ -65,7 +65,7 @@ public class StateUnitManager : MonoBehaviour
             {
                 if (CheckIsRightAccess(skill2, number))
                 {
-                    SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_Appear_01);
+                    SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_APPEAR_01);
                     if (skill2.transform.GetChild(number).GetComponent<StateUnit>().NowCount < skill2.transform.GetChild(number).GetComponent<StateUnit>().MaxCount)
                     {
                         //이 스텟 활성화
@@ -76,7 +76,7 @@ public class StateUnitManager : MonoBehaviour
                     }
                 } else
                 {
-                    SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_Beep_01);
+                    SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_BEEP_01);
                 }
 
             }
@@ -84,7 +84,7 @@ public class StateUnitManager : MonoBehaviour
             {
                 if (CheckIsRightAccess(skill3, number))
                 {
-                    SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_Appear_01);
+                    SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_APPEAR_01);
                     if (skill3.transform.GetChild(number).GetComponent<StateUnit>().NowCount < skill3.transform.GetChild(number).GetComponent<StateUnit>().MaxCount)
                     {
                         //이 스텟 활성화
@@ -96,7 +96,7 @@ public class StateUnitManager : MonoBehaviour
                 }
                 else
                 {
-                    SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_Beep_01);
+                    SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_BEEP_01);
                 }
 
             }
@@ -107,7 +107,7 @@ public class StateUnitManager : MonoBehaviour
             }
         } else
         {
-            SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_Beep_01);
+            SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_BEEP_01);
         }
 
     }
@@ -142,7 +142,6 @@ public class StateUnitManager : MonoBehaviour
 
     public static void Init(UIManager uIManager) //완전처음
     {
-        
         instance = uIManager.StateUI.GetComponent<StateUnitManager>();
         instance.UIObject = uIManager;
         for (int i = 0; i < 8; i++)
@@ -292,7 +291,7 @@ public class StateUnitManager : MonoBehaviour
             UIObject.player.skill2[i] = skill2.transform.GetChild(i).GetComponent<StateUnit>().NowCount;
             UIObject.player.skill3[i] = skill3.transform.GetChild(i).GetComponent<StateUnit>().NowCount;
         }
-        SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_Beat_01);
+        SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_BEAT_01);
         UIObject.player.statePoint = 0;
         //먼가 넘기기
         UIObject.CloseStateToggle();
@@ -301,6 +300,6 @@ public class StateUnitManager : MonoBehaviour
     public void ResetButtonClick()
     {
         RenewalStateUI(UIObject.player.skill1, UIObject.player.skill2, UIObject.player.skill3, UIObject.player.statePoint);
-        SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_Answer_01);
+        SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_ANSWER_01);
     }
 }

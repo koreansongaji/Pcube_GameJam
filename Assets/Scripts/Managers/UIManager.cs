@@ -4,22 +4,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Generic.Singleton<UIManager>
 {
     // Start is called before the first frame update
     [SerializeField] Slider HPBar;
     [SerializeField] Slider ExpBar;
     [SerializeField] Slider SeasonSlider;
-    public static UIManager instance;
     public Player player;
-
-    public enum ESeason
-    {
-        summer,
-        winter,
-        spring,
-        fall
-    }
+    
     public ESeason NowSeason;
     [SerializeField] Color summerColor;
     [SerializeField] Color winterColor;
@@ -29,19 +21,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject GameStopObject;
     public GameObject StateUI;
     bool isGameStopOpened = false;
-    public static UIManager Init()
+
+    private void Awake()
     {
-        if (instance == null)
-        {
-            instance = GameObject.Find("UIManager").GetComponent<UIManager>();
-        } else
-        {
-            Debug.LogError("동일한 씬에 Init 2번실행 오류");
-        }
-        StateUnitManager.Init(instance);
-
-        return instance;
-
+        OpenStateToggle();
+        StateUnitManager.Init(this);
     }
 
     public void Update()
@@ -63,12 +47,6 @@ public class UIManager : MonoBehaviour
                 StateUnitManager.Instance.RenewalGameStopStateUI(player.skill1, player.skill2, player.skill3);
             }
         }
-    }
-
-
-    public void OnDestroy()
-    {
-        instance = null;
     }
 
     public void OpenStateToggle()
@@ -101,16 +79,16 @@ public class UIManager : MonoBehaviour
 
         switch (season)
         {
-            case (ESeason.winter):
+            case (ESeason.WINTER):
                 SeasonSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = winterColor;
                 break;
-            case (ESeason.summer):
+            case (ESeason.SUMMER):
                 SeasonSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = summerColor;
                 break;
-            case (ESeason.spring):
+            case (ESeason.SPRING):
                 SeasonSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = fallColor;
                 break;
-            case (ESeason.fall):
+            case (ESeason.FALL):
                 SeasonSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = fallColor;
                 break;
         }
@@ -125,5 +103,13 @@ public class UIManager : MonoBehaviour
         isGameStopOpened = false;
         Time.timeScale = 1;
         GameStopObject.SetActive(false);
+    }
+    
+    public enum ESeason
+    {
+        SUMMER,
+        WINTER,
+        SPRING,
+        FALL
     }
 }
