@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Data;
 using Generic;
 using UnityEngine;
@@ -47,11 +48,8 @@ namespace Weapons.WeaponSubScripts
 
         private void DealMonsters()
         {
-            foreach (MonsterBehavior monster in _monsters)
+            foreach (MonsterBehavior monster in _monsters.Where(monster => monster != null))
             {
-                if (monster == null)
-                    continue;
-                
                 monster.TakeDamage(_damage);
                 OnHit?.Invoke(monster);
             }

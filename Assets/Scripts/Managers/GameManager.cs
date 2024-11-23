@@ -12,11 +12,12 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] GameObject expPrefab;
     public Transform ExpPoolTransform;
     public Transform ExpPoolTransformSub;
-    public Player player;
-    public GameObjectPool _expPool;
+    
+    private Player _player;
     protected override void Awake()
     {
         base.Awake();
+        SoundManager.Init();
     }
     public float GameTime { get; private set; }
 
@@ -25,17 +26,9 @@ public class GameManager : Singleton<GameManager>
     public void StartGame()
     {
         // 1. Scene Change
-        SceneManager.LoadScene("InGame2");
-        _expPool = new GameObjectPool(expPrefab, ExpPoolTransform, 50, false);
+        //SceneManager.LoadScene($"GameScene");
         // 2. Game Start
         GameTime = 0;
-
-        for(int i=0; i<40; i++)
-        {
-            GameObject a = _expPool.Get();
-            a.transform.position = new Vector3(Random.value*10, 0.5f, Random.value * 10);
-            a.transform.parent = ExpPoolTransformSub;
-        }
     }
 
     private void Update()
@@ -43,4 +36,24 @@ public class GameManager : Singleton<GameManager>
         GameTime += Time.deltaTime;
     }
     
+    public bool TryGetPlayerObject(out Player player)
+    {
+        if (_player == null)
+        {
+            player = GameObject.FindObjectOfType<Player>();
+            _player = player;
+        }
+        else
+        {
+            player = _player;
+        }
+
+        return player != null;
+    }
+
+    public static bool Pause
+    {
+        get => Time.timeScale == 0;
+        set => Time.timeScale = value ? 0 : 1;
+    }
 }
