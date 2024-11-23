@@ -37,6 +37,17 @@ public class MonsterData : ScriptableObject
             if(_maxHp < 0) _maxHp = 0;
         }
     }
+    [SerializeField]
+    private float _curHp;
+    public float CurHp
+    {
+        get { return _curHp; }
+        set
+        {
+            _curHp = value;
+            if (_curHp < 0) _curHp = 0;
+        }
+    }
 
     [SerializeField]
     private float _damage;

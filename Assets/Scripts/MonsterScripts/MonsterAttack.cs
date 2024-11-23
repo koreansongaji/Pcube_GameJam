@@ -18,8 +18,7 @@ public abstract class MonsterAttack : MonoBehaviour
             out hit, dis, LayerMask.GetMask("Player")))
         {
             Debug.Log(this.gameObject.name + "몬스터 공격");
-            //플레이어 체력 깎음
+            //hit.collider.gameObject.???? -= dmg;
         }
-
     }
 }
