@@ -70,7 +70,8 @@ public class MonsterBehavior : MonsterMovement
     IEnumerator Death()
     {
         animator.SetBool("isDeath", true);
-        GameManager.Instance._expPool.Get();
+        GameObject exp = GameManager.Instance._expPool.Get();
+        exp.transform.position = this.transform.position;
         yield return new WaitForSecondsRealtime(1f);
         poolingHandler.DeActiveMonster[monsterStatus.runtimeData.Kind].Add(this.gameObject);
         poolingHandler.ActiveMonster[monsterStatus.runtimeData.Kind].Remove(this.gameObject);
