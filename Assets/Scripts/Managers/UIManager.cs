@@ -1,6 +1,5 @@
-using Helpers;
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,6 +29,21 @@ public class UIManager : Generic.Singleton<UIManager>
     {
     }
 
+    public void DamageFloat(Vector2 vec, float damage)
+    {
+        GameObject go = new GameObject();
+        go.transform.parent = GameObject.Find("Canvas").transform;
+        go.transform.position = vec;
+
+        TextMeshProUGUI text = go.AddComponent<TextMeshProUGUI>();
+        text.text = (int)damage + "";
+        text.alignment = TextAlignmentOptions.Center;
+        text.fontSize = 30;
+        text.DOFade(0.5f, 0.5f).OnComplete(() =>
+        {
+            Destroy(go);
+        });
+    }
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

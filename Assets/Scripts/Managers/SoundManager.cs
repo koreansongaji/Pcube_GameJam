@@ -34,7 +34,7 @@ public class SoundManager : MonoBehaviour
         //추가할 음악데이터 load
         instance = new GameObject().AddComponent<SoundManager>();
         instance.BGMPlayer = instance.AddComponent<AudioSource>();
-
+        
         instance.BGMPlayer.loop = true;
         DontDestroyOnLoad(instance);
 
@@ -43,6 +43,7 @@ public class SoundManager : MonoBehaviour
         SetSound(ESoundEffect.SE_APPEAR_01);
         SetSound(ESoundEffect.SE_ANSWER_01);
         SetSound(ESoundEffect.SE_BEEP_01);
+        SetSound(ESoundEffect.Exp);
 
         SetSound(Ebgm.SUMMER);
         SetSound(Ebgm.WINTER);
@@ -120,7 +121,8 @@ public class SoundManager : MonoBehaviour
         SE_BEAT_01,
         SE_ANSWER_01,
         SE_APPEAR_01,
-        SE_BEEP_01
+        SE_BEEP_01,
+        Exp
 
     }
     public enum Ebgm

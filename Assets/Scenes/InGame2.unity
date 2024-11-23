@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46f800e4f6d44c13b8c23bc6422b077f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atkTrigger: 1
+  atkTrigger: 0
   weaponHandler: {fileID: 0}
   weaponData: {fileID: 11400000, guid: 8dba322388ea9e54e90d4e19a2b489c9, type: 2}
   bulletPrefab: {fileID: 4156557611044721591, guid: fb4fc69072cec8c4993528ec7f4b3c0f, type: 3}
@@ -1532,6 +1532,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1022303366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1022303367}
+  - component: {fileID: 1022303368}
+  m_Layer: 0
+  m_Name: MeleeWeapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1022303367
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022303366}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2387264208512388385}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1022303368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022303366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f38563b3d04d3a94902c8680216a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atkTrigger: 1
+  weaponHandler: {fileID: 0}
+  weaponData: {fileID: 11400000, guid: 1cb66ea869337c241b287a6cf9310578, type: 2}
+  bulletPrefab: {fileID: 4156557611044721591, guid: 859aeb978295b8b44886388210c9fd9a, type: 3}
+  currentType: 0
 --- !u!1 &1044704054
 GameObject:
   m_ObjectHideFlags: 0
@@ -3480,6 +3529,7 @@ Transform:
   m_Children:
   - {fileID: 251997023}
   - {fileID: 1094484458}
+  - {fileID: 1022303367}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2389851311215646119
@@ -3583,6 +3633,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 251997024}
   - {fileID: 1094484459}
+  - {fileID: 1022303368}
   playerData: {fileID: 11400000, guid: ff58c0af199587a45be219642a08ac2b, type: 2}
   player: {fileID: 2413036113369209422}
 --- !u!114 &2413036113369209424

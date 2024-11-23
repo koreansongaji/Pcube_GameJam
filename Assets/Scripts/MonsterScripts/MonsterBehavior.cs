@@ -63,6 +63,7 @@ public class MonsterBehavior : MonsterMovement
     public void TakeDamage(float damage)
     {
         monsterStatus.runtimeData.CurHp -= damage;
+        UIManager.Instance.DamageFloat(Camera.main.WorldToScreenPoint(transform.position), damage);
     }
 
     private void CheckDeath()
