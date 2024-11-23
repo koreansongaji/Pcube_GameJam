@@ -32,6 +32,7 @@ public class MonsterBehavior : MonsterMovement
     {
         GetInfo();
     }
+
     private void OnEnable()
     {
         MoveOnEnable(player, monsterStatus, agent, animator);
@@ -48,6 +49,7 @@ public class MonsterBehavior : MonsterMovement
     private void FixedUpdate()
     {
         MoveUpdate(player, monsterStatus, agent, animator);
+        isDeath();
     }
     private void OnDisable()
     {
@@ -69,6 +71,8 @@ public class MonsterBehavior : MonsterMovement
     IEnumerator Death()
     {
         animator.SetBool("isDeath", true);
+        GameObject exp = GameManager.Instance._expPool.Get();
+        exp.transform.position = this.transform.position;
         yield return new WaitForSecondsRealtime(1f);
         poolingHandler.DeActiveMonster[monsterStatus.runtimeData.Kind].Add(this.gameObject);
         poolingHandler.ActiveMonster[monsterStatus.runtimeData.Kind].Remove(this.gameObject);
