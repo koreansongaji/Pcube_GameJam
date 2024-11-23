@@ -25,9 +25,9 @@ public class PoolingManager : MonoBehaviour //이 스크립트는 싱글톤으로 안만들고 
 
     private SpawnMonsterInfo[] Level_1_Time = new SpawnMonsterInfo[]
     {
-        new SpawnMonsterInfo(0.1f, 5),
-        new SpawnMonsterInfo(0.5f, 10),
-        new SpawnMonsterInfo(1f, 10),
+        new SpawnMonsterInfo(5f, 5),
+        new SpawnMonsterInfo(10f, 10),
+        new SpawnMonsterInfo(12f, 10),
     };
 
 
@@ -64,7 +64,8 @@ public class PoolingManager : MonoBehaviour //이 스크립트는 싱글톤으로 안만들고 
 
     void Update()
     {
-        SpawnMonsterTest();
+        //SpawnMonsterTest();
+        SpawnMonster();
     }
 
     /// <summary>
@@ -105,8 +106,7 @@ public class PoolingManager : MonoBehaviour //이 스크립트는 싱글톤으로 안만들고 
     /// </summary>
     private void SpawnMonster()
     {
-        // todo : -1 => 지정된 인덱스로 변경하기
-        if (GameManager.Instance.GameTime >= Level_1_Time[-1].time)
+        if (GameManager.Instance.GameTime >= Level_1_Time[TimeIndex[0]].time)
         {
             for (int i = 0; i < Level_1_Time[TimeIndex[0]].num; i++)
             {
@@ -115,7 +115,7 @@ public class PoolingManager : MonoBehaviour //이 스크립트는 싱글톤으로 안만들고 
             TimeIndex[0]++;
         }
         
-        if (GameManager.Instance.GameTime >= Level_2_Time[-1].time)
+        if (GameManager.Instance.GameTime >= Level_2_Time[TimeIndex[1]].time)
         {
             for (int i = 0; i < Level_2_Time[TimeIndex[1]].num; i++)
             {
@@ -124,7 +124,7 @@ public class PoolingManager : MonoBehaviour //이 스크립트는 싱글톤으로 안만들고 
             TimeIndex[1]++;
         }
         
-        if (GameManager.Instance.GameTime >= Level_3_Time[-1].time)
+        if (GameManager.Instance.GameTime >= Level_3_Time[TimeIndex[2]].time)
         {
             for (int i = 0; i < Level_3_Time[TimeIndex[2]].num; i++)
             {
@@ -133,7 +133,7 @@ public class PoolingManager : MonoBehaviour //이 스크립트는 싱글톤으로 안만들고 
             TimeIndex[2]++;
         }
         
-        if (GameManager.Instance.GameTime  >= Level_4_Time[-1].time)
+        if (GameManager.Instance.GameTime  >= Level_4_Time[TimeIndex[3]].time)
         {
             for (int i = 0; i < Level_4_Time[TimeIndex[3]].num; i++)
             {
