@@ -32,6 +32,11 @@ public class UIManager : Generic.Singleton<UIManager>
     bool isGameStopOpened = false;
     bool isStateUIWindowOpened = false;
 
+    protected override void Awake()
+    {
+        StateUnitManager.Init(this);
+    }
+
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

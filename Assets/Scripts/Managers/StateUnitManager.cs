@@ -104,15 +104,6 @@ public class StateUnitManager : MonoBehaviour
 
             }
 
-            if (isChanged)
-            {
-                ConfirmButton.gameObject.SetActive(true);
-            }
-            else
-            {
-                ConfirmButton.gameObject.SetActive(false);
-            }
-
         }
         else
         {
@@ -231,7 +222,6 @@ public class StateUnitManager : MonoBehaviour
         RemainSPText.text = "남은 스탯 포인트 : " + remainSP;
 
         isChanged = false;
-        ResetButton.gameObject.SetActive(false);
 
         for (int i = 0; i < 8; i++)
         {
@@ -249,15 +239,6 @@ public class StateUnitManager : MonoBehaviour
         {
             skill3.transform.GetChild(i).GetComponent<StateUnit>().NowCount = skill3Arr[i];
             skill3.transform.GetChild(i).GetComponent<StateUnit>().StateUnitUpdate();
-        }
-
-        if (remainSP > 0)
-        {
-            ConfirmButton.gameObject.SetActive(false);
-        }
-        else
-        {
-            ConfirmButton.gameObject.SetActive(true);
         }
     }
     public void RenewalGameStopStateUI(int[] skill1Arr, int[] skill2Arr, int[] skill3Arr)
