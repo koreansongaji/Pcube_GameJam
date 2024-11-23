@@ -17,7 +17,6 @@ public abstract class MonsterAttack : MonoBehaviour
         if (Physics.Raycast(transform.position + new Vector3(0, hight, 0), this.transform.forward,
             out hit, dis, LayerMask.GetMask("Player")))
         {
-            Debug.Log(this.gameObject.name + "몬스터 공격");
             //hit.collider.gameObject.???? -= dmg;
         }
     }
