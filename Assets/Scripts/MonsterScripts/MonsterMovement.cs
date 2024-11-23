@@ -6,13 +6,13 @@ using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 
 /// <summary>
-/// ´ëºÎºĞ ¸ó½ºÅÍ°¡ »ó¼Ó¹ŞÀ» Ãß»ó Å¬·¡½º, ÀÌµ¿ ºÎºĞÀ» ±¸ÇöÇÒ ¿¹Á¤ÀÌ´Ù.
+/// ëŒ€ë¶€ë¶„ ëª¬ìŠ¤í„°ê°€ ìƒì†ë°›ì„ ì¶”ìƒ í´ë˜ìŠ¤, ì´ë™ ë¶€ë¶„ì„ êµ¬í˜„í•  ì˜ˆì •ì´ë‹¤.
 /// </summary>
 public abstract class MonsterMovement : MonsterAttack
 {
     private bool isAttacking;
     /// <summary>
-    /// ¸ó½ºÅÍBehavior Start¿¡¼­ ÇÑ¹ø ½ÇÇà
+    /// ëª¬ìŠ¤í„°Behavior Startì—ì„œ í•œë²ˆ ì‹¤í–‰
     /// </summary>
     /// <param name="player"></param>
     /// <param name="monsterStatus"></param>
@@ -24,7 +24,7 @@ public abstract class MonsterMovement : MonsterAttack
         SetAgent(player, monsterStatus, agent, animator);
     }
     /// <summary>
-    /// ¸ó½ºÅÍ Behavior Update¿¡¼­ ½ÇÇà
+    /// ëª¬ìŠ¤í„° Behavior Updateì—ì„œ ì‹¤í–‰
     /// </summary>
     /// <param name="player"></param>
     /// <param name="monsterStatus"></param>
@@ -33,10 +33,9 @@ public abstract class MonsterMovement : MonsterAttack
     public void MoveUpdate(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
     {
         RotateTowardsTarget(player);
-        Debug.Log("AttackSpeed °ª: " + monsterStatus.runtimeData.AttackSpeed);
     }
     /// <summary>
-    /// ¸ó½ºÅÍ Behavior OnEnable¿¡¼­ ÇÑ ¹ø ½ÇÇà
+    /// ëª¬ìŠ¤í„° Behavior OnEnableì—ì„œ í•œ ë²ˆ ì‹¤í–‰
     /// </summary>
     /// <param name="player"></param>
     /// <param name="monsterStatus"></param>
@@ -48,7 +47,7 @@ public abstract class MonsterMovement : MonsterAttack
         StartCoroutine(isAttack(player, monsterStatus, agent, animator));
     }
     /// <summary>
-    /// ¸ó½ºÅÍ Behavior OnDisable¿¡¼­ ÇÑ ¹ø ½ÇÇà
+    /// ëª¬ìŠ¤í„° Behavior OnDisableì—ì„œ í•œ ë²ˆ ì‹¤í–‰
     /// </summary>
     /// <param name="player"></param>
     /// <param name="monsterStatus"></param>
@@ -59,35 +58,35 @@ public abstract class MonsterMovement : MonsterAttack
         StopCoroutine(isAttack(player, monsterStatus, agent, animator));
     }
     /// <summary>
-    /// ÇÃ·¹ÀÌ¸¦ ¸ñÀûÁö·Î NavMeshAgent½ÇÇà
+    /// í”Œë ˆì´ë¥¼ ëª©ì ì§€ë¡œ NavMeshAgentì‹¤í–‰
     /// </summary>
-    /// <param name="player">ÇÃ·¹ÀÌ¾î</param>
-    /// <param name="monsterStatus">¸ó½ºÅÍÀÇ »óÅÂ</param>
-    /// <param name="agent">¸ó½ºÅÍ Agent</param>
+    /// <param name="player">í”Œë ˆì´ì–´</param>
+    /// <param name="monsterStatus">ëª¬ìŠ¤í„°ì˜ ìƒíƒœ</param>
+    /// <param name="agent">ëª¬ìŠ¤í„° Agent</param>
     public void SetAgent(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
     {
-        Debug.Log("¦i±â ½ÃÀÛ");
+        Debug.Log("ì«’ê¸° ì‹œì‘");
         agent.speed = monsterStatus.runtimeData.Speed;
         agent.SetDestination(player.transform.position);
         animator.SetFloat("AttackSpeed", monsterStatus.runtimeData.AttackSpeed);
         animator.SetBool("isWalking", true);
     }
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î¸¦ °è¼Ó ¹Ù¶óºÁ¾ßÇÏ´Â ¸ó½ºÅÍ¸¸ ½ÇÇà½ÃÅ³ ÇÔ¼ö, ÇÃ·¹ÀÌ¾î ¹æÇâÀ» ¹Ù¶óº½
+    /// í”Œë ˆì´ì–´ë¥¼ ê³„ì† ë°”ë¼ë´ì•¼í•˜ëŠ” ëª¬ìŠ¤í„°ë§Œ ì‹¤í–‰ì‹œí‚¬ í•¨ìˆ˜, í”Œë ˆì´ì–´ ë°©í–¥ì„ ë°”ë¼ë´„
     /// </summary>
-    /// <param name="player">ÇÃ·¹ÀÌ¾î °ÔÀÓ ¿ÀºêÁ§Æ®</param>
+    /// <param name="player">í”Œë ˆì´ì–´ ê²Œì„ ì˜¤ë¸Œì íŠ¸</param>
     public void RotateTowardsTarget(GameObject player)
     {
         if (player == null) return;
 
-        Vector3 direction = (player.transform.position - transform.position).normalized; // ÇÃ·¹ÀÌ¾îÀÇ ¹æÇâ °è»ê
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // ¼öÆòÀ¸·Î¸¸ È¸Àü
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // ºÎµå·´°Ô È¸Àü
+        Vector3 direction = (player.transform.position - transform.position).normalized; // í”Œë ˆì´ì–´ì˜ ë°©í–¥ ê³„ì‚°
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // ìˆ˜í‰ìœ¼ë¡œë§Œ íšŒì „
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // ë¶€ë“œëŸ½ê²Œ íšŒì „
     }
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î°¡ °ø°İ »ç°Å¸® ³»¿¡ µé¾î¿À¸é ¦i±â ¸ØÃã
+    /// í”Œë ˆì´ì–´ê°€ ê³µê²© ì‚¬ê±°ë¦¬ ë‚´ì— ë“¤ì–´ì˜¤ë©´ ì«’ê¸° ë©ˆì¶¤
     /// </summary>
-    /// <param name="agent">¸ó½ºÅÍ Agent</param>
+    /// <param name="agent">ëª¬ìŠ¤í„° Agent</param>
     private void StopChase(NavMeshAgent agent, Animator animator)
     {
         animator.SetBool("isWalking", false);
@@ -95,23 +94,24 @@ public abstract class MonsterMovement : MonsterAttack
         agent.velocity = new Vector3(0, 0, 0);
     }
     /// <summary>
-    /// ´Ù½Ã ÇÃ·¹ÀÌ¾î ¦i±â, È¤½Ã ¹Ğ°İ °ø°İÀÌ ÀÖÀ¸¸é »ç¿ëÇÔ
+    /// ë‹¤ì‹œ í”Œë ˆì´ì–´ ì«’ê¸°, í˜¹ì‹œ ë°€ê²© ê³µê²©ì´ ìˆìœ¼ë©´ ì‚¬ìš©í•¨
     /// </summary>
-    /// <param name="agent">¸ó½ºÅÍ Agent</param>
+    /// <param name="agent">ëª¬ìŠ¤í„° Agent</param>
     private void ResumeChase(NavMeshAgent agent, Animator animator)
     {
         animator.SetBool("isWalking", true);
         agent.isStopped = false;
     }
+    
     /// <summary>
-    /// °ø°İ ÇÔ¼ö, °ø°İÀÌ ³¡³¯¶§±îÁö ±â´Ù·Á¾ß ÇÏ¹Ç·Î ÄÚ·çÆ¾À¸·Î ÀÛ¼º
+    /// ê³µê²© í•¨ìˆ˜, ê³µê²©ì´ ëë‚ ë•Œê¹Œì§€ ê¸°ë‹¤ë ¤ì•¼ í•˜ë¯€ë¡œ ì½”ë£¨í‹´ìœ¼ë¡œ ì‘ì„±
     /// </summary>
-    /// <param name="monsterStatus">¸ó½ºÅÍ »óÅÂ</param>
+    /// <param name="monsterStatus">ëª¬ìŠ¤í„° ìƒíƒœ</param>
     /// <returns></returns>
     private IEnumerator Attack(MonsterStatus monsterStatus, Animator animator)
     {
         animator.SetTrigger("isAttack");
-        yield return new WaitForSecondsRealtime(1 / monsterStatus.runtimeData.AttackSpeed); //¾Ö´Ï¸ŞÀÌ¼Ç µ¿ÀÛ¿¡ µû¶ó ½Ã°£ Á¶Àı
+        yield return new WaitForSecondsRealtime(1 / monsterStatus.runtimeData.AttackSpeed); //ì• ë‹ˆë©”ì´ì…˜ ë™ì‘ì— ë”°ë¼ ì‹œê°„ ì¡°ì ˆ
 
         CommonAttack(monsterStatus.runtimeData.Damage, 0.5f, 2f);
     }
@@ -134,11 +134,11 @@ public abstract class MonsterMovement : MonsterAttack
         }
     }
     /// <summary>
-    /// »ó¼Ó¹ŞÀº AttackÇÔ¼ö ½ÇÇà
+    /// ìƒì†ë°›ì€ Attackí•¨ìˆ˜ ì‹¤í–‰
     /// </summary>
-    /// <param name="dmg">µ¥¹ÌÁö</param>
-    /// <param name="hight">¸ó½ºÅÍ ³ôÀÌ</param>
-    /// <param name="dis">¸ó½ºÅÍ °ø°İ »ç°Å¸®</param>
+    /// <param name="dmg">ë°ë¯¸ì§€</param>
+    /// <param name="hight">ëª¬ìŠ¤í„° ë†’ì´</param>
+    /// <param name="dis">ëª¬ìŠ¤í„° ê³µê²© ì‚¬ê±°ë¦¬</param>
     new public void CommonAttack(float dmg, float hight, float dis)
     {
         base.CommonAttack(dmg, hight, dis);

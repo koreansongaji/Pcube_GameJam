@@ -7,10 +7,12 @@ public static class NearestMonsterFinder
     {
         MonsterBehavior nearestMonster = null;
         float minDist = float.MaxValue;
-        
-        // todo : FindObjectsOfType 대신 몬스터 리스트를 가지고 있는 매니저를 만들어서 그 매니저에서 몬스터 리스트를 받아오는 것이 좋다.
-        foreach (MonsterBehavior monster in (new []{ Object.FindObjectOfType<MonsterBehavior>() }))
+
+       var monsters = GameObject.FindGameObjectsWithTag("Monster");
+       foreach (GameObject obj in monsters)
         {
+            MonsterBehavior monster = obj.GetComponent<MonsterBehavior>();
+            
             float dist = Vector3.Distance(position, monster.transform.position);
             if (dist < range && dist < minDist)
             {

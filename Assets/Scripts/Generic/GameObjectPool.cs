@@ -9,15 +9,17 @@ namespace Generic
         private readonly Stack<GameObject> _pool;
         private readonly GameObject _prefab;
         private readonly Transform _parent;
+        private readonly bool _createNewObject;
         
 #if UNITY_EDITOR
         private static int _debugNumber = 0;
 #endif
-        public GameObjectPool(GameObject prefab, Transform parent = null, int initialCapacity = 10)
+        public GameObjectPool(GameObject prefab, Transform parent = null, int initialCapacity = 10, bool createNewObject = true)
         {
             _pool = new Stack<GameObject>(initialCapacity);
             _prefab = prefab;
             _parent = parent;
+            _createNewObject = createNewObject;
 
             for (int i = 0; i < initialCapacity; i++)
             {
@@ -37,7 +39,15 @@ namespace Generic
             }
             else
             {
-                return CreateNewObject();
+                if (_createNewObject)
+                {
+                    return CreateNewObject();
+                }
+                else
+                {
+                    Debug.LogWarning("Pool is empty");
+                    return null;
+                }
             }
         }
 

@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
-        // todo : ÇÃ·¹ÀÌ¾î »ç¸Á Ã³¸®
+        // todo : í”Œë ˆì´ì–´ ì‚¬ë§ ì²˜ë¦¬
     }
 
     public PlayerData GetStat()

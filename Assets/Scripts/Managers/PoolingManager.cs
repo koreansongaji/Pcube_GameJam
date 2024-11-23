@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PoolingManager : MonoBehaviour //ÀÌ ½ºÅ©¸³Æ®´Â ½Ì±ÛÅæÀ¸·Î ¾È¸¸µé°í ½ºÆù ÁöÁ¡¿¡ °ÔÀÓ ¿ÀºêÁ§Æ®¿¡ Àû¿ë½ÃÅ²´Ù
+public class PoolingManager : MonoBehaviour //ì´ ìŠ¤í¬ë¦½íŠ¸ëŠ” ì‹±ê¸€í†¤ìœ¼ë¡œ ì•ˆë§Œë“¤ê³  ìŠ¤í° ì§€ì ì— ê²Œì„ ì˜¤ë¸Œì íŠ¸ì— ì ìš©ì‹œí‚¨ë‹¤
 {
-    public GameObject[] Prefabs; //¸ó½ºÅÍ Á¾·ù¸¸ ÀúÀåÇÒ ¹è¿­
+    public GameObject[] Prefabs; //ëª¬ìŠ¤í„° ì¢…ë¥˜ë§Œ ì €ì¥í•  ë°°ì—´
     //0 : Mouse, 1 : Pigeon, 2 : Pudu, 3 : Hog
-    public List<GameObject>[] PooledObject; //¼ÒÈ¯ÇÑ ¸ó½ºÅÍµéÀ» ÀúÀåÇÒ ¹è¿­
+    public List<GameObject>[] PooledObject; //ì†Œí™˜í•œ ëª¬ìŠ¤í„°ë“¤ì„ ì €ì¥í•  ë°°ì—´
     public GameObject[] SpawnPoint;
 
     private int[] CountMonster = new int[4];
@@ -16,8 +16,8 @@ public class PoolingManager : MonoBehaviour //ÀÌ ½ºÅ©¸³Æ®´Â ½Ì±ÛÅæÀ¸·Î ¾È¸¸µé°í 
 
     public struct SpawnMonsterInfo
     {
-        public float time; //ºĞ
-        public readonly int num; //½ºÆùÇÒ ¸ó½ºÅÍ ¼ö
+        public float time; //ë¶„
+        public readonly int num; //ìŠ¤í°í•  ëª¬ìŠ¤í„° ìˆ˜
         public SpawnMonsterInfo(float t, int n)
         {
             this.time = t;
@@ -71,7 +71,7 @@ public class PoolingManager : MonoBehaviour //ÀÌ ½ºÅ©¸³Æ®´Â ½Ì±ÛÅæÀ¸·Î ¾È¸¸µé°í 
     }
 
     /// <summary>
-    /// Ç®¸µ ÇÔ¼ö
+    /// í’€ë§ í•¨ìˆ˜
     /// </summary>
     private void Pooling()
     {
@@ -88,17 +88,17 @@ public class PoolingManager : MonoBehaviour //ÀÌ ½ºÅ©¸³Æ®´Â ½Ì±ÛÅæÀ¸·Î ¾È¸¸µé°í 
     }
 
     /// <summary>
-    /// Ç®¸µ ½ÃÅ°±â À§ÇØ ¸ó½ºÅÍ¸¦ »ı¼ºÇØ¼­ ºñÈ°¼ºÈ­ ½ÃÅ´
+    /// í’€ë§ ì‹œí‚¤ê¸° ìœ„í•´ ëª¬ìŠ¤í„°ë¥¼ ìƒì„±í•´ì„œ ë¹„í™œì„±í™” ì‹œí‚´
     /// </summary>
-    /// <param name="index">»ı¼ºÇÒ ¸ó½ºÅÍ Á¾·ù</param>
-    /// <param name="count">»ı¼ºÇÒ ¸ó½ºÅÍ ¼ö</param>
+    /// <param name="index">ìƒì„±í•  ëª¬ìŠ¤í„° ì¢…ë¥˜</param>
+    /// <param name="count">ìƒì„±í•  ëª¬ìŠ¤í„° ìˆ˜</param>
     /// <returns></returns>
-    private GameObject InstantMonster(int index, int count) //indexÀÇ ¸ó½ºÅÍ¸¦ count°³¼ö¸¸Å­ »ı¼º
+    private GameObject InstantMonster(int index, int count) //indexì˜ ëª¬ìŠ¤í„°ë¥¼ countê°œìˆ˜ë§Œí¼ ìƒì„±
     {
         GameObject select = null;
         for (int i = 0; i < count; i++)
         {
-            select = Instantiate(Prefabs[index], this.transform);
+            select = Instantiate(Prefabs[index], transform);
             PooledObject[index].Add(select);
             select.SetActive(false);
         }
@@ -107,7 +107,7 @@ public class PoolingManager : MonoBehaviour //ÀÌ ½ºÅ©¸³Æ®´Â ½Ì±ÛÅæÀ¸·Î ¾È¸¸µé°í 
     }
 
     /// <summary>
-    /// Ç®¸µ½ÃÅ² ¸ó½ºÅÍ¸¦ È°¼ºÈ­ ½ÃÅ´
+    /// í’€ë§ì‹œí‚¨ ëª¬ìŠ¤í„°ë¥¼ í™œì„±í™” ì‹œí‚´
     /// </summary>
     private void SpawnMonster()
     {
@@ -168,9 +168,9 @@ public class PoolingManager : MonoBehaviour //ÀÌ ½ºÅ©¸³Æ®´Â ½Ì±ÛÅæÀ¸·Î ¾È¸¸µé°í 
     }
     
     /// <summary>
-    /// Ç®¸µÇÑ ¸ó½ºÅÍ È°¼ºÈ­ ½ÃÅ°´Â ÇÔ¼ö
+    /// í’€ë§í•œ ëª¬ìŠ¤í„° í™œì„±í™” ì‹œí‚¤ëŠ” í•¨ìˆ˜
     /// </summary>
-    /// <param name="monsterKind">¾î¶² Á¾·ùÀÇ ¸ó½ºÅÍ¸¦ È°¼ºÈ­ ½ÃÅ³Áö Á¤ÇÔ</param>
+    /// <param name="monsterKind">ì–´ë–¤ ì¢…ë¥˜ì˜ ëª¬ìŠ¤í„°ë¥¼ í™œì„±í™” ì‹œí‚¬ì§€ ì •í•¨</param>
     /// <returns></returns>
     private GameObject SetActiveMonster(int monsterKind)
     {

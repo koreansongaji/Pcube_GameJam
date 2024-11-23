@@ -10,7 +10,6 @@ namespace Weapons
     {
          private Player _player;
         [SerializeField] private GameObject areaPrefab;
-        [SerializeField] private AimType currentType;
         
         private GameObjectPool areaPool;
         
@@ -38,6 +37,9 @@ namespace Weapons
                 CalculateDuration(), 
                 areaPool
                 );
+
+            atkTrigger = false;
+            StartCoroutine(Cooldown(CalculateCooldown()));
         }
 
         protected override float CalculateFinalDamage()
@@ -69,25 +71,12 @@ namespace Weapons
 
         private bool TryGetTarget(out Vector3 target)
         {
-            if (currentType == AimType.TARGET)
-            {
-                MonsterBehavior monster = 
-                    NearestMonsterFinder.FindNearestMonster(weaponHandler.transform.position, 100f);
-                if (monster == null)
-                {
-                    target = Vector3.zero;
-                    return false;
-                }
-
-                target = monster.transform.position;
-                return true;
-            }
-
-            else
-            {
-                target = MouseCursorPosFinder.GetMouseWorldPosition();
-                return true;
-            }
+            // 본인 Transform 이내에서 10f 반경 이내 랜덤 점
+            Vector3 randomPoint = Random.insideUnitSphere * 10f;
+            randomPoint.y = 0;
+            
+            target = weaponHandler.transform.position + randomPoint;
+            return true;
         }
     }
 }
