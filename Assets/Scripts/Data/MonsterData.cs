@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 /// <summary>
 /// 몬스터들의 기본 데이터(스탯)을 저장하는 스크립터블 오브젝트
 /// </summary>
@@ -88,5 +89,11 @@ public class MonsterData : ScriptableObject
             if(Range < 0) Range = 0;
         }
     }
-
+    [SerializeField]
+    private int _kind;
+    public int Kind
+    {
+        get { return _kind; }
+        set { _kind = value; }
+    }
 }

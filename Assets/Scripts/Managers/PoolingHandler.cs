@@ -1,18 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PoolingManager : MonoBehaviour //이 스크립트는 싱글톤으로 안만들고 스폰 지점에 게임 오브젝트에 적용시킨다
+public class PoolingHandler : MonoBehaviour //이 스크립트는 싱글톤으로 안만들고 스폰 지점에 게임 오브젝트에 적용시킨다
 {
     public GameObject[] Prefabs; //몬스터 종류만 저장할 배열
     //0 : Mouse, 1 : Pigeon, 2 : Pudu, 3 : Hog
     public List<GameObject>[] PooledObject; //소환한 몬스터들을 저장할 배열
     public GameObject[] SpawnPoint;
+    public List<GameObject>[] ActiveMonster;
+    public List<GameObject>[] DeActiveMonster;
 
-    private int[] CountMonster = new int[4];
+    public int[] CountMonster = new int[4];
     private int[] TimeIndex = new int[4];
+    
 
     public struct SpawnMonsterInfo
     {
@@ -80,6 +84,8 @@ public class PoolingManager : MonoBehaviour //이 스크립트는 싱글톤으�
         for (int index = 0; index < Prefabs.Length; index++)
         {
             PooledObject[index] = new List<GameObject>();
+            ActiveMonster[index] = new List<GameObject>();
+            DeActiveMonster[index] = new List<GameObject>();
         }
         InstantMonster(0, 100);
         InstantMonster(1, 100);
@@ -100,6 +106,7 @@ public class PoolingManager : MonoBehaviour //이 스크립트는 싱글톤으�
         {
             select = Instantiate(Prefabs[index], transform);
             PooledObject[index].Add(select);
+            DeActiveMonster[index].Add(select);
             select.SetActive(false);
         }
 
@@ -182,6 +189,8 @@ public class PoolingManager : MonoBehaviour //이 스크립트는 싱글톤으�
             spawn = PooledObject[monsterKind][CountMonster[monsterKind]];
             spawn.transform.position = SpawnPoint[randomSpawn].transform.position;
             spawn.SetActive(true);
+            ActiveMonster[monsterKind].Add(spawn);
+            DeActiveMonster[monsterKind].Remove(spawn);
             CountMonster[monsterKind]++;
         }
         return spawn;

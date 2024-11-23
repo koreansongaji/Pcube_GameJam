@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,6 +15,8 @@ public class MonsterBehavior : MonsterMovement
     private GameObject player;
     private Animator animator;
 
+    private PoolingHandler poolingHandler;
+    private int _monsterKind;
     /// <summary>
     /// 정보 받아오는 함수, Awake에 처음 한 번 쓰인다.
     /// </summary>
@@ -22,6 +26,7 @@ public class MonsterBehavior : MonsterMovement
         agent = this.GetComponent<NavMeshAgent>();
         monsterStatus = this.GetComponent<MonsterStatus>();
         animator = this.GetComponent<Animator>();
+        poolingHandler = GameObject.FindObjectOfType<PoolingHandler>();
     }
     private void Awake()
     {
@@ -52,5 +57,21 @@ public class MonsterBehavior : MonsterMovement
     public void TakeDamage(float damage)
     {
         monsterStatus.runtimeData.CurHp -= damage;
+    }
+
+    private void isDeath()
+    {
+        if(monsterStatus.runtimeData.CurHp <= 0)
+        {
+            StartCoroutine(Death());
+        }
+    }
+    IEnumerator Death()
+    {
+        animator.SetBool("isDeath", true);
+        yield return new WaitForSecondsRealtime(1f);
+        poolingHandler.DeActiveMonster[monsterStatus.runtimeData.Kind].Add(this.gameObject);
+        poolingHandler.ActiveMonster[monsterStatus.runtimeData.Kind].Remove(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 }
