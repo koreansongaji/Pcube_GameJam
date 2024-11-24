@@ -12,21 +12,29 @@ public class ChangeSeason : MonoBehaviour
     [SerializeField] private GameObject end;
 
     private bool isMoving = false; // 이동 중인지 확인하는 플래그
+    private int currentSeason = 0; // 현재 계절
 
     private void Update()
     {
-        // GameTime의 각 4분기마다 계절 변화
-        if (GameManager.Instance.GameTime > 60 * 2.5f && isMoving)
+        // 총 시간의 25%가 지나면 변경
+        if (GameManager.Instance.GameTime > GameManager.Instance.GetEndTime() * 0.25f && currentSeason == 0)
         {
-            Change(1);
+            currentSeason = 1;
+            Change(currentSeason);
         }
-        else if (GameManager.Instance.GameTime > 60 * 5f && isMoving)
+        
+        // 총 시간의 50%가 지나면 변경
+        if (GameManager.Instance.GameTime > GameManager.Instance.GetEndTime() * 0.5f && currentSeason == 1)
         {
-            Change(2);
+            currentSeason = 2;
+            Change(currentSeason);
         }
-        else if (GameManager.Instance.GameTime > 60 * 7.5f && isMoving)
+        
+        // 총 시간의 75%가 지나면 변경
+        if (GameManager.Instance.GameTime > GameManager.Instance.GetEndTime() * 0.75f && currentSeason == 2)
         {
-            Change(3);
+            currentSeason = 3;
+            Change(currentSeason);
         }
     }
 

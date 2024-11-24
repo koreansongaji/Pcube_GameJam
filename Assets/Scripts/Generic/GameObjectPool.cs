@@ -11,6 +11,8 @@ namespace Generic
         private readonly Transform _parent;
         private readonly bool _createNewObject;
         
+        private int _activeCount;
+        
 #if UNITY_EDITOR
         private static int _debugNumber = 0;
 #endif
@@ -27,6 +29,8 @@ namespace Generic
                 _pool.Push(obj);
                 obj.SetActive(false);
             }
+            
+            _activeCount = 0;
         }
 
         public GameObject Get()
@@ -35,12 +39,14 @@ namespace Generic
             {
                 var obj = _pool.Pop();
                 obj.SetActive(true);
+                _activeCount++;
                 return obj;
             }
             else
             {
                 if (_createNewObject)
                 {
+                    _activeCount++;
                     return CreateNewObject();
                 }
                 else
@@ -65,6 +71,7 @@ namespace Generic
                 return;
             }
             
+            _activeCount--;
             element.SetActive(false);
             _pool.Push(element);
         }
@@ -90,6 +97,11 @@ namespace Generic
 #else
             return Object.Instantiate(_prefab, _parent);
 #endif
+        }
+        
+        public int GetActiveCount()
+        {
+            return _activeCount;
         }
     }
 }

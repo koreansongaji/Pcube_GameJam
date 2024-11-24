@@ -38,10 +38,16 @@ public class PlayerLevel : MonoBehaviour
 
     private void LevelUp()
     {
-        curLevel++;
-        curExp -= expToNextLevel;
-        expToNextLevel *= expIncreaseFactor;
-        OnLevelUp.Invoke(curLevel);
+        int levelUpCnt = 0;
+        while (curExp >= expToNextLevel)
+        {
+            curLevel++;
+            curExp -= expToNextLevel;
+            expToNextLevel *= expIncreaseFactor;
+            levelUpCnt++;
+        }
+        
+        OnLevelUp.Invoke(levelUpCnt);
     }
     
     public int GetLevel()

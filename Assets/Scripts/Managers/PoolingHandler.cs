@@ -20,8 +20,8 @@ public class PoolingHandler : MonoBehaviour //이 스크립트는 싱글톤으�
 
     public struct SpawnMonsterInfo
     {
-        public float time; //분
-        public readonly int num; //스폰할 몬스터 수
+        public readonly float time; //분
+        public readonly int   num; //스폰할 몬스터 수
         public SpawnMonsterInfo(float t, int n)
         {
             this.time = t;

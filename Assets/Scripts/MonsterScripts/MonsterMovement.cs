@@ -44,7 +44,7 @@ public abstract class MonsterMovement : MonsterAttack
     public void MoveOnEnable(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
     {
         //SetAgent(player, monsterStatus, agent, animator);
-        StartCoroutine(isAttack(player, monsterStatus, agent, animator));
+        StartCoroutine(IsAttack(player, monsterStatus, agent, animator));
     }
     /// <summary>
     /// 몬스터 Behavior OnDisable에서 한 번 실행
@@ -55,7 +55,7 @@ public abstract class MonsterMovement : MonsterAttack
     /// <param name="animator"></param>
     public void MoveOnDisable(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
     {
-        StopCoroutine(isAttack(player, monsterStatus, agent, animator));
+        StopCoroutine(IsAttack(player, monsterStatus, agent, animator));
     }
     /// <summary>
     /// 플레이를 목적지로 NavMeshAgent실행
@@ -115,7 +115,7 @@ public abstract class MonsterMovement : MonsterAttack
         Debug.Log("애니메이션 실행");
         CommonAttack(monsterStatus.runtimeData.Damage, 0.5f, monsterStatus.runtimeData.Range);
     }
-    private IEnumerator isAttack(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
+    private IEnumerator IsAttack(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
     {
         while (true)
         {

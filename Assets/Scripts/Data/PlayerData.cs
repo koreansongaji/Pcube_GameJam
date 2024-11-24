@@ -28,20 +28,39 @@ public class PlayerData : ScriptableObject
     [SerializeField] public CharacterStat resurrection;
     [SerializeField] public CharacterStat growth;
     
-    //복사 생성자
-    public PlayerData(PlayerData playerData)
+    public CharacterStat GetStatByType(StatType statType)
     {
-        maxHp = new CharacterStat(playerData.maxHp.baseValue);
-        currentHp = new CharacterStat(playerData.maxHp.baseValue);
-        regenHp = new CharacterStat(playerData.maxHp.baseValue);
-        armor = new CharacterStat(playerData.maxHp.baseValue);
-        damage = new CharacterStat(playerData.maxHp.baseValue);
-        projectileSpeed = new CharacterStat(playerData.maxHp.baseValue);
-        duration = new CharacterStat(playerData.maxHp.baseValue);
-        attackRange = new CharacterStat(playerData.maxHp.baseValue);
-        coolTimeReduce = new CharacterStat(playerData.maxHp.baseValue);
-        projectileCount = new CharacterStat(playerData.maxHp.baseValue);
-        resurrection = new CharacterStat(playerData.maxHp.baseValue);
-        growth = new CharacterStat(playerData.maxHp.baseValue);
+        return statType switch
+        {
+            StatType.MAX_HP => maxHp,
+            StatType.CURRENT_HP => currentHp,
+            StatType.REGEN_HP => regenHp,
+            StatType.ARMOR => armor,
+            StatType.DAMAGE => damage,
+            StatType.PROJECTILE_SPEED => projectileSpeed,
+            StatType.DURATION => duration,
+            StatType.ATTACK_RANGE => attackRange,
+            StatType.COOL_TIME_REDUCE => coolTimeReduce,
+            StatType.PROJECTILE_COUNT => projectileCount,
+            StatType.RESURRECTION => resurrection,
+            StatType.GROWTH => growth,
+            _ => null
+        };
+    }
+
+    public enum StatType
+    {
+        MAX_HP,
+        CURRENT_HP,
+        REGEN_HP,
+        ARMOR,
+        DAMAGE,
+        PROJECTILE_SPEED,
+        DURATION,
+        ATTACK_RANGE,
+        COOL_TIME_REDUCE,
+        PROJECTILE_COUNT,
+        RESURRECTION,
+        GROWTH
     }
 }
