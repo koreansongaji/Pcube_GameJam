@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Weapons;
 
 namespace PlayerScripts
 {
@@ -54,6 +55,34 @@ namespace PlayerScripts
             {
                 ApplySelectedUpgradeStat(stat);
             }
+            
+            if(upgrade is GetWeapon weapon)
+            {
+                ApplySelectedWeapon(weapon);
+            }
+        }
+
+        private void ApplySelectedWeapon(GetWeapon weapon)
+        {
+            // 1, try get player object
+            if (!GameManager.Instance.TryGetPlayerObject(out Player p))
+            {
+                Debug.LogWarning("Player is not found");
+                return;
+            }
+            
+            // 2, get player weapon handler
+            WeaponHandler weaponHandler = p.GetComponent<WeaponHandler>();
+            
+            GameObject weaponPrefab = weapon.weaponPrefab;
+            GameObject weaponObject = Instantiate(weaponPrefab);
+            weaponObject.transform.SetParent(weaponHandler.transform);
+            weaponObject.TryGetComponent(out Weapon weaponComponent);
+            
+            weaponHandler.AddWeapon(weaponComponent);
+            
+            // 3. remove from list
+            weaponDataList.Remove(weapon);
         }
     }
     
