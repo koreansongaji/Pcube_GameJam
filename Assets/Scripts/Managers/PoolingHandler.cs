@@ -85,6 +85,10 @@ public class PoolingHandler : MonoBehaviour //이 스크립트는 싱글톤으�
             yield return new WaitForSecondsRealtime(cool);
             if (GetCurrentMonsterCount() < totalMonsterCount)
             {
+                if(GameManager.Instance.GetEndTime() * 0.9f<= GameManager.Instance.GameTime)
+                {
+                    StopCoroutine(SpawnCycle());
+                }
                 // 랜덤으로 몬스터 생성
                 int randomMonster = UnityEngine.Random.Range(0, 4);
                 SetActiveMonster(randomMonster);
