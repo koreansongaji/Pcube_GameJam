@@ -87,7 +87,7 @@ public abstract class MonsterMovement : MonsterAttack
     /// 플레이어가 공격 사거리 내에 들어오면 쫒기 멈춤
     /// </summary>
     /// <param name="agent">몬스터 Agent</param>
-    private void StopChase(NavMeshAgent agent, Animator animator)
+    public void StopChase(NavMeshAgent agent, Animator animator)
     {
         animator.SetBool("isWalking", false);
         agent.isStopped = true;
@@ -119,6 +119,10 @@ public abstract class MonsterMovement : MonsterAttack
         while (true)
         {
             yield return new WaitForSecondsRealtime(0.02f);
+            if(monsterStatus.runtimeData.CurHp <= 0)
+            {
+                StopChase(agent, animator);
+            }
             if ((Vector3.Distance(this.gameObject.transform.position, player.transform.position) <= monsterStatus.runtimeData.Range))
             {
                 isAttacking = true;

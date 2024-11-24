@@ -66,15 +66,38 @@ public class PoolingHandler : MonoBehaviour //이 스크립트는 싱글톤으�
     {
         SetUp();
         Pooling();
+        StartCoroutine(SpawnCycle());
     }
 
     void Update()
     {
         //SpawnMonsterTest();
         //SpawnMonster();
-        SpawnMonster1();
+        //SpawnMonster1();
+        
     }
     
+    IEnumerator SpawnCycle()
+    {
+        float cool = 2f;
+        while(true)
+        {
+            yield return new WaitForSecondsRealtime(cool);
+            if (GetCurrentMonsterCount() < totalMonsterCount)
+            {
+                // 랜덤으로 몬스터 생성
+                int randomMonster = UnityEngine.Random.Range(0, 4);
+                SetActiveMonster(randomMonster);
+                cool -= 0.1f;
+                if(cool < 0.1)
+                {
+                    cool = 0.1f;
+                }
+            }
+        }
+    }
+
+
     public int GetCurrentMonsterCount()
     {
         return ActiveMonster[0].Count + ActiveMonster[1].Count + ActiveMonster[2].Count + ActiveMonster[3].Count;
