@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player Data
   m_EditorClassIdentifier: 
   maxHp:
-    baseValue: 0
+    baseValue: 100
   currentHp:
     baseValue: 0
   regenHp:

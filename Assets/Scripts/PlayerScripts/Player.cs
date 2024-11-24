@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerData baseData;
     [SerializeField] private PlayerData runtimeData;
+    [SerializeField ]private float curHp;
 
     private PlayerLevel _playerLevel;
     private WeaponHandler _weaponHandler;
@@ -16,20 +17,21 @@ public class Player : MonoBehaviour
         _weaponHandler = GetComponent<WeaponHandler>();
 
         runtimeData = Instantiate(baseData);
-        runtimeData.currentHp.baseValue = baseData.maxHp.baseValue;
+        curHp = baseData.maxHp.baseValue;
     }
 
     public void TakeDamage(float damage)
     {
-        runtimeData.currentHp.baseValue -= damage;
-        if (Health() <= 0)
+        curHp -= damage;
+        if (curHp <= 0)
         {
             Die();
         }
+    }
 
-        return;
-
-        float Health() => runtimeData.currentHp.baseValue;
+    public float GetHealth()
+    {
+        return curHp;
     }
 
     private void Die()

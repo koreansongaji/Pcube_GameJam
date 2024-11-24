@@ -13,23 +13,20 @@ public class ChangeSeason : MonoBehaviour
 
     private bool isMoving = false; // 이동 중인지 확인하는 플래그
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && !isMoving)
+        // GameTime의 각 4분기마다 계절 변화
+        if (GameManager.Instance.GameTime < 60 * 2.5f && !isMoving)
         {
-            StartCoroutine(MoveCloud(0));
+            Change(1);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && !isMoving)
+        else if (GameManager.Instance.GameTime < 60 * 5f && !isMoving)
         {
-            StartCoroutine(MoveCloud(1));
+            Change(2);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && !isMoving)
+        else if (GameManager.Instance.GameTime < 60 * 7.5f && !isMoving)
         {
-            StartCoroutine(MoveCloud(2));
-        }
-        else if(Input.GetKeyDown(KeyCode.Alpha4) && !isMoving)
-        {
-            StartCoroutine(MoveCloud(3));
+            Change(3);
         }
     }
 
@@ -39,11 +36,7 @@ public class ChangeSeason : MonoBehaviour
     /// <param name="idx">0 : Fall, 1 : Winter, 2 : Spring, 3 : Summer</param>
     public void Change(int idx)
     {
-        for (int i = 0; i < seasons.Count; i++)
-        {
-            seasons[i].SetActive(false);
-        }
-        seasons[idx].SetActive(true);
+        StartCoroutine(MoveCloud(idx));
     }
 
     public IEnumerator MoveCloud(int idx)

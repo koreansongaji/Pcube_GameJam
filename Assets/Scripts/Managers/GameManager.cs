@@ -14,11 +14,8 @@ public class GameManager : Singleton<GameManager>
     public Transform ExpPoolTransformSub;
     
     private Player _player;
-    protected override void Awake()
-    {
-        base.Awake();
-    }
     public float GameTime { get; private set; }
+    [SerializeField] private float endTime = 60 * 10f;
 
     
 
@@ -32,14 +29,18 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        GameTime += Time.deltaTime;
+        if (SceneManager.GetActiveScene().name == "InGame2")
+        {
+            GameTime += Time.deltaTime;
+        }
+        
         CheckSufficientTime();
     }
 
     //시간이 다찼는지 확인하는 함수
     public void CheckSufficientTime()
     {
-        if (GameTime > 10f)
+        if (GameTime > endTime)
         {
             GameTime = 0;
             SceneManager.LoadScene("GameClear");

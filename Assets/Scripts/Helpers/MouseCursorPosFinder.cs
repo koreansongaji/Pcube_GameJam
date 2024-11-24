@@ -16,7 +16,6 @@ namespace Helpers
             }
             else
             {
-                Debug.LogError("Mouse Detection 레이어가 없습니다.");
                 return Vector3.zero;
             }
         }

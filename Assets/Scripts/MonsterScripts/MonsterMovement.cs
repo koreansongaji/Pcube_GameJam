@@ -113,7 +113,7 @@ public abstract class MonsterMovement : MonsterAttack
         animator.SetTrigger("isAttack");
         yield return new WaitForSecondsRealtime(1 / monsterStatus.runtimeData.AttackSpeed); //애니메이션 동작에 따라 시간 조절
 
-        CommonAttack(monsterStatus.runtimeData.Damage, 0.5f, 2f);
+        CommonAttack(monsterStatus.runtimeData.Damage, 0.5f, 10f);
     }
     private IEnumerator isAttack(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
     {

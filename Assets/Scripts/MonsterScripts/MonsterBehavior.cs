@@ -10,12 +10,12 @@ using UnityEngine.AI;
 /// </summary>
 public class MonsterBehavior : MonsterMovement
 {
-    private NavMeshAgent agent;
-    private MonsterStatus monsterStatus;
-    private GameObject player;
-    private Animator animator;
+    private NavMeshAgent _agent;
+    private MonsterStatus _monsterStatus;
+    private GameObject _player;
+    private Animator _animator;
 
-    private PoolingHandler poolingHandler;
+    private PoolingHandler _poolingHandler;
     private int _monsterKind;
     private static readonly int IS_DEATH = Animator.StringToHash("isDeath");
 
@@ -26,12 +26,13 @@ public class MonsterBehavior : MonsterMovement
     /// </summary>
     private void GetInfo()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        agent = this.GetComponent<NavMeshAgent>();
-        monsterStatus = this.GetComponent<MonsterStatus>();
-        animator = this.GetComponent<Animator>();
-        poolingHandler = GameObject.FindObjectOfType<PoolingHandler>();
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _agent = GetComponent<NavMeshAgent>();
+        _monsterStatus = GetComponent<MonsterStatus>();
+        _animator = GetComponent<Animator>();
+        _poolingHandler = FindObjectOfType<PoolingHandler>();
     }
+    
     private void Awake()
     {
         GetInfo();
@@ -39,30 +40,31 @@ public class MonsterBehavior : MonsterMovement
 
     private void OnEnable()
     {
-        MoveOnEnable(player, monsterStatus, agent, animator);
+        MoveOnEnable(_player, _monsterStatus, _agent, _animator);
     }
-    void Start()
+
+    private void Start()
     {
-        MoveStart(player, monsterStatus, agent, animator);
+        MoveStart(_player, _monsterStatus, _agent, _animator);
     }
-    
-    void Update()
+
+    private void Update()
     {
         Debug.DrawRay(transform.position + new Vector3(0, 0.5f, 0), transform.forward * 5, Color.red);
     }
     private void FixedUpdate()
     {
-        MoveUpdate(player, monsterStatus, agent, animator);
+        MoveUpdate(_player, _monsterStatus, _agent, _animator);
         CheckDeath();
     }
     private void OnDisable()
     {
-        MoveOnDisable(player, monsterStatus, agent, animator);    
+        MoveOnDisable(_player, _monsterStatus, _agent, _animator);    
     }
 
     public void TakeDamage(float damage)
     {
-        monsterStatus.runtimeData.CurHp -= damage;
+        _monsterStatus.runtimeData.CurHp -= damage;
         UIManager.Instance.DamageFloat(Camera.main.WorldToScreenPoint(transform.position), damage);
     }
 
@@ -70,7 +72,7 @@ public class MonsterBehavior : MonsterMovement
     {
         if(_dead) return;
         
-        if(monsterStatus.runtimeData.CurHp <= 0)
+        if(_monsterStatus.runtimeData.CurHp <= 0)
         {
             _dead = true;
             
@@ -80,11 +82,11 @@ public class MonsterBehavior : MonsterMovement
 
     private IEnumerator Death()
     {
-        animator.SetBool(IS_DEATH, true);
+        _animator.SetBool(IS_DEATH, true);
         ExpPoolSystem.Instance.CreateExpSphere(this.transform.position);
         yield return new WaitForSecondsRealtime(1f);
-        poolingHandler.DeActiveMonster[monsterStatus.runtimeData.Kind].Add(gameObject);
-        poolingHandler.ActiveMonster[monsterStatus.runtimeData.Kind].Remove(gameObject);
+        _poolingHandler.DeActiveMonster[_monsterStatus.runtimeData.Kind].   Add(gameObject);
+        _poolingHandler.ActiveMonster  [_monsterStatus.runtimeData.Kind].Remove(gameObject);
         
         gameObject.SetActive(false);
     }
