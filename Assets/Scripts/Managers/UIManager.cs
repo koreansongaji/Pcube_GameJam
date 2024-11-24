@@ -40,7 +40,7 @@ public class UIManager : Generic.Singleton<UIManager>
         text.text = (int)damage + "";
         text.alignment = TextAlignmentOptions.Center;
         text.fontSize = 30;
-        text.DOFade(0.5f, 0.5f).OnComplete(() =>
+        text.DOFade(0.5f, 0.5f).SetUpdate(true).OnComplete(() =>
         {
             Destroy(go);
         });

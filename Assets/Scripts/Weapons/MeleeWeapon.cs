@@ -27,7 +27,7 @@ namespace Weapons
 
             bullet.transform.position = weaponHandler.transform.position;
             bulletScript.SetTarget(target);
-
+            bulletScript.SetArgs(CalculateFinalDamage());
 
             atkTrigger = false;
             StartCoroutine(Cooldown(CalculateCooldown()));

@@ -87,7 +87,6 @@ public class MonsterBehavior : MonsterMovement
         yield return new WaitForSecondsRealtime(1f);
         _poolingHandler.DeActiveMonster[_monsterStatus.runtimeData.Kind].   Add(gameObject);
         _poolingHandler.ActiveMonster  [_monsterStatus.runtimeData.Kind].Remove(gameObject);
-        
         gameObject.SetActive(false);
     }
 }

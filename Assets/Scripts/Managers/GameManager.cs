@@ -25,6 +25,22 @@ public class GameManager : Singleton<GameManager>
         
         // 2. Game Start
         GameTime = 0;
+        Pause = false;
+        cursorCoroutine = StartCoroutine(cursorCoroutineFuction());
+    }
+    Coroutine cursorCoroutine;
+    GameObject cursorBuffer;
+    IEnumerator cursorCoroutineFuction()
+    {
+        yield return null;
+        // Input.mousePosition
+        cursorBuffer = Instantiate(Resources.Load("UIPrefab/cursor") as GameObject, Vector3.zero, Quaternion.identity, GameObject.Find("Canvas").transform);
+        DontDestroyOnLoad(cursorBuffer);
+        while (true)
+        {
+            cursorBuffer.transform.position = Input.mousePosition;
+            yield return null;
+        }
     }
 
     private void Update()
@@ -43,6 +59,9 @@ public class GameManager : Singleton<GameManager>
         if (GameTime > endTime)
         {
             GameTime = 0;
+            Pause = true;
+            StopCoroutine(cursorCoroutine);
+            Destroy(cursorBuffer);
             SceneManager.LoadScene("GameClear");
         }
     }

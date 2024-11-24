@@ -72,11 +72,8 @@ namespace Weapons
         private bool TryGetTarget(out Vector3 target)
         {
             // 본인 Transform 이내에서 10f 반경 이내 랜덤 점
-            Vector3 randomPoint = Random.insideUnitSphere * 10f;
-            randomPoint.y = 0;
-            Debug.Log($"randomPoint: {randomPoint}");
-            
-            target = weaponHandler.transform.position + randomPoint;
+            target = MouseCursorPosFinder.GetMouseWorldPosition();
+            target.y += 1;
             return true;
         }
     }

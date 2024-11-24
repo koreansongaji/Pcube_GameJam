@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e90ceaf3964e7fb0f2850731c5d709, type: 3}
   m_Name: Melee
   m_EditorClassIdentifier: 
-  damage: 100
+  damage: 60
   projectileSpeed: 10
   duration: 1
   attackRange: -1
-  coolTime: 1
+  coolTime: 6.97
   projectileCount: 1

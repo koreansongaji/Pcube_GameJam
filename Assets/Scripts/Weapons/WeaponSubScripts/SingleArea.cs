@@ -65,7 +65,6 @@ namespace Weapons.WeaponSubScripts
                     continue;
                 monster.TakeDamage(_damage);
                 OnHit?.Invoke(monster);
-                _pool.Release(gameObject);
             }
         }
 

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Pigeon
   _speed: 2
-  _maxHp: 2
-  _curHp: 2
+  _maxHp: 50
+  _curHp: 50
   _damage: 2
   _attackSpeed: 1
   _range: 5
