@@ -15,9 +15,13 @@ public class GameManager : Singleton<GameManager>
     
     private Player _player;
     public float GameTime { get; private set; }
+    
     [SerializeField] private float endTime = 60 * 10f;
 
-    
+    public float GetEndTime()
+    {
+        return endTime;
+    }
 
     public void StartGame()
     {

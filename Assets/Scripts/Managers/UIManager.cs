@@ -46,34 +46,18 @@ public class UIManager : Generic.Singleton<UIManager>
     }
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (isGameStopOpened)
-            {
-                isGameStopOpened = false;
-                Time.timeScale = 1;
-                GameStopObject.SetActive(false);
-
-            }
-            else
-            {
-                Time.timeScale = 0;
-                isGameStopOpened = true;
-                GameStopObject.SetActive(true);
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.E) && !isGameStopOpened)
-        {
-            SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_ANSWER_01);
-            if (isStateUIWindowOpened)
-            {
-                isStateUIWindowOpened = false;
-            }
-            else
-            {
-                isStateUIWindowOpened = true;
-            }
-        }
+        // if (Input.GetKeyDown(KeyCode.E) && !isGameStopOpened)
+        // {
+        //     SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_ANSWER_01);
+        //     if (isStateUIWindowOpened)
+        //     {
+        //         isStateUIWindowOpened = false;
+        //     }
+        //     else
+        //     {
+        //         isStateUIWindowOpened = true;
+        //     }
+        // }
     }
 
 

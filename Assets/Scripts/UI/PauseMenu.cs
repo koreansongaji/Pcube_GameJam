@@ -8,8 +8,20 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GameManager.Pause = true;
+            GameManager.Pause = !GameManager.Pause;
+            if (GameManager.Pause)
+            {
+                OnPause();
+            }
+            else
+            {
+                ClosePause();
+            }
         }
+    }
+
+    private void ClosePause()
+    {
     }
 
     private void OnPause()
