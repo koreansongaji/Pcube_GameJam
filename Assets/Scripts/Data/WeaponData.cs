@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using PlayerScripts;
 using UnityEngine;
 
 namespace Data
@@ -22,6 +24,8 @@ namespace Data
         public float attackRange;
         public float coolTime;
         public float projectileCount;
+        
+        public List<UpgradeWeapon> upgradeList;
     }
 }
 

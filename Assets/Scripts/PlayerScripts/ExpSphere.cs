@@ -8,6 +8,8 @@ using UnityEngine;
 public class ExpSphere : MonoBehaviour
 {
     bool _isActive = false;
+    
+    
 
     private void ActiveThisExpSphere()
     {

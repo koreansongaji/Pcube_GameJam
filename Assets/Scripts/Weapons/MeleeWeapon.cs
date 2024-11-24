@@ -33,6 +33,11 @@ namespace Weapons
             StartCoroutine(Cooldown(CalculateCooldown()));
         }
 
+        public override WeaponType GetWeaponType()
+        {
+            return WeaponType.MELEE;
+        }
+
         protected override float CalculateFinalDamage()
         {
             float percentage = _player.GetStat().damage.Value;

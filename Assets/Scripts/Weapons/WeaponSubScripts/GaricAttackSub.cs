@@ -14,7 +14,7 @@ public class GaricAttackSub : MonoBehaviour
             {
                 if (other.TryGetComponent(out MonsterBehavior monster) == false)
                     return;
-                transform.parent.GetComponent<GaricAttack>().Damage(monster);
+                transform.parent.GetComponent<GarlicAttack>().Damage(monster);
             }
         }
     }

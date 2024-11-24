@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Weapons;
 
 namespace PlayerScripts
 {
@@ -28,6 +29,20 @@ namespace PlayerScripts
         public string GetString()
         {
             return $"New Weapon : {weaponPrefab.name}";
+        }
+    }
+    
+    [Serializable]
+    public struct UpgradeWeapon : IUpgrades
+    {
+        public WeaponType weaponType;
+        public WeaponStatType statType;
+        public float value;
+        
+        
+        public string GetString()
+        {
+            return $"Weapon Upgrade";
         }
     }
 }

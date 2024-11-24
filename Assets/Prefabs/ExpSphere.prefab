@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6488343055241734372}
   - component: {fileID: 3988337606036722506}
   - component: {fileID: 6677439868202778092}
-  - component: {fileID: -4025303860176776149}
   m_Layer: 7
   m_Name: ExpSphere
   m_TagString: Monster
@@ -119,24 +118,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505240c079996ed45bd30b5a997dc52f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &-4025303860176776149
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9165418659709256353}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.49999997
-  m_Center: {x: 0, y: 0, z: 0}

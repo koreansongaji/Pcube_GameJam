@@ -8,7 +8,7 @@ using UnityEngine.Pool;
 namespace Weapons.WeaponSubScripts
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class GaricAttack : MonoBehaviour
+    public class GarlicAttack : MonoBehaviour
     {
         public UnityAction<MonsterBehavior> OnHit { get; set; }
 

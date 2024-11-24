@@ -14,12 +14,17 @@ namespace Weapons
         
         [Header("Initial Data")]
         [SerializeField] protected WeaponData weaponData;
-        
-        
+
+        private void Awake()
+        {
+            weaponData = Instantiate(weaponData);
+        }
         
         
         public abstract void Setup(WeaponHandler handler);
         public abstract void Attack();
+        
+        public abstract WeaponType GetWeaponType();
 
         public virtual bool CanAttack()
         {
@@ -34,5 +39,13 @@ namespace Weapons
             yield return new WaitForSeconds(time);
             atkTrigger = true;
         }
+    }
+
+    public enum WeaponType
+    {
+        GARLIC,
+        AREA,
+        LEAVES,
+        MELEE
     }
 }

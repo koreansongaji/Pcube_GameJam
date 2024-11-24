@@ -22,7 +22,9 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Debug.Log("TakeDamage 함수 실행");
+        // armor 곱연산 계산. log로
+        damage *= 100 / (100 + runtimeData.armor.Value);
+        
         curHp -= damage;
         if (curHp <= 0)
         {

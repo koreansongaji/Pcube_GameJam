@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Weapons;
 
@@ -9,6 +10,17 @@ namespace PlayerScripts
     {
         [SerializeField] private List<UpgradeStat> upgradeStatDataList = new List<UpgradeStat>();
         [SerializeField] private List<GetWeapon> weaponDataList = new List<GetWeapon>();
+
+        private void Awake()
+        {
+            foreach (GetWeapon a in weaponDataList.Where(a => a.weaponPrefab == null))
+            {
+                Debug.LogError("Weapon prefab is null");
+                #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+                #endif
+            }
+        }
         
         // 랜덤으로 세 값을 받습니다.
         public List<IUpgrades> GetRandomUpgradeStats()
@@ -75,8 +87,7 @@ namespace PlayerScripts
             WeaponHandler weaponHandler = p.GetComponent<WeaponHandler>();
             
             GameObject weaponPrefab = weapon.weaponPrefab;
-            GameObject weaponObject = Instantiate(weaponPrefab);
-            weaponObject.transform.SetParent(weaponHandler.transform);
+            GameObject weaponObject = Instantiate(weaponPrefab, weaponHandler.transform, true);
             weaponObject.TryGetComponent(out Weapon weaponComponent);
             
             weaponHandler.AddWeapon(weaponComponent);

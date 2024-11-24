@@ -23,13 +23,18 @@ namespace Weapons
 
             // shoot LeavesBullet
             GameObject bullet = Instantiate(bulletPrefab);
-            bullet.TryGetComponent(out GaricAttack bulletScript);
+            bullet.TryGetComponent(out GarlicAttack bulletScript);
 
             bullet.transform.position = weaponHandler.transform.position;
             bulletScript.SetTarget();
             bulletScript.SetArgs(CalculateFinalDamage());
             atkTrigger = false;
             StartCoroutine(Cooldown(CalculateCooldown()));
+        }
+
+        public override WeaponType GetWeaponType()
+        {
+            return WeaponType.GARLIC;
         }
 
         protected override float CalculateFinalDamage()

@@ -42,6 +42,11 @@ namespace Weapons
             StartCoroutine(Cooldown(CalculateCooldown()));
         }
 
+        public override WeaponType GetWeaponType()
+        {
+            return WeaponType.AREA;
+        }
+
         protected override float CalculateFinalDamage()
         {
             float percentage = _player.GetStat().damage.Value;
