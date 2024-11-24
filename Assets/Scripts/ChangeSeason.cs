@@ -36,6 +36,12 @@ public class ChangeSeason : MonoBehaviour
             currentSeason = 3;
             Change(currentSeason);
         }
+
+        if (GameManager.Instance.GameTime > GameManager.Instance.GetEndTime() * 0.90f && currentSeason == 3)
+        {
+            currentSeason = 0;
+            Change(currentSeason);
+        }
     }
 
     /// <summary>
