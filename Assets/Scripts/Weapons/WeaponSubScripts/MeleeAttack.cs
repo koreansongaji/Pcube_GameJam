@@ -48,7 +48,9 @@ namespace Weapons.WeaponSubScripts
             
             // target 방향으로 회전
             transform.LookAt(target);
-            GameObject spawnedVFX = Instantiate(myVFX, transform.position+new Vector3(0, 1, 0), transform.rotation*Quaternion.Euler(new Vector3(90, 0, -90))) as GameObject;
+            GameObject spawnedVFX = Instantiate(myVFX, transform.position
+                                                       +new Vector3(0, 1, 0), 
+                transform.rotation*Quaternion.Euler(new Vector3(90, 0, -90))) as GameObject;
             spawnedVFX.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
             Destroy(spawnedVFX, 1f);
             StartCoroutine(LiveCoroutine());
@@ -61,8 +63,6 @@ namespace Weapons.WeaponSubScripts
         
         private void OnEnable()
         {
-            
-            
             _time = 0;
             _collided = false;
         }

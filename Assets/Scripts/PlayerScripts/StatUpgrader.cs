@@ -7,28 +7,36 @@ namespace PlayerScripts
     public class StatUpgrader : MonoBehaviour
     {
         [SerializeField] private List<UpgradeStat> upgradeStatDataList = new List<UpgradeStat>();
+        [SerializeField] private List<GetWeapon> weaponDataList = new List<GetWeapon>();
         
         // 랜덤으로 세 값을 받습니다.
-        public List<UpgradeStat> GetRandomUpgradeStats()
+        public List<IUpgrades> GetRandomUpgradeStats()
         {
-            List<UpgradeStat> results = new List<UpgradeStat>();
+            List<IUpgrades> results = new List<IUpgrades>();
             
-            for (int i = 0; i < 3; i++)
+            List<int> randomNumbers = 
+                Helpers.RandomNumberGenerator.GetRandomNumbers(
+                    3, 
+                    0, 
+                    upgradeStatDataList.Count + weaponDataList.Count
+                    );
+            
+            foreach (int number in randomNumbers)
             {
-                // random Select Stat from UpgradeStatDataList
-                UpgradeStat randomStat = new UpgradeStat();
+                if (number >= upgradeStatDataList.Count)
+                {
+                    results.Add(weaponDataList[number - upgradeStatDataList.Count]);
+                    continue;
+                }
                 
-                int randomIndex = UnityEngine.Random.Range(0, upgradeStatDataList.Count);
-                
-                randomStat = upgradeStatDataList[randomIndex];
-                results.Add(randomStat);
+                results.Add(upgradeStatDataList[number]);
             }
             
             return results;
         }
         
         // 업그레이드 스탯을 받아서 적용합니다.
-        public void ApplySelectedUpgradeStat(UpgradeStat stat)
+        private void ApplySelectedUpgradeStat(UpgradeStat stat)
         {
             if (!GameManager.Instance.TryGetPlayerObject(out Player p))
             {
@@ -39,13 +47,15 @@ namespace PlayerScripts
             StatModifier modifier = new StatModifier(stat.value, stat.modifier, this);
             p.GetStat().GetStatByType(stat.statType).AddModifier(modifier);
         }
+        
+        public void ApplyUpgrade(IUpgrades upgrade)
+        {
+            if(upgrade is UpgradeStat stat)
+            {
+                ApplySelectedUpgradeStat(stat);
+            }
+        }
     }
     
-    [Serializable]
-    public struct UpgradeStat
-    {
-        public StatModType modifier;
-        public PlayerData.StatType statType;
-        public float value;
-    }
+    
 }

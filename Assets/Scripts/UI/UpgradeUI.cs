@@ -12,7 +12,7 @@ namespace UI
         private PlayerLevel playerLevel;
         
         [SerializeField] private StatUpgrader statUpgrader;
-        [SerializeField] private List<UpgradeStat> currentUpgradeStats;
+        [SerializeField] private List<IUpgrades> currentUpgradeStats;
 
         private void Start()
         {
@@ -47,7 +47,7 @@ namespace UI
         {
             Debug.Log($"Upgrade option {index} selected");
             
-            statUpgrader.ApplySelectedUpgradeStat(currentUpgradeStats[index]);
+            statUpgrader.ApplyUpgrade(currentUpgradeStats[index]);
             remainingUpgradeCount--;
             
             
@@ -67,8 +67,8 @@ namespace UI
             currentUpgradeStats = statUpgrader.GetRandomUpgradeStats();
             for (int i = 0; i < upgradeButtons.Length; i++)
             {
-                upgradeButtons[i].GetComponentInChildren<Text>().text = 
-                    currentUpgradeStats[i].statType.ToString() + " : " + currentUpgradeStats[i].value;
+                upgradeButtons[i].GetComponentInChildren<Text>().text =
+                    currentUpgradeStats[i].GetString();
             }
         }
     }
