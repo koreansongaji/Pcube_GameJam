@@ -5,7 +5,7 @@ using Weapons.WeaponSubScripts;
 
 namespace Weapons
 {
-    public class GaricWeapon : Weapon
+    public class GarlicWeapon : Weapon
     { 
         private Player _player;
         [SerializeField] private GameObject bulletPrefab;

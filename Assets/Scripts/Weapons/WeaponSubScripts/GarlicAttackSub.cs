@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.Pool;
 using Weapons.WeaponSubScripts;
 
-public class GaricAttackSub : MonoBehaviour
+public class GarlicAttackSub : MonoBehaviour
     {
         private void OnTriggerEnter(Collider other)
         {
