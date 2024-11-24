@@ -83,12 +83,10 @@ public class MonsterBehavior : MonsterMovement
     private IEnumerator Death()
     {
         _animator.SetBool(IS_DEATH, true);
-        // todo : => 경험치 드랍 확인
-        //ExpPoolSystem.Instance.CreateExpSphere(this.transform.position);
+        ExpPoolSystem.Instance.CreateExpSphere(this.transform.position);
         yield return new WaitForSecondsRealtime(1f);
         _poolingHandler.DeActiveMonster[_monsterStatus.runtimeData.Kind].   Add(gameObject);
         _poolingHandler.ActiveMonster  [_monsterStatus.runtimeData.Kind].Remove(gameObject);
-        
         gameObject.SetActive(false);
     }
 }

@@ -20,7 +20,6 @@ public class MonsterAttack : MonoBehaviour
         {
             if (hit.collider.CompareTag("Player"))
             {
-                Debug.Log("플레이어 공격");
                 hit.collider.GetComponent<Player>().TakeDamage(dmg);
             }
         }

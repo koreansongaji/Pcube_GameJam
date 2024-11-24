@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        Debug.Log("TakeDamage 함수 실행");
         curHp -= damage;
         if (curHp <= 0)
         {
