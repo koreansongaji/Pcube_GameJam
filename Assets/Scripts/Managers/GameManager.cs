@@ -8,11 +8,6 @@ using static SoundManager;
 
 public class GameManager : Singleton<GameManager>
 {
-
-    [SerializeField] GameObject expPrefab;
-    public Transform ExpPoolTransform;
-    public Transform ExpPoolTransformSub;
-    
     private Player _player;
     public float GameTime { get; private set; }
     
@@ -27,6 +22,7 @@ public class GameManager : Singleton<GameManager>
     {
         // 1. Scene Change
         SceneManager.LoadScene("InGame2");
+        
         // 2. Game Start
         GameTime = 0;
     }

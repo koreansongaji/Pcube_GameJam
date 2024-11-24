@@ -14,7 +14,7 @@ namespace UI
         [SerializeField] private StatUpgrader statUpgrader;
         [SerializeField] private List<UpgradeStat> currentUpgradeStats;
 
-        private void Awake()
+        private void Start()
         {
             if (GameManager.Instance.TryGetPlayerObject(out Player player))
             {
@@ -29,12 +29,15 @@ namespace UI
             }
 
             upgradePanel.SetActive(false);
+            ReloadUpgradeButtons();
         }
 
-        
-        int remainingUpgradeCount = 0;
+
+        private int remainingUpgradeCount = 0;
         private void OnPlayerLevelUp(int levelUpCount)
         {
+            Debug.Log($"Player level up! Level : {playerLevel.GetLevel()}");
+            
             remainingUpgradeCount += levelUpCount;
             GameManager.Pause = true;
             upgradePanel.SetActive(true);
