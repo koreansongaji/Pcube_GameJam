@@ -82,9 +82,10 @@ public class MonsterBehavior : MonsterMovement
 
     private IEnumerator Death()
     {
+        StopChase(_agent, _animator);
         _animator.SetBool(IS_DEATH, true);
         ExpPoolSystem.Instance.CreateExpSphere(this.transform.position);
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.6f);
         _poolingHandler.DeActiveMonster[_monsterStatus.runtimeData.Kind].   Add(gameObject);
         _poolingHandler.ActiveMonster  [_monsterStatus.runtimeData.Kind].Remove(gameObject);
         gameObject.SetActive(false);
