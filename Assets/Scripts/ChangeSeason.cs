@@ -10,6 +10,7 @@ public class ChangeSeason : MonoBehaviour
     [SerializeField] private GameObject start;
     [SerializeField] private GameObject mid;
     [SerializeField] private GameObject end;
+    [SerializeField] private GameObject apple;
 
     private bool isMoving = false; // 이동 중인지 확인하는 플래그
     private int currentSeason = 0; // 현재 계절
@@ -41,6 +42,7 @@ public class ChangeSeason : MonoBehaviour
         {
             currentSeason = 0;
             Change(currentSeason);
+            apple.SetActive(true);
         }
     }
 

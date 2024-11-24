@@ -93,9 +93,9 @@ public class PoolingHandler : MonoBehaviour //이 스크립트는 싱글톤으�
                 int randomMonster = UnityEngine.Random.Range(0, 4);
                 SetActiveMonster(randomMonster);
                 cool -= 0.1f;
-                if(cool < 0.3)
+                if(cool < 0.5f)
                 {
-                    cool = 0.3f;
+                    cool = 0.5f;
                 }
             }
         }
