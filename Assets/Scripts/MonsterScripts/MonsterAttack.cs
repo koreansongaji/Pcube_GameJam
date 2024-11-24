@@ -12,7 +12,6 @@ public class MonsterAttack : MonoBehaviour
     /// <param name="dis">몬스터의 공격 사거리 확인</param>
     public void CommonAttack(float dmg, float height, float dis) //몬스터 공격 추상함수
     {
-        Debug.Log("CommonAttack 실행");
         RaycastHit hit;
 
         if (Physics.Raycast(transform.position + new Vector3(0, height, 0), this.transform.forward,
@@ -20,7 +19,6 @@ public class MonsterAttack : MonoBehaviour
         {
             if (hit.collider.CompareTag("Player"))
             {
-                Debug.Log("플레이어 공격");
                 hit.collider.GetComponent<Player>().TakeDamage(dmg);
             }
         }

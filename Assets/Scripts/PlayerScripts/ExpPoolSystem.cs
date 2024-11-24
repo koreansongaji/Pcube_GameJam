@@ -3,8 +3,12 @@ using UnityEngine;
 
 public class ExpPoolSystem : MonoBehaviour
 {
-    public static ExpPoolSystem Instance { get; private set; }
-    
+    public static ExpPoolSystem Instance
+    {
+        get;
+        private set;
+    }
+
     private GameObjectPool _expPool;
     
     [SerializeField] private GameObject expPrefab;

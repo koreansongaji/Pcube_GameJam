@@ -27,6 +27,7 @@ public class UIManager : Generic.Singleton<UIManager>
 
     protected override void Awake()
     {
+        base.Awake();
     }
 
     public void DamageFloat(Vector2 vec, float damage)
@@ -66,15 +67,6 @@ public class UIManager : Generic.Singleton<UIManager>
         instance = null;
     }
 
-    public void SetHPBar(float a)
-    {
-        HPBar.value = a;
-    }
-    public void SetExpBar(float a)
-    {
-        ExpBar.value = a;
-    }
-
     public void SetSeasonBar(float a)
     {
         float sliderValue = a / 8.0f;
@@ -108,7 +100,6 @@ public class UIManager : Generic.Singleton<UIManager>
     public void GameContinue()
     {
         isGameStopOpened = false;
-        Time.timeScale = 1;
         GameStopObject.SetActive(false);
     }
 }

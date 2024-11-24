@@ -15,12 +15,12 @@ namespace PlayerScripts
             
             for (int i = 0; i < 3; i++)
             {
-                UpgradeStat randomStat = new UpgradeStat
-                {
-                    statType = (PlayerData.StatType)UnityEngine.Random.Range
-                        (0, Enum.GetValues(typeof(PlayerData.StatType)).Length),
-                    value = UnityEngine.Random.Range(1, 11)
-                };
+                // random Select Stat from UpgradeStatDataList
+                UpgradeStat randomStat = new UpgradeStat();
+                
+                int randomIndex = UnityEngine.Random.Range(0, upgradeStatDataList.Count);
+                
+                randomStat = upgradeStatDataList[randomIndex];
                 results.Add(randomStat);
             }
             
@@ -30,7 +30,7 @@ namespace PlayerScripts
         // 업그레이드 스탯을 받아서 적용합니다.
         public void ApplySelectedUpgradeStat(UpgradeStat stat)
         {
-            if (! GameManager.Instance.TryGetPlayerObject(out Player p))
+            if (!GameManager.Instance.TryGetPlayerObject(out Player p))
             {
                 Debug.LogWarning("Player is not found");
                 return;
