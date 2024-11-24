@@ -89,5 +89,6 @@ public class MonsterBehavior : MonsterMovement
         _poolingHandler.DeActiveMonster[_monsterStatus.runtimeData.Kind].   Add(gameObject);
         _poolingHandler.ActiveMonster  [_monsterStatus.runtimeData.Kind].Remove(gameObject);
         gameObject.SetActive(false);
+        gameObject.transform.position = transform.position;
     }
 }
