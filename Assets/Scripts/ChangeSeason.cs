@@ -16,15 +16,15 @@ public class ChangeSeason : MonoBehaviour
     private void Update()
     {
         // GameTime의 각 4분기마다 계절 변화
-        if (GameManager.Instance.GameTime < 60 * 2.5f && !isMoving)
+        if (GameManager.Instance.GameTime > 60 * 2.5f && isMoving)
         {
             Change(1);
         }
-        else if (GameManager.Instance.GameTime < 60 * 5f && !isMoving)
+        else if (GameManager.Instance.GameTime > 60 * 5f && isMoving)
         {
             Change(2);
         }
-        else if (GameManager.Instance.GameTime < 60 * 7.5f && !isMoving)
+        else if (GameManager.Instance.GameTime > 60 * 7.5f && isMoving)
         {
             Change(3);
         }

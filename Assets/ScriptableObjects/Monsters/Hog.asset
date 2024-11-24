@@ -19,3 +19,4 @@ MonoBehaviour:
   _damage: 3
   _attackSpeed: 1
   _range: 1.5
+  _kind: 3

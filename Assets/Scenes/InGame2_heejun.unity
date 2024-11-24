@@ -415,7 +415,7 @@ GameObject:
   m_Component:
   - component: {fileID: 251997023}
   - component: {fileID: 251997024}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Leave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,6 +548,7 @@ MonoBehaviour:
   expPrefab: {fileID: 9165418659709256353, guid: 4ace7995390bcae40a581881bf1d603f, type: 3}
   ExpPoolTransform: {fileID: 1388017232}
   ExpPoolTransformSub: {fileID: 922562232}
+  endTime: 600
 --- !u!4 &470313621
 Transform:
   m_ObjectHideFlags: 0
@@ -1136,7 +1137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1094484458}
   - component: {fileID: 1094484459}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AreaWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1587,6 +1588,7 @@ MonoBehaviour:
   - {fileID: 1341745082}
   - {fileID: 541927979}
   CountMonster: 00000000000000000000000000000000
+  totalMonsterCount: 100
 --- !u!4 &1714968855
 Transform:
   m_ObjectHideFlags: 0
@@ -1831,7 +1833,7 @@ GameObject:
   - component: {fileID: 2413036113369209422}
   - component: {fileID: 2413036113369209424}
   - component: {fileID: 2413036113369209423}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerTree
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1902,6 +1904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseData: {fileID: 11400000, guid: ff58c0af199587a45be219642a08ac2b, type: 2}
   runtimeData: {fileID: 0}
+  curHp: 0
 --- !u!114 &2413036113369209423
 MonoBehaviour:
   m_ObjectHideFlags: 0

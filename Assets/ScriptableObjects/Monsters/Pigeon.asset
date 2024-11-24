@@ -18,4 +18,5 @@ MonoBehaviour:
   _curHp: 2
   _damage: 2
   _attackSpeed: 1
-  _range: 3
+  _range: 5
+  _kind: 1

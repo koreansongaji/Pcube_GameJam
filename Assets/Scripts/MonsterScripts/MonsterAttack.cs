@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class MonsterAttack : MonoBehaviour
+public class MonsterAttack : MonoBehaviour
 {
     /// <summary>
     /// 몬스터가 공격하는 함수, 래이로 피격 확인
@@ -12,6 +12,7 @@ public abstract class MonsterAttack : MonoBehaviour
     /// <param name="dis">몬스터의 공격 사거리 확인</param>
     public void CommonAttack(float dmg, float hight, float dis) //몬스터 공격 추상함수
     {
+        Debug.Log("CommonAttack 실행");
         RaycastHit hit;
 
         if (Physics.Raycast(transform.position + new Vector3(0, hight, 0), this.transform.forward,

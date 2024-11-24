@@ -112,8 +112,8 @@ public abstract class MonsterMovement : MonsterAttack
     {
         animator.SetTrigger("isAttack");
         yield return new WaitForSecondsRealtime(1 / monsterStatus.runtimeData.AttackSpeed); //애니메이션 동작에 따라 시간 조절
-
-        CommonAttack(monsterStatus.runtimeData.Damage, 0.5f, 10f);
+        Debug.Log("애니메이션 실행");
+        CommonAttack(monsterStatus.runtimeData.Damage, 0.5f, monsterStatus.runtimeData.Range);
     }
     private IEnumerator isAttack(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
     {
@@ -133,14 +133,5 @@ public abstract class MonsterMovement : MonsterAttack
             }
         }
     }
-    /// <summary>
-    /// 상속받은 Attack함수 실행
-    /// </summary>
-    /// <param name="dmg">데미지</param>
-    /// <param name="hight">몬스터 높이</param>
-    /// <param name="dis">몬스터 공격 사거리</param>
-    new public void CommonAttack(float dmg, float hight, float dis)
-    {
-        base.CommonAttack(dmg, hight, dis);
-    }
+
 }
