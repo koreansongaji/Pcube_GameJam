@@ -12,7 +12,7 @@ namespace Weapons
         private Player _player;
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private AimType currentType;
-        
+
         private GameObjectPool _bulletPool;
         
         public override void Setup(WeaponHandler handler)
@@ -22,6 +22,7 @@ namespace Weapons
             _bulletPool = new GameObjectPool(bulletPrefab, handler.transform, 10);
             atkTrigger = true;
         }
+
         public override void Attack()
         {
             if(TryGetTarget(out Vector3 target) == false)

@@ -415,20 +415,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeStatDataList:
   - modifier: 100
+    statType: 3
+    value: 10
+  - modifier: 100
+    statType: 3
+    value: 20
+  - modifier: 200
+    statType: 3
+    value: 30
+  - modifier: 200
     statType: 0
-    value: 2
+    value: 30
   - modifier: 100
     statType: 0
-    value: 7
-  - modifier: 100
+    value: 100
+  - modifier: 300
     statType: 0
-    value: 4
+    value: 150
   - modifier: 100
-    statType: 0
-    value: 4
+    statType: 4
+    value: 20
   - modifier: 100
-    statType: 0
-    value: 4
+    statType: 4
+    value: 15
+  - modifier: 200
+    statType: 4
+    value: 10
+  - modifier: 300
+    statType: 4
+    value: 150
   weaponDataList:
   - weaponPrefab: {fileID: 0}
   - weaponPrefab: {fileID: 0}

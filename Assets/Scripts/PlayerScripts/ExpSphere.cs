@@ -15,13 +15,13 @@ public class ExpSphere : MonoBehaviour
         
         _isActive = true;
         GameManager.Instance.TryGetPlayerObject(out Player player);
-            
+
         transform.DOMove(player.transform.position + new Vector3(0, 2, 0), 0.5f)
             .SetEase(Ease.InExpo).OnComplete(() =>
             {
-                player.GetComponent<PlayerLevel>().EarnExp(10);
-                SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_APPEAR_01);
-                ExpPoolSystem.Instance.ReturnExpSphere(gameObject);
+            player.GetComponent<PlayerLevel>().EarnExp(10);
+            SoundManager.Instance.PlaySE(SoundManager.ESoundEffect.SE_APPEAR_01);
+            transform.DOMove(player.transform.position, 0.5f).OnComplete(() => ExpPoolSystem.Instance.ReturnExpSphere(gameObject));
             });
     }
 

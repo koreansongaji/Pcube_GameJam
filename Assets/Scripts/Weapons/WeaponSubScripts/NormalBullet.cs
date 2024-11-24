@@ -15,7 +15,6 @@ namespace Weapons.WeaponSubScripts
         private GameObjectPool _pool;
         private float _damage;
         private Rigidbody _rigidBody;
-        
         private bool _collided = false;
         
         private void Awake()
@@ -46,6 +45,7 @@ namespace Weapons.WeaponSubScripts
                 if(other.TryGetComponent(out MonsterBehavior monster) == false)
                     return;
                 monster.TakeDamage(_damage);
+                monster.transform.position += transform.forward.normalized*0.5f;
                 _collided = true;
                 
                 OnHit?.Invoke(monster);
