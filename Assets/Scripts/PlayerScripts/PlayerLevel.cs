@@ -22,8 +22,7 @@ public class PlayerLevel : MonoBehaviour
     
     public void EarnExp(int exp)
     {
-        // todo : 성장이라는 강화요소를 사용한다면, 이곳에서 성장이 적용된 경험치를 계산한다.
-        curExp += exp;
+        curExp += exp * (100 + _player.GetStat().growth.Value) * 0.01f;
         CheckLevelUp();
     }
     

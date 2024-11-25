@@ -33,6 +33,13 @@ namespace Generic
             _activeCount = 0;
         }
 
+        public GameObject Get(Transform parent)
+        {
+            var obj = Get();
+            obj.transform.SetParent(parent);
+            return obj;
+        }
+        
         public GameObject Get()
         {
             if (_pool.Count > 0)

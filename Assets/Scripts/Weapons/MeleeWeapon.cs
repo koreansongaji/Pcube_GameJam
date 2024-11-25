@@ -10,6 +10,7 @@ namespace Weapons
         private Player _player;
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private AimType currentType;
+        
         public override void Setup(WeaponHandler handler)
         {
             weaponHandler = handler;
@@ -30,7 +31,7 @@ namespace Weapons
             bulletScript.SetArgs(
                 CalculateFinalDamage(),
                 CalculateWeaponRange()
-                );
+            );
 
             atkTrigger = false;
             StartCoroutine(Cooldown(CalculateCooldown()));
@@ -51,7 +52,8 @@ namespace Weapons
 
         private float CalculateWeaponRange()
         {
-            return weaponData.attackRange * (100 + _player.GetStat().attackRange.Value) * 0.01f;
+            return weaponData.attackRange * 
+                   ((100 + _player.GetStat().attackRange.Value) * 0.01f);
         }
 
         private float CalculateCooldown()

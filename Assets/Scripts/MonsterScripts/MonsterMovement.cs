@@ -118,6 +118,8 @@ public abstract class MonsterMovement : MonsterAttack
         while (true)
         {
             yield return new WaitForSecondsRealtime(0.02f);
+            if (GameManager.Pause) continue;
+            
             if(monsterStatus.runtimeData.CurHp <= 0)
             {
                 StopChase(agent, animator);

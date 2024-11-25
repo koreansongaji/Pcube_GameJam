@@ -21,7 +21,7 @@ public class ExpReader : MonoBehaviour
 
         if (Mathf.Abs(curValue - targetValue) > 0.01f)
         {
-            expSlider.value = Mathf.Lerp(curValue, targetValue, 5 * Time.deltaTime);
+            expSlider.value = Mathf.Lerp(curValue, targetValue, 5 * Time.unscaledDeltaTime);
         }
     }
 }

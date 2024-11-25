@@ -9,8 +9,12 @@ using static SoundManager;
 public class GameManager : Singleton<GameManager>
 {
     private Player _player;
-    public float GameTime { get; private set; }
+    public float GameTime { 
+        get => gameTime;
+        private set => gameTime = value; 
+    }
     
+    [SerializeField] private float gameTime = 0;
     [SerializeField] private float endTime = 60 * 10f;
 
     public float GetEndTime()
@@ -92,5 +96,10 @@ public class GameManager : Singleton<GameManager>
     {
         get => Time.timeScale == 0;
         set => Time.timeScale = value ? 0 : 1;
+    }
+
+    public float GetProgress()
+    {
+        return gameTime / endTime;
     }
 }

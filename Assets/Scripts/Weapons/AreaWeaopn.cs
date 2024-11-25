@@ -36,7 +36,7 @@ namespace Weapons
                 CalculateAreaSize(),
                 CalculateDuration(), 
                 areaPool
-                );
+            );
 
             atkTrigger = false;
             StartCoroutine(Cooldown(CalculateCooldown()));

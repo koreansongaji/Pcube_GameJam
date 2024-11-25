@@ -25,8 +25,7 @@ namespace Weapons
 
         public override void Attack()
         {
-            if(TryGetTarget(out Vector3 target) == false)
-                return;
+            if(TryGetTarget(out Vector3 target) == false) return;
             
             // shoot LeavesBullet
             GameObject bullet = _bulletPool.Get();
@@ -86,8 +85,7 @@ namespace Weapons
                 return true;
             }
 
-            target = MouseCursorPosFinder.GetMouseWorldPosition();
-            return true;
+            return MouseCursorPosFinder.TryGetMouseWorldPosition(out target);
         }
     }
     

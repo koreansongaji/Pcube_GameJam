@@ -21,6 +21,15 @@ public class Player : MonoBehaviour
         curHp = baseData.maxHp.baseValue;
     }
 
+    private void Update()
+    {
+        // regen
+        if (curHp < runtimeData.maxHp.Value)
+        {
+            Heal(runtimeData.hpRegen.Value * Time.deltaTime);
+        }
+    }
+
     public void TakeDamage(float damage)
     {
         // armor 곱연산 계산. log로

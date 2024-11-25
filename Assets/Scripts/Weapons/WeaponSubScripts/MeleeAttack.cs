@@ -20,7 +20,6 @@ namespace Weapons.WeaponSubScripts
         
         private void Awake()
         {
-            //transform.GetChild(0).GetComponent<MeleeAttackSub>().meleeAttack = this;
             _rigidBody = GetComponent<Rigidbody>();
         }
 
@@ -47,13 +46,14 @@ namespace Weapons.WeaponSubScripts
             
             // target 방향으로 회전
             transform.LookAt(target);
-            GameObject spawnedVFX = Instantiate(myVFX, 
+            GameObject spawnedVFX = Instantiate(
+                myVFX, 
                 transform.position + new Vector3(0, 1, 0), 
                 transform.rotation * Quaternion.Euler(new Vector3(90, 0, -90))
-                );
+            );
             spawnedVFX.transform.localScale = transform.localScale;
-                
             Destroy(spawnedVFX, 1f);
+            
             StartCoroutine(LiveCoroutine());
         }
 

@@ -16,7 +16,7 @@ MonoBehaviour:
     baseValue: 100
   currentHp:
     baseValue: 0
-  regenHp:
+  hpRegen:
     baseValue: 0
   armor:
     baseValue: 0

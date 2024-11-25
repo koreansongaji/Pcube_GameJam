@@ -27,7 +27,7 @@ public class HpReader : MonoBehaviour
 
         if (Math.Abs(curValue - targetValue) > 0.01f)
         {
-            hpSlider.value = Mathf.Lerp(curValue, targetValue, 5 * Time.deltaTime);
+            hpSlider.value = Mathf.Lerp(curValue, targetValue, 5 * Time.unscaledDeltaTime);
         }
     }
 }

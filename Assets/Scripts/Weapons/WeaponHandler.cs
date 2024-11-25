@@ -5,7 +5,7 @@ using Weapons;
 
 public class WeaponHandler : MonoBehaviour
 {
-    private const int MAX_WEAPON_COUNT = 2;
+    private const int MAX_WEAPON_COUNT = 10;
 
     [SerializeField] private List<Weapon> weapons;
     [SerializeField] private PlayerData playerData;

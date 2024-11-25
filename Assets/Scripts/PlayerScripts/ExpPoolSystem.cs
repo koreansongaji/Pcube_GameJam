@@ -27,6 +27,9 @@ public class ExpPoolSystem : MonoBehaviour
     public void CreateExpSphere(Vector3 pos)
     {
         GameObject exp = _expPool.Get();
+        if(exp == null)
+            return;
+        
         exp.transform.position = pos;
     }
 

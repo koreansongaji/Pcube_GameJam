@@ -15,6 +15,7 @@ MonoBehaviour:
   damage: 60
   projectileSpeed: 10
   duration: 1
-  attackRange: -1
+  attackRange: 1.5
   coolTime: 6.97
   projectileCount: 1
+  upgradeList: []

@@ -214,6 +214,7 @@ MonoBehaviour:
   start: {fileID: 6506750559183798962}
   mid: {fileID: 5276335879472472834}
   end: {fileID: 1385605428282182493}
+  apple: {fileID: 0}
 --- !u!1 &8285244517269214970
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,7 +490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2457681350661852344, guid: a8689532187ec02449b5b8d229c758a6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2586,7 +2587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6513759346938146008, guid: c5899a0b233499d4b9325262b2c13728, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8488000693503182356, guid: c5899a0b233499d4b9325262b2c13728, type: 3}
       propertyPath: m_LocalPosition.x

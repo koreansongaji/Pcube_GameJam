@@ -13,7 +13,6 @@ namespace Weapons.WeaponSubScripts
     {
         public UnityAction<MonsterBehavior> OnHit { get; set; }
 
-        public GameObject myVFX;
         private GameObjectPool _pool;
         private Rigidbody _rigidBody;
         private const float ATK_RATE = 1;
@@ -29,23 +28,15 @@ namespace Weapons.WeaponSubScripts
             _rigidBody = GetComponent<Rigidbody>();
             _rigidBody.isKinematic = true;
         }
-        float a = 0;        private float _time = 0;
+      
+        private float _time = 0;
         private float _nextAtk = 0;
         private void Update()
         {
-            a += Time.deltaTime;
             _time += Time.deltaTime;
             if (_time >= _duration)
             {
                 CheckRelease();
-            }
-
-            if ( a>0.5f)
-            {
-                GameObject spawnedVFX = Instantiate(myVFX, transform.position, transform.rotation) as GameObject;
-                spawnedVFX.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-                Destroy(spawnedVFX, 5f);
-                a -= 0.5f;
             }
 
             if (_time >= _nextAtk)
@@ -99,6 +90,8 @@ namespace Weapons.WeaponSubScripts
             _pool = pool;
             
             transform.localScale = new Vector3(_range, transform.localScale.y, _range);
+            // child의 scale을 조정해야함
+            transform.GetChild(0).localScale = new Vector3(_range, _range, _range);
         }
         
         private void OnEnable()
@@ -106,9 +99,6 @@ namespace Weapons.WeaponSubScripts
             _time = 0;
             _nextAtk = 0;
             _monsters.Clear();
-            GameObject spawnedVFX = Instantiate(myVFX, transform.position, transform.rotation) as GameObject;
-            spawnedVFX.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            Destroy(spawnedVFX, 5f);
         }
     }
 }

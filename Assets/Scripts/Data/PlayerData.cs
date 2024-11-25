@@ -17,7 +17,7 @@ public class PlayerData : ScriptableObject
     
     [SerializeField] public CharacterStat maxHp;
     [SerializeField] public CharacterStat currentHp;
-    [SerializeField] public CharacterStat regenHp;
+    [FormerlySerializedAs("regenHp")] [SerializeField] public CharacterStat hpRegen;
     [SerializeField] public CharacterStat armor;
     [SerializeField] public CharacterStat damage;
     [SerializeField] public CharacterStat projectileSpeed;
@@ -34,7 +34,7 @@ public class PlayerData : ScriptableObject
         {
             StatType.MAX_HP => maxHp,
             StatType.CURRENT_HP => currentHp,
-            StatType.REGEN_HP => regenHp,
+            StatType.REGEN_HP => hpRegen,
             StatType.ARMOR => armor,
             StatType.DAMAGE => damage,
             StatType.PROJECTILE_SPEED => projectileSpeed,
