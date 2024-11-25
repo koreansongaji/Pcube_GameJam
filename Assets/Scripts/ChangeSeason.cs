@@ -39,7 +39,7 @@ public class ChangeSeason : MonoBehaviour
             < 30.0f => Season.WINTER,
             < 60.0f => Season.SPRING,
             < 90.0f => Season.SUMMER,
-            _ => Season.WINTER
+            _       => Season.FALL
         };
     }   
 
@@ -47,12 +47,12 @@ public class ChangeSeason : MonoBehaviour
     /// 맵 계절 변경
     /// </summary>
     /// <param name="idx">0 : Fall, 1 : Winter, 2 : Spring, 3 : Summer</param>
-    public void Change(int idx)
+    private void Change(int idx)
     {
         StartCoroutine(MoveCloud(idx));
     }
 
-    public IEnumerator MoveCloud(int idx)
+    private IEnumerator MoveCloud(int idx)
     {
         isMoving = true; // 이동 중 플래그 활성화
         yield return ToMid();
@@ -68,20 +68,20 @@ public class ChangeSeason : MonoBehaviour
         isMoving = false; // 이동 완료 후 플래그 비활성화
         currentSeason = idx;
         
-//        apple.SetActive(idx == (int)Season.FALL);
+        if(apple != null) apple.SetActive(idx == (int)Season.FALL);
     }
 
-    IEnumerator ToMid()
+    private IEnumerator ToMid()
     {
         yield return SmoothMove(cloud.transform, start.transform.position, mid.transform.position, 1f);
     }
 
-    IEnumerator ToEnd()
+    private IEnumerator ToEnd()
     {
         yield return SmoothMove(cloud.transform, mid.transform.position, end.transform.position, 1f);
     }
 
-    IEnumerator SmoothMove(Transform target, Vector3 from, Vector3 to, float duration)
+    private static IEnumerator SmoothMove(Transform target, Vector3 from, Vector3 to, float duration)
     {
         float elapsedTime = 0f;
 
