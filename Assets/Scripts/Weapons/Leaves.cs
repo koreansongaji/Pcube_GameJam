@@ -60,7 +60,7 @@ namespace Weapons
         private float CalculateCooldown()
         {
             return weaponData.coolTime * 
-                   (100 - _player.GetStat().coolTimeReduce.Value) * 0.01f
+                   ( 50 / (50 + _player.GetStat().coolTimeReduce.Value))
                    / (_player.GetStat().projectileCount.Value + weaponData.projectileCount);
         }
         

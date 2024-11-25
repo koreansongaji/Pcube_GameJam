@@ -72,7 +72,7 @@ namespace Weapons
         {
             const float minCooldown = 0.1f;
             
-            float ret = weaponData.coolTime * (100 - _player.GetStat().coolTimeReduce.Value) * 0.01f;
+            float ret = weaponData.coolTime * ( 50 / (50 + _player.GetStat().coolTimeReduce.Value));
             
             return Mathf.Max(ret, minCooldown);
         }
