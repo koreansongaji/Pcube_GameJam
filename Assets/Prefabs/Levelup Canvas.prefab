@@ -422,16 +422,16 @@ MonoBehaviour:
     value: 20
   - modifier: 200
     statType: 3
-    value: 30
+    value: 0.3
   - modifier: 200
     statType: 0
-    value: 30
+    value: 0.3
   - modifier: 100
     statType: 0
     value: 100
   - modifier: 300
     statType: 0
-    value: 150
+    value: 1.5
   - modifier: 100
     statType: 4
     value: 20
@@ -440,15 +440,18 @@ MonoBehaviour:
     value: 15
   - modifier: 200
     statType: 4
-    value: 10
-  - modifier: 300
+    value: 0.1
+  - modifier: 100
     statType: 4
-    value: 150
+    value: 50
+  - modifier: 100
+    statType: 8
+    value: 50
   weaponDataList:
-  - weaponPrefab: {fileID: 0}
-  - weaponPrefab: {fileID: 0}
-  - weaponPrefab: {fileID: 0}
-  - weaponPrefab: {fileID: 0}
+  - weaponPrefab: {fileID: 2853627377992069757, guid: 6a4e9c12a3a05b9498372d0679fabbbf, type: 3}
+  - weaponPrefab: {fileID: 3888140611766801648, guid: f28e743fa16a9244eac9b93d53a9d08b, type: 3}
+  - weaponPrefab: {fileID: 5157688733374994665, guid: ede6d09ff407a9f4f9f1e2d8b116f9bd, type: 3}
+  - weaponPrefab: {fileID: 2337852243144092709, guid: f5d020e7939672a4a84bf5b541eecd46, type: 3}
 --- !u!1 &4656977292762619322
 GameObject:
   m_ObjectHideFlags: 0

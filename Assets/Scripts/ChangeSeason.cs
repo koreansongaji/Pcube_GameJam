@@ -17,34 +17,31 @@ public class ChangeSeason : MonoBehaviour
 
     private void Update()
     {
-        // 총 시간의 25%가 지나면 변경
-        if (GameManager.Instance.GameTime > GameManager.Instance.GetEndTime() * 0.25f && currentSeason == 0)
-        {
-            currentSeason = 1;
-            Change(currentSeason);
-        }
+        if (isMoving) return; // 이동 중이면 업데이트 중지
         
-        // 총 시간의 50%가 지나면 변경
-        if (GameManager.Instance.GameTime > GameManager.Instance.GetEndTime() * 0.5f && currentSeason == 1)
-        {
-            currentSeason = 2;
-            Change(currentSeason);
-        }
+        Season curSeason = GetCurSeason();
+        if (currentSeason == (int)curSeason) return; // 현재 계절이랑 같으면 업데이트 중지
         
-        // 총 시간의 75%가 지나면 변경
-        if (GameManager.Instance.GameTime > GameManager.Instance.GetEndTime() * 0.75f && currentSeason == 2)
-        {
-            currentSeason = 3;
-            Change(currentSeason);
-        }
-
-        if (GameManager.Instance.GameTime > GameManager.Instance.GetEndTime() * 0.90f && currentSeason == 3)
-        {
-            currentSeason = 0;
-            Change(currentSeason);
-            apple.SetActive(true);
-        }
+        Change((int)curSeason); // 계절 변경
     }
+    
+    private float GetCurTimePercentage()
+    {
+        return GameManager.Instance.GameTime / GameManager.Instance.GetEndTime() * 100.0f;
+    }
+    
+    private Season GetCurSeason()
+    {
+        float curPercentage = GetCurTimePercentage();
+
+        return curPercentage switch
+        {
+            < 30.0f => Season.WINTER,
+            < 60.0f => Season.SPRING,
+            < 90.0f => Season.SUMMER,
+            _ => Season.WINTER
+        };
+    }   
 
     /// <summary>
     /// 맵 계절 변경
@@ -60,11 +57,18 @@ public class ChangeSeason : MonoBehaviour
         isMoving = true; // 이동 중 플래그 활성화
         yield return ToMid();
         yield return new WaitForSeconds(1f); // 1초 대기
-        Change(idx);
+        
+        // 계절 변경
+        seasons[currentSeason].SetActive(false);
+        seasons[idx].SetActive(true);
+        
         yield return ToEnd();
         yield return new WaitForSecondsRealtime(1f);
         cloud.transform.position = start.transform.position; // 초기화
         isMoving = false; // 이동 완료 후 플래그 비활성화
+        currentSeason = idx;
+        
+//        apple.SetActive(idx == (int)Season.FALL);
     }
 
     IEnumerator ToMid()
@@ -96,5 +100,13 @@ public class ChangeSeason : MonoBehaviour
 
         // 이동 완료 후 정확히 목표 위치로 설정
         target.position = to;
+    }
+
+    private enum Season
+    {
+        FALL = 0,
+        WINTER = 1,
+        SPRING = 2,
+        SUMMER = 3
     }
 }
