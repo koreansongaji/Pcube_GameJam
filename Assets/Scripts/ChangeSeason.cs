@@ -12,17 +12,17 @@ public class ChangeSeason : MonoBehaviour
     [SerializeField] private GameObject end;
     [SerializeField] private GameObject apple;
 
-    private bool isMoving = false; // ÀÌµ¿ ÁßÀÎÁö È®ÀÎÇÏ´Â ÇÃ·¡±×
-    private int currentSeason = 0; // ÇöÀç °èÀý
+    private bool isMoving = false; // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½
+    private int currentSeason = 0; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     private void Update()
     {
-        if (isMoving) return; // ÀÌµ¿ ÁßÀÌ¸é ¾÷µ¥ÀÌÆ® ÁßÁö
+        if (isMoving) return; // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
         
         Season curSeason = GetCurSeason();
-        if (currentSeason == (int)curSeason) return; // ÇöÀç °èÀýÀÌ¶û °°À¸¸é ¾÷µ¥ÀÌÆ® ÁßÁö
+        if (currentSeason == (int)curSeason) return; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
         
-        Change((int)curSeason); // °èÀý º¯°æ
+        Change((int)curSeason); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
     
     private float GetCurTimePercentage()
@@ -44,7 +44,7 @@ public class ChangeSeason : MonoBehaviour
     }   
 
     /// <summary>
-    /// ¸Ê °èÀý º¯°æ
+    /// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     /// <param name="idx">0 : Fall, 1 : Winter, 2 : Spring, 3 : Summer</param>
     private void Change(int idx)
@@ -54,18 +54,18 @@ public class ChangeSeason : MonoBehaviour
 
     private IEnumerator MoveCloud(int idx)
     {
-        isMoving = true; // ÀÌµ¿ Áß ÇÃ·¡±× È°¼ºÈ­
+        isMoving = true; // ï¿½Ìµï¿½ ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­
         yield return ToMid();
-        yield return new WaitForSeconds(1f); // 1ÃÊ ´ë±â
+        yield return new WaitForSeconds(1f); // 1ï¿½ï¿½ ï¿½ï¿½ï¿½
         
-        // °èÀý º¯°æ
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         seasons[currentSeason].SetActive(false);
         seasons[idx].SetActive(true);
         
         yield return ToEnd();
         yield return new WaitForSecondsRealtime(1f);
-        cloud.transform.position = start.transform.position; // ÃÊ±âÈ­
-        isMoving = false; // ÀÌµ¿ ¿Ï·á ÈÄ ÇÃ·¡±× ºñÈ°¼ºÈ­
+        cloud.transform.position = start.transform.position; // ï¿½Ê±ï¿½È­
+        isMoving = false; // ï¿½Ìµï¿½ ï¿½Ï·ï¿½ ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
         currentSeason = idx;
         
         if(apple != null) apple.SetActive(idx == (int)Season.FALL);
@@ -92,13 +92,13 @@ public class ChangeSeason : MonoBehaviour
 
             float smoothT = Mathf.SmoothStep(0, 1, t);
 
-            // À§Ä¡ °è»ê
+            // ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½
             target.position = Vector3.Lerp(from, to, smoothT);
 
-            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±â
+            yield return null; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         }
 
-        // ÀÌµ¿ ¿Ï·á ÈÄ Á¤È®È÷ ¸ñÇ¥ À§Ä¡·Î ¼³Á¤
+        // ï¿½Ìµï¿½ ï¿½Ï·ï¿½ ï¿½ï¿½ ï¿½ï¿½È®ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         target.position = to;
     }
 
