@@ -68,7 +68,7 @@ public class ChangeSeason : MonoBehaviour
         isMoving = false; // 이동 완료 후 플래그 비활성화
         currentSeason = idx;
         
-//        apple.SetActive(idx == (int)Season.FALL);
+        apple.SetActive(idx == (int)Season.FALL);
     }
 
     IEnumerator ToMid()
