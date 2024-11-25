@@ -16,6 +16,8 @@ namespace Weapons.WeaponSubScripts
         private float _damage;
         private Rigidbody _rigidBody;
         
+        private GameObjectPool _pool;
+        
         private bool _collided = false;
         
         private void Awake()
@@ -31,7 +33,7 @@ namespace Weapons.WeaponSubScripts
         {
             transform.GetChild(0).gameObject.SetActive(true);
             yield return new WaitForSeconds(0.5f);
-            Destroy(gameObject);
+            _pool.Release(gameObject);
         }
 
         public void Damage(MonsterBehavior monster)
@@ -52,17 +54,15 @@ namespace Weapons.WeaponSubScripts
             StartCoroutine(LiveCoroutine());
         }
 
-        public void SetArgs(float damage)
+        public void SetArgs(float damage, GameObjectPool pool)
         {
             _damage = damage;
+            _pool = pool;
         }
         
         private void OnEnable()
         {
-            
-            
             _time = 0;
-            _collided = false;
         }
     }
 }

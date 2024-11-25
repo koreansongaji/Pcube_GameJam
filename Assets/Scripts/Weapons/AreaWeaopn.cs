@@ -27,7 +27,7 @@ namespace Weapons
                 return;
             
             // shoot LeavesBullet
-            GameObject area = areaPool.Get();
+            GameObject area = areaPool.Get(transform);
             area.TryGetComponent(out SingleArea areaScript);
             
             area.transform.position = target;
@@ -70,11 +70,14 @@ namespace Weapons
         
         private float CalculateCooldown()
         {
-            return weaponData.coolTime *
-                   (100 - _player.GetStat().coolTimeReduce.Value) * 0.01f;
+            const float minCooldown = 0.1f;
+            
+            float ret = weaponData.coolTime * (100 - _player.GetStat().coolTimeReduce.Value) * 0.01f;
+            
+            return Mathf.Max(ret, minCooldown);
         }
 
-        private bool TryGetTarget(out Vector3 target)
+        private static bool TryGetTarget(out Vector3 target)
         {
             // 본인 Transform 이내에서 10f 반경 이내 랜덤 점
             target = MouseCursorPosFinder.GetMouseWorldPosition();

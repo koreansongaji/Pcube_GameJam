@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e90ceaf3964e7fb0f2850731c5d709, type: 3}
   m_Name: Leave
   m_EditorClassIdentifier: 
-  damage: 40
+  damage: 20
   projectileSpeed: 10
   duration: 1
   attackRange: -1
-  coolTime: 1
+  coolTime: 0.3
   projectileCount: 1
   upgradeList: []

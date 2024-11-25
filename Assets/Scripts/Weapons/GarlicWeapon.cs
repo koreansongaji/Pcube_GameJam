@@ -10,10 +10,13 @@ namespace Weapons
         private Player _player;
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private AimType currentType;
+        
+        private GameObjectPool _bulletPool;
         public override void Setup(WeaponHandler handler)
         {
             weaponHandler = handler;
             _player = handler.GetComponent<Player>();
+            _bulletPool = new GameObjectPool(bulletPrefab, handler.transform, 10);
         }
 
         public override void Attack()
@@ -22,12 +25,13 @@ namespace Weapons
                 return;
 
             // shoot LeavesBullet
-            GameObject bullet = Instantiate(bulletPrefab);
+            GameObject bullet =  _bulletPool.Get(transform);
             bullet.TryGetComponent(out GarlicAttack bulletScript);
 
             bullet.transform.position = weaponHandler.transform.position;
             bulletScript.SetTarget();
-            bulletScript.SetArgs(CalculateFinalDamage());
+            bulletScript.SetArgs(CalculateFinalDamage(), _bulletPool);
+            
             atkTrigger = false;
             StartCoroutine(Cooldown(CalculateCooldown()));
         }

@@ -28,7 +28,7 @@ namespace Weapons
             if(TryGetTarget(out Vector3 target) == false) return;
             
             // shoot LeavesBullet
-            GameObject bullet = _bulletPool.Get();
+            GameObject bullet = _bulletPool.Get(transform);
             bullet.TryGetComponent(out NormalBullet bulletScript);
             
             bullet.transform.position = weaponHandler.transform.position + new Vector3(0, 1, 0);

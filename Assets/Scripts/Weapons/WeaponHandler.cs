@@ -14,6 +14,12 @@ public class WeaponHandler : MonoBehaviour
     private void Awake()
     {
         player = GetComponent<Player>();
+        
+        weapons = new List<Weapon>();
+        foreach (Weapon weapon in GetComponentsInChildren<Weapon>())
+        {
+            weapons.Add(weapon);
+        }
     }
 
     private void Start()

@@ -218,14 +218,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.93542266, b: 0.8443396, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1311315258840129574, guid: c5442373b3b85274aab549187ebb01b5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a641a8aab8dba848b61fd80484d9745, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -442,7 +442,7 @@ MonoBehaviour:
     statType: 9
     value: 1
   - modifier: 100
-    statType: 10
+    statType: 11
     value: 10
   weaponDataList:
   - weaponPrefab: {fileID: 2853627377992069757, guid: 6a4e9c12a3a05b9498372d0679fabbbf, type: 3}
@@ -509,14 +509,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.93542266, b: 0.8443396, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1311315258840129574, guid: c5442373b3b85274aab549187ebb01b5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a641a8aab8dba848b61fd80484d9745, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -708,14 +708,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.93542266, b: 0.8443396, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1311315258840129574, guid: c5442373b3b85274aab549187ebb01b5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a641a8aab8dba848b61fd80484d9745, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
