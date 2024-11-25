@@ -10,6 +10,15 @@ public class GameStart : MonoBehaviour
     {
         GameManager.Instance.StartGame();
     }
+    
+    public void GameQuitButtonClick()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
 
     private void Awake()
     {

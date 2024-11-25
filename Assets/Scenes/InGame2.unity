@@ -739,6 +739,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 472335944}
   m_CullTransparentMesh: 1
+--- !u!1 &538324437
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 538324438}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &538324438
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538324437}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 994.9541, y: 608.1534, z: -3.5719311}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &539740792
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3588,6 +3619,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 951756764456601177, guid: 13056b68d1e61944e896ddcea3bb4e53, type: 3}
+      propertyPath: expIncreaseFactor
+      value: 1.1
+      objectReference: {fileID: 0}
     - target: {fileID: 1339805469096505018, guid: 13056b68d1e61944e896ddcea3bb4e53, type: 3}
       propertyPath: m_Name
       value: PlayerTree
@@ -3661,3 +3696,4 @@ SceneRoots:
   - {fileID: 580679828}
   - {fileID: 1318341178}
   - {fileID: 4258762242558429819}
+  - {fileID: 538324438}
