@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerData baseData;
     [SerializeField] private PlayerData runtimeData;
-    [SerializeField ]private float curHp;
+    [SerializeField] private float curHp;
 
     private PlayerLevel _playerLevel;
     private WeaponHandler _weaponHandler;
@@ -36,6 +36,17 @@ public class Player : MonoBehaviour
     public float GetHealth()
     {
         return curHp;
+    }
+    
+    public void Heal(float amount)
+    {
+        Debug.Log($"Heal : {amount}");
+        Debug.Log("Current HP : " + curHp);
+        
+        curHp += amount;
+        curHp = Mathf.Clamp(curHp, 0, runtimeData.maxHp.Value);
+        
+        Debug.Log("After HP : " + curHp);
     }
 
     private void Die()

@@ -65,7 +65,6 @@ public abstract class MonsterMovement : MonsterAttack
     /// <param name="agent">몬스터 Agent</param>
     public void SetAgent(GameObject player, MonsterStatus monsterStatus, NavMeshAgent agent, Animator animator)
     {
-        Debug.Log("쫒기 시작");
         agent.speed = monsterStatus.runtimeData.Speed;
         agent.SetDestination(player.transform.position);
         animator.SetFloat("AttackSpeed", monsterStatus.runtimeData.AttackSpeed);

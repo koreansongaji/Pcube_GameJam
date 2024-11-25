@@ -21,7 +21,7 @@ namespace Weapons.WeaponSubScripts
         {
             _rigidBody = GetComponent<Rigidbody>();
         }
-        float a = 0;
+        
         private float _time = 0;
         private void Update()
         {

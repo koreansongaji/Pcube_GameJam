@@ -9,6 +9,7 @@ namespace Helpers
             if(count > max - min && !availableDuplicate)
                 throw new System.Exception("Count is bigger than max - min");
             
+            UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
             List<int> randomNumbers = new List<int>();
             for (int i = 0; i < count; i++)
             {

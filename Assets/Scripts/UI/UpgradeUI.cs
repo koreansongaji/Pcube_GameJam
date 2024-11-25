@@ -49,16 +49,13 @@ namespace UI
             
             statUpgrader.ApplyUpgrade(currentUpgradeStats[index]);
             remainingUpgradeCount--;
+            ReloadUpgradeButtons();
             
             
             if (remainingUpgradeCount <= 0)
             {
                 GameManager.Pause = false;
                 upgradePanel.SetActive(false);
-            }
-            else
-            {
-                ReloadUpgradeButtons();
             }
         }
         

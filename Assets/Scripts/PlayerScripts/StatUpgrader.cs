@@ -49,7 +49,7 @@ namespace PlayerScripts
         }
         
         // 업그레이드 스탯을 받아서 적용합니다.
-        private void ApplySelectedUpgradeStat(UpgradeStat stat)
+        private void ApplySelectedUpgradeStat(UpgradeStat upgradeInfo)
         {
             if (!GameManager.Instance.TryGetPlayerObject(out Player p))
             {
@@ -57,8 +57,19 @@ namespace PlayerScripts
                 return;
             }
             
-            StatModifier modifier = new StatModifier(stat.value, stat.modifier, this);
-            p.GetStat().GetStatByType(stat.statType).AddModifier(modifier);
+            StatModifier modifier = new StatModifier(upgradeInfo.value, upgradeInfo.modifier, this);
+
+            float beforeValue = p.GetStat().GetStatByType(upgradeInfo.statType).Value;
+            
+            p.GetStat().GetStatByType(upgradeInfo.statType).AddModifier(modifier);
+            
+            float afterValue = p.GetStat().GetStatByType(upgradeInfo.statType).Value;
+            
+            if (upgradeInfo.statType == PlayerData.StatType.MAX_HP)
+            {
+                Debug.Log($"HP up : {beforeValue} -> {afterValue}");
+                p.Heal(afterValue - beforeValue);
+            }
         }
         
         public void ApplyUpgrade(IUpgrades upgrade)

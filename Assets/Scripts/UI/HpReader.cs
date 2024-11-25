@@ -23,8 +23,7 @@ public class HpReader : MonoBehaviour
         GameManager.Instance.TryGetPlayerObject(out Player player);
         
         curValue = hpSlider.value;   
-        targetValue = player.GetHealth() / 
-                            player.GetStat().maxHp.Value;
+        targetValue = player.GetHealth() / player.GetStat().maxHp.Value;
 
         if (Math.Abs(curValue - targetValue) > 0.01f)
         {

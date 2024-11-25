@@ -26,8 +26,12 @@ public class WeaponHandler : MonoBehaviour
 
     private void Update()
     {
-        foreach (Weapon weapon in weapons.Where(weapon => weapon.CanAttack()))
+        if (GameManager.Pause) return;
+        foreach (Weapon weapon in weapons)
         {
+            if (weapon.CanAttack() == false)
+                continue;
+            
             weapon.Attack();
         }
     }
