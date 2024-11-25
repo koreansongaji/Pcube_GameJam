@@ -27,7 +27,10 @@ namespace Weapons
 
             bullet.transform.position = weaponHandler.transform.position;
             bulletScript.SetTarget(target);
-            bulletScript.SetArgs(CalculateFinalDamage());
+            bulletScript.SetArgs(
+                CalculateFinalDamage(),
+                CalculateWeaponRange()
+                );
 
             atkTrigger = false;
             StartCoroutine(Cooldown(CalculateCooldown()));
@@ -44,6 +47,11 @@ namespace Weapons
 
             float damage = weaponData.damage * ((100 + percentage) * 0.01f);
             return damage;
+        }
+
+        private float CalculateWeaponRange()
+        {
+            return weaponData.attackRange * (100 + _player.GetStat().attackRange.Value) * 0.01f;
         }
 
         private float CalculateCooldown()

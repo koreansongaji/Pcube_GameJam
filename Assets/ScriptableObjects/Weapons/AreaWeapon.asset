@@ -18,3 +18,4 @@ MonoBehaviour:
   attackRange: 5
   coolTime: 5
   projectileCount: 2
+  upgradeList: []

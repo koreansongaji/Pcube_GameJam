@@ -26,17 +26,24 @@ public class GameManager : Singleton<GameManager>
         // 2. Game Start
         GameTime = 0;
         Pause = false;
-        cursorCoroutine = StartCoroutine(cursorCoroutineFuction());
+        cursorCoroutine = StartCoroutine(CursorCoroutineFunction());
     }
-    Coroutine cursorCoroutine;
-    GameObject cursorBuffer;
-    IEnumerator cursorCoroutineFuction()
+
+    private Coroutine cursorCoroutine;
+    private GameObject cursorBuffer;
+
+    private IEnumerator CursorCoroutineFunction()
     {
         yield return null;
         // Input.mousePosition
-        cursorBuffer = Instantiate(Resources.Load("UIPrefab/cursor") as GameObject, Vector3.zero, Quaternion.identity, GameObject.Find("Canvas").transform);
-        DontDestroyOnLoad(cursorBuffer);
-        while (true)
+        cursorBuffer = Instantiate(
+            Resources.Load("UIPrefab/cursor") as GameObject,
+            Vector3.zero,
+            Quaternion.identity,
+            GameObject.Find("Canvas").transform
+            );
+        
+        while (cursorBuffer != null)
         {
             cursorBuffer.transform.position = Input.mousePosition;
             yield return null;
@@ -70,7 +77,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (_player == null)
         {
-            player = GameObject.FindObjectOfType<Player>();
+            player = FindObjectOfType<Player>();
             _player = player;
         }
         else

@@ -86,6 +86,7 @@ namespace Generic
         }
 
         public int CountInactive => _pool.Count;
+        public int CountActive => _activeCount;
 
         
         private GameObject CreateNewObject()
@@ -97,11 +98,6 @@ namespace Generic
 #else
             return Object.Instantiate(_prefab, _parent);
 #endif
-        }
-        
-        public int GetActiveCount()
-        {
-            return _activeCount;
         }
     }
 }

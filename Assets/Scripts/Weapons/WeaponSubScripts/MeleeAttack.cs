@@ -24,10 +24,9 @@ namespace Weapons.WeaponSubScripts
             _rigidBody = GetComponent<Rigidbody>();
         }
 
-        float a = 0;
         private float _time = 0;
 
-        IEnumerator LiveCoroutine()
+        private IEnumerator LiveCoroutine()
         {
             transform.GetChild(0).gameObject.SetActive(true);
             yield return new WaitForSeconds(0.5f);
@@ -48,17 +47,20 @@ namespace Weapons.WeaponSubScripts
             
             // target 방향으로 회전
             transform.LookAt(target);
-            GameObject spawnedVFX = Instantiate(myVFX, transform.position
-                                                       +new Vector3(0, 1, 0), 
-                transform.rotation*Quaternion.Euler(new Vector3(90, 0, -90))) as GameObject;
-            spawnedVFX.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            GameObject spawnedVFX = Instantiate(myVFX, 
+                transform.position + new Vector3(0, 1, 0), 
+                transform.rotation * Quaternion.Euler(new Vector3(90, 0, -90))
+                );
+            spawnedVFX.transform.localScale = transform.localScale;
+                
             Destroy(spawnedVFX, 1f);
             StartCoroutine(LiveCoroutine());
         }
 
-        public void SetArgs(float damage)
+        public void SetArgs(float damage, float range)
         {
             _damage = damage;
+            transform.localScale = new Vector3(range, range, range);
         }
         
         private void OnEnable()
