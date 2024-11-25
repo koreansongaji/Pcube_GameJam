@@ -51,7 +51,7 @@ namespace Weapons.WeaponSubScripts
                 transform.position + new Vector3(0, 1, 0), 
                 transform.rotation * Quaternion.Euler(new Vector3(90, 0, -90))
             );
-            spawnedVFX.transform.localScale = transform.localScale;
+            spawnedVFX.transform.localScale = transform.localScale*6;
             Destroy(spawnedVFX, 1f);
             
             StartCoroutine(LiveCoroutine());

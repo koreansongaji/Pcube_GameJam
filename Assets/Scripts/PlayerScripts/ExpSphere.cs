@@ -32,7 +32,7 @@ public class ExpSphere : MonoBehaviour
         if (GameManager.Pause) return;
         
         Vector3 getMousePos = Helpers.MouseCursorPosFinder.GetMouseWorldPosition();
-        if (Vector3.Distance(getMousePos, transform.position) < 5)
+        if (Vector3.Distance(getMousePos, transform.position) < 2f)
         {
             ActiveThisExpSphere();
         }

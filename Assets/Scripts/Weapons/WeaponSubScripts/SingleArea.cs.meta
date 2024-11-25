@@ -1,3 +1,12 @@
 fileFormatVersion: 2
 guid: 283809d248aa41e39c202cc6ab63fa32
-timeCreated: 1732354414
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - myVFX: {fileID: 125726, guid: 28237332098b6a54a92d770e23648a92, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

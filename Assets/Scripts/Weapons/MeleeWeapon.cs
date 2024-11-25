@@ -15,6 +15,7 @@ namespace Weapons
         {
             weaponHandler = handler;
             _player = handler.GetComponent<Player>();
+            currentType = AimType.DIRECTION;
         }
 
         public override void Attack()

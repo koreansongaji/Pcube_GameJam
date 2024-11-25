@@ -49,6 +49,22 @@ public class ChangeSeason : MonoBehaviour
     /// <param name="idx">0 : Fall, 1 : Winter, 2 : Spring, 3 : Summer</param>
     private void Change(int idx)
     {
+        switch (idx)
+        {
+            case 0:
+                SoundManager.Instance.PlayBGM(SoundManager.Ebgm.FALL);
+                break;
+            case 1:
+                SoundManager.Instance.PlayBGM(SoundManager.Ebgm.WINTER);
+                break;
+            case 2:
+                SoundManager.Instance.PlayBGM(SoundManager.Ebgm.SPRING);
+                break;
+            case 3:
+                SoundManager.Instance.PlayBGM(SoundManager.Ebgm.SUMMER);
+                break;
+        }
+        
         StartCoroutine(MoveCloud(idx));
     }
 

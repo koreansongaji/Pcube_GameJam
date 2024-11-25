@@ -13,6 +13,8 @@ namespace Weapons.WeaponSubScripts
     {
         public UnityAction<MonsterBehavior> OnHit { get; set; }
 
+        public GameObject myVFX;
+
         private GameObjectPool _pool;
         private Rigidbody _rigidBody;
         private const float ATK_RATE = 1;
@@ -31,16 +33,30 @@ namespace Weapons.WeaponSubScripts
       
         private float _time = 0;
         private float _nextAtk = 0;
+
+        float a = 0.5f;
+        float b = 0;
+
         private void Update()
         {
+            b += Time.deltaTime;
             _time += Time.deltaTime;
             if (_time >= _duration)
             {
                 CheckRelease();
             }
 
+            if (b > a)
+            {
+                GameObject go = Instantiate(myVFX, transform.position + new Vector3(0, -0.7f, 0), Quaternion.identity);
+                go.transform.localScale = transform.localScale*0.6f;
+                Destroy(go, 1.5f);
+                b -= a;
+            }
+
             if (_time >= _nextAtk)
             {
+
                 _nextAtk = _time + ATK_RATE;
                 DealMonsters();
             }
@@ -91,7 +107,13 @@ namespace Weapons.WeaponSubScripts
             
             transform.localScale = new Vector3(_range, transform.localScale.y, _range);
             // child의 scale을 조정해야함
-            transform.GetChild(0).localScale = new Vector3(_range, _range, _range);
+            b = 0;
+            GameObject go = Instantiate(myVFX, transform.position+new Vector3(0, -0.7f, 0), Quaternion.identity);
+            go.transform.localScale = transform.localScale * 0.6f;
+            Destroy(go, 1.5f);
+            //transform.GetChild(0).localScale = new Vector3(_range, _range, _range);
+            //myVFX.transform.localScale = transform.localScale;
+
         }
         
         private void OnEnable()
